@@ -29,9 +29,12 @@ class NewPasswordController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $input_type = filter_var($request->input('input_key'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $request->merge([$input_type => $request->input('input_key')]);
         $request->validate([
             'token' => ['required'],
-            'email' => ['required', 'email'],
+            'email' => ['sometimes','required', 'email', 'exists:users,email'],
+            'name' => ['sometimes','required', 'string', 'exists:users,name'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -55,7 +58,7 @@ class NewPasswordController extends Controller
         // redirect them back to where they came from with their error message.
         return $status == Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+                    : back()->withInput($request->only($input_type))
+                            ->withErrors([$input_type => __($status)]);
     }
 }
