@@ -23,6 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        ResetPassword::createUrlUsing(function ($user, string $token){
+            return 'http://custom-breeze.test/reset-password/'.$token;
+        });
     }
 }
