@@ -11,6 +11,10 @@
                 <div class="p-6 text-gray-900">
                     {{ __("This is resi!") }}
                 </div>
+
+                <a href="{{ route('resi.create') }}" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                    {{ __('Add Resi') }}
+                </a>
             </div>
         </div>
     </div>

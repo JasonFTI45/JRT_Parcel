@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,10 +24,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/resi', function() {
-    return view('resi');
+    return view('resi.index');
 })->middleware(['auth', 'verified'])->name('resi');
 
+
 Route::middleware('auth')->group(function () {
+    Route::get('/resi', [ResiController::class, 'index'])->name('resi.index');
+    Route::get('/resi/create', [ResiController::class, 'create'])->name('resi.create');
+    Route::post('/resi', [ResiController::class, 'store'])->name('resi.store');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
