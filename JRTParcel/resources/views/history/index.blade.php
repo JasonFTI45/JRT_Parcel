@@ -12,7 +12,7 @@
                 <form id="searchForm" method="GET" action="{{ route('history.index') }}">
                     <div class="flex flex-row">
                         <div class="form-group w-60">
-                            <input type="text" name="search" class="form-control" placeholder="Search by name">
+                            <input type="text" name="search" class="form-control" placeholder="Search by Courier's Name">
                         </div>
                         <div class="form-group self-center">
                             <button type="submit" class="bg-red-500 hover:bg-red-600 active:bg-red-700">Search</button>
@@ -27,11 +27,30 @@
                         <option value="water" {{ ($shippingMethod == 'water') ? 'selected' : '' }}>Laut</option>
                         <option value="air" {{ ($shippingMethod == 'air') ? 'selected' : '' }}>Udara</option>
                     </select>
-                    <select class="border-red-400 mx-2" id="shippingLocation" onchange="updateFilter()">
+                    <div class=" max-h-40 overflow-y-auto">
+                    <select class="border-red-400 mx-2 " id="shippingLocation" onchange="updateFilter()">
                         <option value="">Select Shipping Location</option>
+                        @foreach ($karyawan as $k)
+                            <option value="{{ $k->nama }}" {{ ($shippingLocation == $k->id) ? 'selected' : '' }}>{{ $k->nama }}</option>
+                        @endforeach
+                        <!-- <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
                         <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
                         <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
+                        <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
+                        <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
+                        <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
+                        <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
+                        <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option>
+                        <option value="singkawang" {{ ($shippingLocation == 'singkawang') ? 'selected' : '' }}>Singkawang</option>
+                        <option value="pontianak" {{ ($shippingLocation == 'pontianak') ? 'selected' : '' }}>Pontianak</option> -->
                     </select>
+                    </div>
                     <select class="border-red-400 mx-2" id="shippingStatus" onchange="updateFilter()">
                         <option value="">Select shipping Status</option>
                         <option value="coll" {{ ($shippingStatus == 'coll') ? 'selected' : '' }}>Collected</option>
@@ -44,22 +63,30 @@
                     </div>
                 </form>
                 </div>
-                <div class="card">
-                    <div class="card-body overscroll-contain px-4">
-                        <table class="table">
+                <div class="card w-full max-w-full px-4 py-4">
+                    <div class="card-body overflow-y-auto max-h-500">
+                        <table class="table px-4">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Email</th>
+                                    <th>Resi</th>
+                                    <th>Kurir</th>
+                                    <th>Pengirim</th>
+                                    <th>Kota Asal</th>
+                                    <th>Kota Tujuan</th>
+                                    <th>Penerima</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($karyawan as $k)
-                                    <tr">
-                                        <td class ="text-red-500 hover:text-red-700">{{ $k->nama }}</td>
-                                        <td>{{ $k->nomor_telepon }}</td>
-                                        <td>{{ $k->email }}</td>
+                                    <tr>
+                                        <td>{{ $k->id }}</td>
+                                        <td>{{ $k->nama }}<br>{{ $k->nomor_telepon }} </td>
+                                        <td class="text-red-500 hover:text-red-700">{{ $k->nama }}<br>{{ $k->nomor_telepon }}</td>
+                                        <td >{{ $k->nama }}</td>
+                                        <td >{{ $k->nama }}</td>
+                                        <td class="text-red-500 hover:text-red-700">{{ $k->nama }}<br>{{ $k->nomor_telepon }}</td>
+                                        <td><button class="text-red-500 hover:text-red-700">Print Resi</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>
