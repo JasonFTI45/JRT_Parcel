@@ -5,6 +5,7 @@
             search: '{{ $defaultText }}',
             open: false,
             items: {{ json_encode($items) }},
+            selectedItem: null,
 
             get filteredItems() {
                 if (!this.search.trim()) {
@@ -16,7 +17,16 @@
             },
 
             handleInput() {
-                this.open = this.search.length > 0;
+                if (!{{ $disabled ? 'true' : 'false' }}) {
+                    this.open = this.search.length > 0;
+                }
+            },
+
+            selectItem(item) {
+                this.search = item;
+                this.selectedItem = item;
+                this.open = false;
+                
             }
         }"
     class="relative"
@@ -36,10 +46,12 @@
         :class="{'bg-gray-100 text-gray-500 cursor-not-allowed': {{ $disabled ? 'true' : 'false' }}, 'bg-white': !{{ $disabled ? 'true' : 'false' }}}"
         class="py-3 px-4 w-1/2 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
         :disabled="{{ $disabled ? 'true' : 'false' }}"
-        :readonly="{{ $disabled ? 'true' : 'false' }}"
+        
         :required="{{ $required ? 'true' : 'false' }}"
     >
-    
+    @if ($disabled)
+        <input type="hidden" name="{{ $name }}" x-bind:value="search">
+    @endif
     <ul 
         x-show="open && filteredItems.length > 0" 
         x-transition:enter="transition ease-out duration-300"
@@ -54,8 +66,8 @@
             <li 
                 class="w-full text-gray-700 p-4 cursor-pointer hover:bg-gray-100"
                 x-text="item"
-                x-on:click="search = item; open = false"
+                x-on:click="selectItem(item)"
             ></li>
         </template>
     </ul>
-</div>
+</div> 
