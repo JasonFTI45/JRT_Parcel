@@ -38,16 +38,43 @@
                         <option value="Laut">Laut</option>
                     </select>
 
-                    <!-- <h3>Kecamatan, Kota Asal</h3> -->
-                    <label for="kecamatan_kota_asal">Kecamatan, Kota Asal:</label>
-                    <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required>
+                    <x-dropdown-search-input
+                        id="kecamatan_kota_asal" 
+                        name="kecamatan_kota_asal" 
+                        label="Kecamatan, Kota Asal"
+                        :disabled="true"
+                        defaultText="TAMBORA, JAKARTA BARAT"
+                        :required="true"
+                    />
+                    <!-- <input type="hidden" id="kecamatan_kota_asal" name="kecamatan_kota_asal" value="TAMBORA, JAKARTA BARAT"> -->
+                    <!-- <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required> -->
 
                     <!-- <h3>Kecamatan, Kota Tujuan</h3> -->
-                    <label for="kecamatan_kota_tujuan">Kecamatan, Kota Tujuan:</label>
-                    <input type="text" id="kecamatan_kota_tujuan" name="kecamatan_kota_tujuan" required>
+                    <x-dropdown-search-input
+                        id="kecamatan_kota_tujuan" 
+                        name="kecamatan_kota_tujuan" 
+                        label="Kecamatan, Kota Asal"
+                        :items="['SINGKAWANG BARAT, SINGKAWANG', 'SINGKAWANG SELATAN, SINGKAWANG', 'SINGKAWANG TENGAH, SINGKAWANG', 'SINGKAWANG TIMUR, SINGKAWANG', 'SINGKAWANG UTARA, SINGKAWANG', 'SUNGAI PINYUH, MEMPAWAH',]"
+                        placeholder="Search Kecamatan/Kota..."
+                        :required="true"
+                        initialQuery=""
+                        :disabled="false"
+                    />
+                    
+                    <!-- <h3>Kecamatan, Kota Asal</h3> -->
+                    
+                    <!-- <label for="kecamatan_kota_asal">Kecamatan, Kota Asal:</label> -->
+                    <!-- <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required> -->
+                    
+                    
+
+                    <!-- <h3>Kecamatan, Kota Tujuan</h3> -->
+                    <!-- <label for="kecamatan_kota_tujuan">Kecamatan, Kota Tujuan:</label> -->
+                    <!-- <input type="text" id="kecamatan_kota_tujuan" name="kecamatan_kota_tujuan" required> -->
 
                     <h3>Barang</h3>
                     <div id="barang-container">
+                        <!-- Existing Barang item -->
                         <div class="barang-item">
                             <label for="tipe_komoditas">Tipe Komoditas:</label>
                             <input type="text" name="barang[0][tipe_komoditas]" required>
@@ -57,6 +84,7 @@
                             <input type="number" name="barang[0][panjang]" required>
                             <label for="tinggi">Tinggi:</label>
                             <input type="number" name="barang[0][tinggi]" required>
+                            <button type="button" onclick="removeBarang(this)">Remove</button>
                         </div>
                     </div>
                     <button type="button" onclick="addBarang()">Add Barang</button>
@@ -82,8 +110,13 @@
             <input type="number" name="barang[${barangIndex}][panjang]" required>
             <label for="tinggi">Tinggi:</label>
             <input type="number" name="barang[${barangIndex}][tinggi]" required>
+            <button type="button" onclick="removeBarang(this)">Remove</button>
         `;
         container.appendChild(newBarang);
         barangIndex++;
+    }
+
+    function removeBarang(button) {
+        button.parentNode.remove();
     }
 </script>
