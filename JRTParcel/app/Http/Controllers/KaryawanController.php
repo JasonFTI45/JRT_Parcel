@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class KaryawanController extends Controller
 {
@@ -25,7 +27,6 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::where('email', $email)->first();
 
         if (!$karyawan) {
-            // Handle the case where no karyawan with the given email exists
             return redirect()->route('karyawan.index')->with('error', 'No karyawan found with the given email');
         }
 
@@ -38,9 +39,19 @@ class KaryawanController extends Controller
             'nama' => 'required',
             'nomor_telepon' => 'required',
             'email' => 'required',
+            'password' => 'required', 
         ]);
 
         $karyawan = Karyawan::create($request->all());
+
+        // Create a new user for the karyawan
+        $user = new User;
+        $user->name = $request->nama;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'karyawan';
+        $user->karyawan_id = $karyawan->id; 
+        $user->save();
 
         return redirect()->route('karyawan.index')->with('success','Karyawan berhasil ditambahkan!');
     }
@@ -65,6 +76,12 @@ class KaryawanController extends Controller
     public function destroy($karyawan)
     {
         $karyawan = Karyawan::where('email', $karyawan)->first();
+
+        // Delete the associated user
+        if ($karyawan->user) {
+            $karyawan->user->delete();
+        }
+
         $karyawan->delete();
 
         return redirect()->route('karyawan.index');

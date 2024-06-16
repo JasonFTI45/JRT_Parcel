@@ -18,13 +18,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="alamat">Nomor Telepon:</label>
+                            <label class="form-label" for="nomor_telepon">Nomor Telepon:</label>
                             <input class="form-input" type="number"  name="nomor_telepon" id="nomor_telepon" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="telepon">email:</label>
+                            <label class="form-label" for="email">email:</label>
                             <input class="form-input" type="email" name="email" id="email" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="password">password:</label>
+                            <input class="form-input" type="password" name="password" id="password" class="form-control" required>
                         </div>
 
                         <button type="submit" class="add button">Submit</button>
