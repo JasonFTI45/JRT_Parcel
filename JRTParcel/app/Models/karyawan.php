@@ -15,5 +15,10 @@ class karyawan extends Model
         'email',
     ];
 
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
     protected $table = 'karyawan';
 }
