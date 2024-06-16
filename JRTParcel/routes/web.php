@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,9 @@ Route::get('/karyawan/edit/{karyawan}', [KaryawanController::class, 'edit'])->na
 Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
 Route::patch('/karyawan/update/{karyawan}', [KaryawanController::class, 'update'])->name('karyawan.update');
 Route::delete('/karyawan/delete/{karyawan}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
+
+Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+Route::get('/history/{id}', [HistoryController::class, 'view'])->name('history.view');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -25,6 +25,7 @@
 
                         <div>
                             <button type="submit" class="update button">Update</button>
+                            <!-- <x-danger-button type="submit" class="update button">{{__('Update')}}</x-danger-button> -->
                         </div>
                     </form>
                 </div>
