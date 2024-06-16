@@ -1,4 +1,4 @@
-@props(['id', 'name', 'label', 'items' => [], 'placeholder', 'disabled' => false, 'defaultText' => '', 'required' => false])
+@props(['id', 'name', 'label', 'items' => [], 'placeholder', 'disabled' => false, 'defaultText' => '', 'required' => false, 'value' => ''])
 
 <div 
     x-data="{
@@ -46,8 +46,8 @@
         :class="{'bg-gray-100 text-gray-500 cursor-not-allowed': {{ $disabled ? 'true' : 'false' }}, 'bg-white': !{{ $disabled ? 'true' : 'false' }}}"
         class="py-3 px-4 w-1/2 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
         :disabled="{{ $disabled ? 'true' : 'false' }}"
-        
         :required="{{ $required ? 'true' : 'false' }}"
+        :value="{{ $value }}"
     >
     @if ($disabled)
         <input type="hidden" name="{{ $name }}" x-bind:value="search">
