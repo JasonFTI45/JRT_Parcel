@@ -13,6 +13,8 @@ class HistoryController extends Controller
         $shippingMethod = $filter[0] ?? '';
         $shippingLocation = $filter[1] ?? '';
         $shippingStatus = $filter[2] ?? '';
+        $sortField = $request->get('sortField', '');
+        $sortOrder = $request->get('sortOrder', '');
 
         $karyawan = Karyawan::query();
 
@@ -20,14 +22,27 @@ class HistoryController extends Controller
             $karyawan->whereRaw('LOWER(nama) LIKE ?', [strtolower("%{$search}%")]);
         }
 
+        if ($shippingMethod) {
+            $karyawan->where('shipping_method', $shippingMethod);
+        }
+        if ($shippingLocation) {
+            $karyawan->where('shipping_location', $shippingLocation);
+        }
+        if ($shippingStatus) {
+            $karyawan->where('id', $shippingStatus);
+        }
+
+        if ($sortField && $sortOrder) {
+            $karyawan->orderBy($sortField, $sortOrder);
+        }
+
         $karyawan = $karyawan->get();
 
-        return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'karyawan'));
+        return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'karyawan'));
     }
 
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class);
     }
-
 }
