@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResiController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/resi', function() {
+    return view('resi.index');
+})->middleware(['auth', 'verified'])->name('resi');
+
 Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
 Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
 Route::get('/karyawan/edit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
@@ -35,7 +40,12 @@ Route::delete('/karyawan/delete/{karyawan}', [KaryawanController::class, 'destro
 Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
 Route::get('/history/{id}', [HistoryController::class, 'view'])->name('history.view');
 
+
 Route::middleware('auth')->group(function () {
+    Route::get('/resi', [ResiController::class, 'index'])->name('resi.index');
+    Route::get('/resi/create', [ResiController::class, 'create'])->name('resi.create');
+    Route::post('/resi', [ResiController::class, 'store'])->name('resi.store');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
