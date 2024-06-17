@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Resi') }}
+            {{ __('Edit Resi') }}
         </h2>
     </x-slot>
 
@@ -46,10 +46,7 @@
                         defaultText="TAMBORA, JAKARTA BARAT"
                         :required="true"
                     />
-                    <!-- <input type="hidden" id="kecamatan_kota_asal" name="kecamatan_kota_asal" value="TAMBORA, JAKARTA BARAT"> -->
-                    <!-- <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required> -->
-
-                    <!-- <h3>Kecamatan, Kota Tujuan</h3> -->
+                    
                     <x-dropdown-search-input
                         id="kecamatan_kota_tujuan" 
                         name="kecamatan_kota_tujuan" 
@@ -60,17 +57,6 @@
                         initialQuery=""
                         :disabled="false"
                     />
-                    
-                    <!-- <h3>Kecamatan, Kota Asal</h3> -->
-                    
-                    <!-- <label for="kecamatan_kota_asal">Kecamatan, Kota Asal:</label> -->
-                    <!-- <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required> -->
-                    
-                    
-
-                    <!-- <h3>Kecamatan, Kota Tujuan</h3> -->
-                    <!-- <label for="kecamatan_kota_tujuan">Kecamatan, Kota Tujuan:</label> -->
-                    <!-- <input type="text" id="kecamatan_kota_tujuan" name="kecamatan_kota_tujuan" required> -->
 
                     <h3>Barang</h3>
                     <div id="barang-container">
