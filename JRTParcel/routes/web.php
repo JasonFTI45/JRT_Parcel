@@ -25,10 +25,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/resi', function() {
-    return view('resi.index');
-})->middleware(['auth', 'verified'])->name('resi');
-
 Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
 Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
 Route::get('/karyawan/edit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
