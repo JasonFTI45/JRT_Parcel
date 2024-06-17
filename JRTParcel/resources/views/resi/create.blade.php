@@ -15,28 +15,29 @@
                     @csrf
                     @method('POST')
 
-                    <h3>Penerima</h3>
-                    <label for="penerima_nama">Nama:</label>
-                    <input type="text" id="penerima_nama" name="penerima_nama" required>
-                    <label for="penerima_nomorTelepon">Nomor Telepon:</label>
-                    <input type="text" id="penerima_nomorTelepon" name="penerima_nomorTelepon" required>
-                    <label for="penerima_alamat">Alamat:</label>
-                    <textarea id="penerima_alamat" name="penerima_alamat" required></textarea>
+                    <x-input-label for="penerima_nama" :value="__('Nama Penerima')"/>
+                    <x-text-input type="text" id="penerima_nama" name="penerima_nama" required/>
+                    <x-input-label for="penerima_nomorTelepon" :value="__('Nomor Telepon')"/>
+                    <x-text-input type="text" id="penerima_nomorTelepon" name="penerima_nomorTelepon" required/>
+                    <x-input-label for="penerima_alamat" :value="__('Alamat')"/>
+                    <x-text-area id="penerima_alamat" name="penerima_alamat" rows=4 required/>
 
                     <h3>Pengirim</h3>
-                    <label for="pengirim_nama">Nama:</label>
-                    <input type="text" id="pengirim_nama" name="pengirim_nama" required>
-                    <label for="pengirim_nomorTelepon">Nomor Telepon:</label>
-                    <input type="text" id="pengirim_nomorTelepon" name="pengirim_nomorTelepon" required>
-                    <label for="pengirim_alamat">Alamat:</label> 
-                    <textarea id="pengirim_alamat" name="pengirim_alamat" required></textarea>
+                    <x-input-label for="pengirim_nama" :value="__('Nama')"/>
+                    <x-text-input type="text" id="pengirim_nama" name="pengirim_nama" required/>
+                    <x-input-label for="pengirim_nomorTelepon" :value="__('Nomor Telepon')"/>
+                    <x-text-input type="text" id="pengirim_nomorTelepon" name="pengirim_nomorTelepon" required/>
+                    <x-input-label for="pengirim_alamat" :value="__('Alamat')"/>
+                    <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows=4 required/>
 
-                    <!-- <h3>Jenis Pengiriman</h3> -->
-                    <label for="jenisPengiriman">Jenis Pengiriman:</label>
-                    <select id="jenisPengiriman" name="jenisPengiriman" required>
-                        <option value="Udara">Udara</option>
-                        <option value="Laut">Laut</option>
-                    </select>
+                    <x-input-label for="jenisPengiriman" :value="__('Jenis Pengiriman')"/>
+                    <x-select-input 
+                    id="jenisPengiriman" 
+                    name="jenisPengiriman" 
+                    :options="['Udara' => 'Udara', 'Laut' => 'Laut']"
+                    selected="Udara"
+                    required
+                    />
 
                     <x-dropdown-search-input
                         id="kecamatan_kota_asal" 
@@ -46,10 +47,7 @@
                         defaultText="TAMBORA, JAKARTA BARAT"
                         :required="true"
                     />
-                    <!-- <input type="hidden" id="kecamatan_kota_asal" name="kecamatan_kota_asal" value="TAMBORA, JAKARTA BARAT"> -->
-                    <!-- <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required> -->
 
-                    <!-- <h3>Kecamatan, Kota Tujuan</h3> -->
                     <x-dropdown-search-input
                         id="kecamatan_kota_tujuan" 
                         name="kecamatan_kota_tujuan" 
@@ -60,30 +58,19 @@
                         initialQuery=""
                         :disabled="false"
                     />
-                    
-                    <!-- <h3>Kecamatan, Kota Asal</h3> -->
-                    
-                    <!-- <label for="kecamatan_kota_asal">Kecamatan, Kota Asal:</label> -->
-                    <!-- <input type="text" id="kecamatan_kota_asal" name="kecamatan_kota_asal" required> -->
-                    
-                    
-
-                    <!-- <h3>Kecamatan, Kota Tujuan</h3> -->
-                    <!-- <label for="kecamatan_kota_tujuan">Kecamatan, Kota Tujuan:</label> -->
-                    <!-- <input type="text" id="kecamatan_kota_tujuan" name="kecamatan_kota_tujuan" required> -->
 
                     <h3>Barang</h3>
                     <div id="barang-container">
                         <!-- Existing Barang item -->
                         <div class="barang-item">
-                            <label for="tipe_komoditas">Tipe Komoditas:</label>
-                            <input type="text" name="barang[0][tipe_komoditas]" required>
-                            <label for="lebar">Lebar:</label>
-                            <input type="number" name="barang[0][lebar]" required>
-                            <label for="panjang">Panjang:</label>
-                            <input type="number" name="barang[0][panjang]" required>
-                            <label for="tinggi">Tinggi:</label>
-                            <input type="number" name="barang[0][tinggi]" required>
+                            <x-input-label for="tipe_komoditas" :value="__('Tipe Komoditas')"/>
+                            <x-text-input type="text" name="barang[0][tipe_komoditas]" required/>
+                            <x-input-label for="lebar" :value="__('Lebar')"/>
+                            <x-number-input type="number" name="barang[0][lebar]" required/>
+                            <x-input-label for="panjang" :value="__('Panjang')"/>
+                            <x-number-input type="number" name="barang[0][panjang]" required/>
+                            <x-input-label for="tinggi" :value="__('Tinggi')"/>
+                            <x-number-input type="number" name="barang[0][tinggi]" required/>
                             <button type="button" onclick="removeBarang(this)">Remove</button>
                         </div>
                     </div>
@@ -102,14 +89,14 @@
         const newBarang = document.createElement('div');
         newBarang.classList.add('barang-item');
         newBarang.innerHTML = `
-            <label for="tipe_komoditas">Tipe Komoditas:</label>
-            <input type="text" name="barang[${barangIndex}][tipe_komoditas]" required>
-            <label for="lebar">Lebar:</label>
-            <input type="number" name="barang[${barangIndex}][lebar]" required>
-            <label for="panjang">Panjang:</label>
-            <input type="number" name="barang[${barangIndex}][panjang]" required>
-            <label for="tinggi">Tinggi:</label>
-            <input type="number" name="barang[${barangIndex}][tinggi]" required>
+            <x-input-label for="tipe_komoditas" :value="__('Tipe Komoditas')"/>
+            <x-text-input type="text" name="barang[${barangIndex}][tipe_komoditas]" required/>
+            <x-input-label for="lebar" :value="__('Lebar')"/>
+            <x-number-input type="number" name="barang[${barangIndex}][lebar]" required/>
+            <x-input-label for="panjang" :value="__('Panjang')"/>
+            <x-number-input type="number" name="barang[${barangIndex}][panjang]" required/>
+            <x-input-label for="tinggi" :value="__('Tinggi')"/>
+            <x-number-input type="number" name="barang[${barangIndex}][tinggi]" required/>
             <button type="button" onclick="removeBarang(this)">Remove</button>
         `;
         container.appendChild(newBarang);

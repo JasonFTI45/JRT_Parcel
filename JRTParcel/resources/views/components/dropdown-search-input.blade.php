@@ -44,7 +44,7 @@
         name="{{ $name }}" 
         autocomplete="off"
         :class="{'bg-gray-100 text-gray-500 cursor-not-allowed': {{ $disabled ? 'true' : 'false' }}, 'bg-white': !{{ $disabled ? 'true' : 'false' }}}"
-        class="py-3 px-4 w-1/2 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
+        class="py-3 px-4 w-1/2 border-gray-300 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
         :disabled="{{ $disabled ? 'true' : 'false' }}"
         :required="{{ $required ? 'true' : 'false' }}"
         :value="{{ $value }}"
