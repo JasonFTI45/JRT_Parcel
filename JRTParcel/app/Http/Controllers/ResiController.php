@@ -75,6 +75,7 @@ class ResiController extends Controller
             Barang::create([
                 'resi_id' => $resi->id,
                 'tipe_komoditas' => $barangData['tipe_komoditas'],
+                'berat' => $barangData['berat'],
                 'lebar' => $barangData['lebar'],
                 'panjang' => $barangData['panjang'],
                 'tinggi' => $barangData['tinggi'],
