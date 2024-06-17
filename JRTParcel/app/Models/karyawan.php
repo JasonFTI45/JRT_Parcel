@@ -20,5 +20,10 @@ class karyawan extends Model
         return $this->hasOne(User::class);
     }
 
+    public function resi()
+    {
+        return $this->hasMany(Resi::class);
+    }
+
     protected $table = 'karyawan';
 }

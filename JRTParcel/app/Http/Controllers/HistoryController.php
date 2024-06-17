@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
+use App\Models\Resi;
 
 class HistoryController extends Controller
 {
@@ -15,30 +16,31 @@ class HistoryController extends Controller
         $shippingStatus = $filter[2] ?? '';
         $sortField = $request->get('sortField', '');
         $sortOrder = $request->get('sortOrder', '');
-
-        $karyawan = Karyawan::query();
+        $resi = Resi::query();
 
         if ($search) {
-            $karyawan->whereRaw('LOWER(nama) LIKE ?', [strtolower("%{$search}%")]);
+            $resi->whereHas('karyawan', function ($query) use ($search) {
+                $query->whereRaw('LOWER(nama) LIKE ?', [strtolower("%{$search}%")]);
+            });
         }
 
         if ($shippingMethod) {
-            $karyawan->where('shipping_method', $shippingMethod);
+            $resi->where('jenisPengiriman', $shippingMethod);
         }
-        if ($shippingLocation) {
-            $karyawan->where('shipping_location', $shippingLocation);
-        }
-        if ($shippingStatus) {
-            $karyawan->where('id', $shippingStatus);
-        }
+        // if ($shippingLocation) {
+        //     $resi->where('shipping_location', $shippingLocation);
+        // }
+        // if ($shippingStatus) {
+        //     $resi->where('id', $shippingStatus);
+        // }
 
-        if ($sortField && $sortOrder) {
-            $karyawan->orderBy($sortField, $sortOrder);
-        }
+        // if ($sortField && $sortOrder) {
+        //     $resi->orderBy($sortField, $sortOrder);
+        // }
 
-        $karyawan = $karyawan->get();
+        $resi = $resi->get();
 
-        return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'karyawan'));
+        return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'resi'));
     }
 
     public function karyawan()

@@ -24,13 +24,13 @@
                                 <div class="flex flex-row space-x-2">
                                     <select class="border-red-400" id="shippingMethod" name="shippingMethod" onchange="updateFilter()">
                                         <option value="">Select shipping method</option>
-                                        <option value="water" {{ ($shippingMethod == 'water') ? 'selected' : '' }}>Laut</option>
-                                        <option value="air" {{ ($shippingMethod == 'air') ? 'selected' : '' }}>Udara</option>
+                                        <option value="Laut" {{ ($shippingMethod == 'Laut') ? 'selected' : '' }}>Laut</option>
+                                        <option value="Udara" {{ ($shippingMethod == 'Udara') ? 'selected' : '' }}>Udara</option>
                                     </select>
                                     <select class="border-red-400" id="shippingLocation" name="shippingLocation" onchange="updateFilter()">
                                         <option value="">Select Shipping Location</option>
-                                        @foreach ($karyawan as $k)
-                                            <option value="{{ $k->nama }}" {{ ($shippingLocation == $k->nama) ? 'selected' : '' }}>{{ $k->nama }}</option>
+                                        @foreach ($resi as $r)
+                                            <option value="{{ $r->nama }}" {{ ($shippingLocation == $r->nama) ? 'selected' : '' }}>{{ $r->nama }}</option>
                                         @endforeach
                                     </select>
                                     <select class="border-red-400" id="shippingStatus" name="shippingStatus" onchange="updateFilter()">
@@ -84,16 +84,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($karyawan as $k)
+                                @foreach ($resi as $r)
                                     <tr>
-                                        <td>{{ $k->id }}</td>
-                                        <td>{{ $k->nama }}<br>{{ $k->nomor_telepon }} </td>
-                                        <td class="text-red-500 hover:text-red-700">{{ $k->nama }}<br>{{ $k->nomor_telepon }}</td>
-                                        <td >{{ $k->nama }}</td>
-                                        <td >{{ $k->nama }}</td>
-                                        <td class="text-red-500 hover:text-red-700">{{ $k->nama }}<br>{{ $k->nomor_telepon }}</td>
-                                        <td class="text-red-500 hover:text-red-700">{{ $k->nama }}</td>
-                                        <td><button class="text-red-500 hover:text-red-700">Print Resi</button></td>
+                                        <td>{{ $r->kodeResi }}</td>
+                                        <td>{{ $r->karyawan->nama}}<br>{{ $r->karyawan->nomor_telepon}}</td>
+                                        <td class="text-red-500 hover:text-red-700">{{ $r->pengirim->namaPengirim }}<br>{{ $r->pengirim->nomorTelepon }}</td>
+                                        <td >{{ $r->kecamatan_kota_asal }}</td> 
+                                        <td >{{ $r->kecamatan_kota_tujuan }}</td>
+                                        <td class="text-red-500 hover:text-red-700">{{ $r->penerima->namaPenerima }}<br>{{ $r->penerima->nomorTelepon }}</td>
+                                        <td class="text-red-500 hover:text-red-700">{{ $r->status }}</td>
+                                        <td><button class="text-red-500 hover:text-red-700">Print Resi</button></td> 
                                     </tr>
                                 @endforeach
                             </tbody>
