@@ -23,21 +23,21 @@
                             <div class="flex flex-row space-x-2">
                                 <div class="flex flex-row space-x-2">
                                     <select class="border-red-400" id="shippingMethod" name="shippingMethod" onchange="updateFilter()">
-                                        <option value="">Select shipping method</option>
+                                        <option value="">Select Shipping method</option>
                                         <option value="Laut" {{ ($shippingMethod == 'Laut') ? 'selected' : '' }}>Laut</option>
                                         <option value="Udara" {{ ($shippingMethod == 'Udara') ? 'selected' : '' }}>Udara</option>
                                     </select>
                                     <select class="border-red-400" id="shippingLocation" name="shippingLocation" onchange="updateFilter()">
                                         <option value="">Select Shipping Location</option>
                                         @foreach ($resi as $r)
-                                            <option value="{{ $r->nama }}" {{ ($shippingLocation == $r->nama) ? 'selected' : '' }}>{{ $r->nama }}</option>
+                                            <option value="{{ $r->kecamatan_kota_tujuan }}" {{ ($shippingLocation == $r->kecamatan_kota_tujuan) ? 'selected' : '' }}>{{ $r->kecamatan_kota_tujuan }}</option>
                                         @endforeach
                                     </select>
                                     <select class="border-red-400" id="shippingStatus" name="shippingStatus" onchange="updateFilter()">
-                                        <option value="">Select shipping Status</option>
-                                        <option value="Ruben" {{ ($shippingStatus == 'Ruben') ? 'selected' : '' }}>Collected</option>
-                                        <option value="delv" {{ ($shippingStatus == 'delv') ? 'selected' : '' }}>Delivering</option>
-                                        <option value="sent" {{ ($shippingStatus == 'sent') ? 'selected' : '' }}>Sent</option>
+                                        <option value="">Select Shipping Status</option>
+                                        <option value="Menunggu Pengiriman" {{ ($shippingStatus == 'Menunggu Pengiriman') ? 'selected' : '' }}>Menunggu Pengiriman</option>
+                                        <option value="Sedang Dikirim" {{ ($shippingStatus == 'Sedang Dikirim') ? 'selected' : '' }}>Sedang Dikirim</option>
+                                        <option value="Sudah Sampai" {{ ($shippingStatus == 'Sudah Sampai') ? 'selected' : '' }}>Sudah Sampai</option>
                                     </select>
                                 </div>
                                 <div class="form-group self-center">
@@ -49,12 +49,10 @@
                                 <div class="flex flex-row space-x-2">
                                     <select class="border-red-400" id="sortField" name="sortField">
                                         <option value="">Sort by</option>
-                                        <option value="id" {{ ($sortField == 'id') ? 'selected' : '' }}>Resi</option>
+                                        <option value="id" {{ ($sortField == 'id') ? 'selected' : '' }}>Resi ID</option>
                                         <option value="nama" {{ ($sortField == 'nama') ? 'selected' : '' }}>Kurir</option>
-                                        <option value="pengirim" {{ ($sortField == 'pengirim') ? 'selected' : '' }}>Pengirim</option>
-                                        <option value="kota_asal" {{ ($sortField == 'kota_asal') ? 'selected' : '' }}>Kota Asal</option>
-                                        <option value="kota_tujuan" {{ ($sortField == 'kota_tujuan') ? 'selected' : '' }}>Kota Tujuan</option>
-                                        <option value="penerima" {{ ($sortField == 'penerima') ? 'selected' : '' }}>Penerima</option>
+                                        <option value="kecamatan_kota_asal" {{ ($sortField == 'kecamatan_kota_asal') ? 'selected' : '' }}>Kota Asal</option>
+                                        <option value="kecamatan_kota_tujuan" {{ ($sortField == 'kecamatan_kota_tujuan') ? 'selected' : '' }}>Kota Tujuan</option>
                                     </select>
                                     <select class="border-red-400" id="sortOrder" name="sortOrder">
                                         <option value="asc" {{ ($sortOrder == 'asc') ? 'selected' : '' }}>Ascending</option>

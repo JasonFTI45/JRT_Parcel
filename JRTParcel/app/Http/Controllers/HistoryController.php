@@ -15,7 +15,7 @@ class HistoryController extends Controller
         $shippingLocation = $filter[1] ?? '';
         $shippingStatus = $filter[2] ?? '';
         $sortField = $request->get('sortField', '');
-        $sortOrder = $request->get('sortOrder', '');
+        $sortOrder = $request->get('sortOrder', 'asc');
         $resi = Resi::query();
 
         if ($search) {
@@ -27,16 +27,20 @@ class HistoryController extends Controller
         if ($shippingMethod) {
             $resi->where('jenisPengiriman', $shippingMethod);
         }
-        // if ($shippingLocation) {
-        //     $resi->where('shipping_location', $shippingLocation);
-        // }
-        // if ($shippingStatus) {
-        //     $resi->where('id', $shippingStatus);
-        // }
+        if ($shippingLocation) {
+            $resi->where('shipping_location', $shippingLocation);
+        }
+        if ($shippingStatus) {
+            $resi->where('id', $shippingStatus);
+        }
 
-        // if ($sortField && $sortOrder) {
-        //     $resi->orderBy($sortField, $sortOrder);
-        // }
+        if ($sortField === 'nama') {
+            $resi->join('karyawan', 'resi.karyawan_id', '=', 'karyawan.id')
+                    ->orderBy('karyawan.nama', $sortOrder)
+                    ->select('resi.*');
+        } else {
+            $resi->orderBy($sortField, $sortOrder);
+        }
 
         $resi = $resi->get();
 
