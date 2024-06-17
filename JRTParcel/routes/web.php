@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/resi', [ResiController::class, 'index'])->name('resi.index');
     Route::get('/resi/create', [ResiController::class, 'create'])->name('resi.create');
     Route::post('/resi', [ResiController::class, 'store'])->name('resi.store');
+    Route::get('/resi/{resi}', [ResiController::class, 'details'])->name('resi.details');
+    Route::get('/resi/{resi}/edit', [ResiController::class, 'edit'])->name('resi.edit');
+    Route::put('/resi/{resi}', [ResiController::class, 'update'])->name('resi.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

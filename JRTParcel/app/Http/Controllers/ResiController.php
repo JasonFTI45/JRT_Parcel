@@ -11,11 +11,21 @@ use App\Models\Barang;
 class ResiController extends Controller
 {
     public function index(){
-        return view('resi.index');
+        $resis = Resi::with('penerima', 'pengirim')->get();
+        return view('resi.index', compact('resis'));
     }
 
     public function create(){
         return view('resi.create');
+    }
+
+    public function details(Resi $resi){
+        // dd($resi);
+        return view('resi.details', compact('resi'));
+    }
+
+    public function edit(Resi $resi){
+        return view('resi.edit', compact('resi'));
     }
 
     public function store(Request $request){
@@ -74,4 +84,6 @@ class ResiController extends Controller
 
         return redirect()->route('resi.create')->with('success', 'Resi created successfully');
     }
+
+    
 }
