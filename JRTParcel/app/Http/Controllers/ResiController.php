@@ -62,6 +62,7 @@ class ResiController extends Controller
             'pengirim_id' => $pengirim ? $pengirim->id : null,
             'karyawan_id' => $karyawan_id, 
             'created_at' => now(),
+            'status' => 'Menunggu Pengiriman',
         ]);
 
         // Create Barang
