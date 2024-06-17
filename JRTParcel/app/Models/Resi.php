@@ -28,7 +28,6 @@ class Resi extends Model
     {
         return $this->belongsTo(Penerima::class, 'penerima_id');
     }
-
     public function pengirim()
     {
         return $this->belongsTo(Pengirim::class, 'pengirim_id');
@@ -56,20 +55,32 @@ class Resi extends Model
 
     // Generate kodeResi based on jenisPengiriman
     private function generateKodeResi()
-    {
-        $prefix = ($this->jenisPengiriman == 'Udara') ? 'U' : 'L';
+{
+    $prefix = ($this->jenisPengiriman == 'Udara') ? 'U' : 'L';
+    $latestResi = DB::table('resi')
+                    ->where('jenisPengiriman', $this->jenisPengiriman)
+                    ->orderBy('kodeResi', 'desc')
+                    ->first();
 
-        $latestResi = DB::table('resi')
-                        ->where('jenisPengiriman', $this->jenisPengiriman)
-                        ->orderBy('kodeResi', 'desc')
-                        ->first();
-
-        if ($latestResi) {
-            $latestId = intval(substr($latestResi->kodeResi, 1)) + 1;
-        } else {
-            $latestId = 1;
+    if ($latestResi) {
+        $latestId = intval(substr($latestResi->kodeResi, 1)) + 1;
+        // Check for maximum value, assuming 9999 is the max
+        if ($latestId > 9999) {
+            $latestId = 1; // Reset to 1 if the max is reached
         }
-
-        return $prefix . str_pad($latestId, 4, '0', STR_PAD_LEFT);
+    } else {
+        $latestId = 1;
     }
+
+    $newKodeResi = $prefix . str_pad($latestId, 4, '0', STR_PAD_LEFT);
+
+    // Ensure the new kodeResi doesn't duplicate
+    while (DB::table('resi')->where('kodeResi', $newKodeResi)->exists()) {
+        $uniqueSuffix = now()->format('YmdHis'); // Use the current timestamp as a unique suffix
+        $newKodeResi = $prefix . str_pad($latestId, 4, '0', STR_PAD_LEFT) . $uniqueSuffix;
+    }
+
+    return $newKodeResi;
+}
+
 }
