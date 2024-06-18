@@ -77,12 +77,15 @@ class KaryawanController extends Controller
     {
         $karyawan = Karyawan::where('email', $karyawan)->first();
 
-        // Delete the associated user
-        if ($karyawan->user) {
-            $karyawan->user->delete();
-        }
+        // Set the bekerja field to false
+        $karyawan->bekerja = false;
+        $karyawan->save();
 
-        $karyawan->delete();
+        // Set the isEnabled field of the associated user to false
+        if ($karyawan->user) {
+            $karyawan->user->isEnabled = false;
+            $karyawan->user->save();
+        }
 
         return redirect()->route('karyawan.index');
     }

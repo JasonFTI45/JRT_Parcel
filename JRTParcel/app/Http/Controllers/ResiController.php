@@ -12,7 +12,7 @@ use App\Models\Barang;
 class ResiController extends Controller
 {
     public function index(){
-        $resis = Resi::with('penerima', 'pengirim')->get();
+        $resis = Resi::with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10);
         return view('resi.index', compact('resis'));
     }
 
