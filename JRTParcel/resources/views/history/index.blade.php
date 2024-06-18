@@ -22,18 +22,18 @@
 
                             <div class="flex flex-row space-x-2">
                                 <div class="flex flex-row space-x-2">
-                                    <select class="border-red-400" id="shippingMethod" name="shippingMethod" onchange="updateFilter()">
+                                    <select class="border-red-400" id="shippingMethod" name="shippingMethod">
                                         <option value="">Select Shipping method</option>
                                         <option value="Laut" {{ ($shippingMethod == 'Laut') ? 'selected' : '' }}>Laut</option>
                                         <option value="Udara" {{ ($shippingMethod == 'Udara') ? 'selected' : '' }}>Udara</option>
                                     </select>
-                                    <select class="border-red-400" id="shippingLocation" name="shippingLocation" onchange="updateFilter()">
+                                    <select class="border-red-400" id="shippingLocation" name="shippingLocation">
                                         <option value="">Select Shipping Location</option>
                                         @foreach ($resi as $r)
                                             <option value="{{ $r->kecamatan_kota_tujuan }}" {{ ($shippingLocation == $r->kecamatan_kota_tujuan) ? 'selected' : '' }}>{{ $r->kecamatan_kota_tujuan }}</option>
                                         @endforeach
                                     </select>
-                                    <select class="border-red-400" id="shippingStatus" name="shippingStatus" onchange="updateFilter()">
+                                    <select class="border-red-400" id="shippingStatus" name="shippingStatus">
                                         <option value="">Select Shipping Status</option>
                                         <option value="Menunggu Pengiriman" {{ ($shippingStatus == 'Menunggu Pengiriman') ? 'selected' : '' }}>Menunggu Pengiriman</option>
                                         <option value="Sedang Dikirim" {{ ($shippingStatus == 'Sedang Dikirim') ? 'selected' : '' }}>Sedang Dikirim</option>

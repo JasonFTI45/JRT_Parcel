@@ -10,11 +10,10 @@ class HistoryController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $filter = explode(',', $request->get('filter'));
-        $shippingMethod = $filter[0] ?? '';
-        $shippingLocation = $filter[1] ?? '';
-        $shippingStatus = $filter[2] ?? '';
-        $sortField = $request->get('sortField', '');
+        $shippingMethod = $request->get('shippingMethod');
+        $shippingLocation = $request->get('shippingLocation');
+        $shippingStatus = $request->get('shippingStatus');
+        $sortField = $request->get('sortField', 'id');
         $sortOrder = $request->get('sortOrder', 'asc');
         $resi = Resi::query();
 
@@ -28,10 +27,10 @@ class HistoryController extends Controller
             $resi->where('jenisPengiriman', $shippingMethod);
         }
         if ($shippingLocation) {
-            $resi->where('shipping_location', $shippingLocation);
+            $resi->where('kecamatan_kota_tujuan', $shippingLocation);
         }
         if ($shippingStatus) {
-            $resi->where('id', $shippingStatus);
+            $resi->where('status', $shippingStatus);
         }
 
         if ($sortField === 'nama') {
