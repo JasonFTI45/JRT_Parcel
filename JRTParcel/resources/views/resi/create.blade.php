@@ -15,7 +15,7 @@
                     @csrf
                     @method('POST')
                     <div>
-                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Pengiriman') }}/h3>
+                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Pengiriman') }}</h3>
                         <div class="border p-4 rounded-md">
                             <div class="mb-6">
                                 <x-input-label for="jenisPengiriman" :value="__('Jenis Pengiriman')" />
