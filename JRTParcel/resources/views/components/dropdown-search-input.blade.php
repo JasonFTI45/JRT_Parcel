@@ -44,7 +44,7 @@
         name="{{ $name }}" 
         autocomplete="off"
         :class="{'bg-gray-100 text-gray-500 cursor-not-allowed': {{ $disabled ? 'true' : 'false' }}, 'bg-white': !{{ $disabled ? 'true' : 'false' }}}"
-        class="py-3 px-4 w-1/2 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
+        class="py-3 px-4 w-full border-gray-300 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
         :disabled="{{ $disabled ? 'true' : 'false' }}"
         :required="{{ $required ? 'true' : 'false' }}"
         :value="{{ $value }}"
@@ -60,7 +60,10 @@
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-2"
+
+        //class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg z-10"
         class="absolute left-0 mt-2 w-1/2 bg-white border border-gray-300 rounded shadow-lg z-10 overflow-y-auto max-h-16"
+
     >
         <template x-for="item in filteredItems" :key="item">
             <li 

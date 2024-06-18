@@ -13,6 +13,7 @@ class Barang extends Model
 
     protected $fillable = [
         'tipe_komoditas',
+        'berat',
         'lebar',
         'panjang',
         'tinggi',
