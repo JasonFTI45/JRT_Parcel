@@ -26,11 +26,12 @@ class ResiController extends Controller
     }
 
     public function edit(Resi $resi){
+        $resi->load('barangs');
         return view('resi.edit', compact('resi'));
     }
 
-    public function store(Request $request){
-        // dd($request->all());
+    public function update(Resi $resi, Request $request){
+        // Validate request
         $request->validate([
             'penerima_nama' => 'required|string',
             'penerima_nomorTelepon' => 'required|string',
@@ -42,33 +43,137 @@ class ResiController extends Controller
             'kecamatan_kota_tujuan' => 'required|string',
             'kecamatan_kota_asal' => 'required|string',
             'barang.*.tipe_komoditas' => 'required|string',
-            'barang.*.lebar' => 'required|integer',
-            'barang.*.panjang' => 'required|integer',
-            'barang.*.tinggi' => 'required|integer',
+            'barang.*.berat' => 'required|numeric',
+            'barang.*.lebar' => 'required|numeric',
+            'barang.*.panjang' => 'required|numeric',
+            'barang.*.tinggi' => 'required|numeric',
         ]);
-
-        // Create penerima
-        $penerima = Penerima::create([
-            'namaPenerima' => $request->input('penerima_nama'),
-            'nomorTelepon' => $request->input('penerima_nomorTelepon'),
-            'alamat' => $request->input('penerima_alamat'),
+    
+        // Check and update Penerima
+        $penerima = Penerima::firstOrCreate(
+            [
+                'namaPenerima' => $request->input('penerima_nama'),
+                'nomorTelepon' => $request->input('penerima_nomorTelepon'),
+            ],
+            [
+                'alamat' => $request->input('penerima_alamat'),
+            ]
+        );
+    
+        // Check and update Pengirim
+        $pengirim = Pengirim::firstOrCreate(
+            [
+                'namaPengirim' => $request->input('pengirim_nama'),
+                'nomorTelepon' => $request->input('pengirim_nomorTelepon'),
+            ],
+            [
+                'alamat' => $request->input('pengirim_alamat'),
+            ]
+        );
+    
+        $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
+        $jenisPengiriman = $request->input('jenisPengiriman');
+        $barangData = $request->input('barang');
+    
+        // Recalculate harga
+        $harga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
+    
+        // Update Resi
+        $resi->update([
+            'jenisPengiriman' => $request->input('jenisPengiriman'),
+            'kecamatan_kota_tujuan' => $request->input('kecamatan_kota_tujuan'),
+            'kecamatan_kota_asal' => $request->input('kecamatan_kota_asal'),
+            'penerima_id' => $penerima->id,
+            'pengirim_id' => $pengirim->id,
+            'harga' => $harga,
+            'status' => 'Updated Status', // Update status as needed
         ]);
-
-        // Create Pengirim
-        $pengirim = Pengirim::create([
-            'namaPengirim' => $request->input('pengirim_nama'),
-            'nomorTelepon' => $request->input('pengirim_nomorTelepon'),
-            'alamat' => $request->input('pengirim_alamat'),
+    
+        // Update Barang
+        $existingBarangs = $resi->barangs->keyBy('id');
+        foreach ($barangData as $data) {
+            if (isset($data['id'])) {
+                // Update existing Barang
+                $existingBarangs[$data['id']]->update([
+                    'tipe_komoditas' => $data['tipe_komoditas'],
+                    'berat' => $data['berat'],
+                    'lebar' => $data['lebar'],
+                    'panjang' => $data['panjang'],
+                    'tinggi' => $data['tinggi'],
+                ]);
+                // Remove updated barang from the list
+                $existingBarangs->forget($data['id']);
+            } else {
+                // Create new Barang
+                Barang::create([
+                    'resi_id' => $resi->id,
+                    'tipe_komoditas' => $data['tipe_komoditas'],
+                    'berat' => $data['berat'],
+                    'lebar' => $data['lebar'],
+                    'panjang' => $data['panjang'],
+                    'tinggi' => $data['tinggi'],
+                    'created_at' => now(),
+                ]);
+            }
+        }
+    
+        // Delete Barangs that were not included in the request
+        foreach ($existingBarangs as $barang) {
+            $barang->delete();
+        }
+    
+        return redirect()->route('resi.edit', $resi)->with('success', 'Resi updated successfully');
+    }
+    
+    public function store(Request $request){
+        // Validate request
+        $request->validate([
+            'penerima_nama' => 'required|string',
+            'penerima_nomorTelepon' => 'required|string',
+            'penerima_alamat' => 'required|string',
+            'pengirim_nama' => 'required|string',
+            'pengirim_nomorTelepon' => 'required|string',
+            'pengirim_alamat' => 'required|string',
+            'jenisPengiriman' => 'required|string|in:Udara,Laut',
+            'kecamatan_kota_tujuan' => 'required|string',
+            'kecamatan_kota_asal' => 'required|string',
+            'barang.*.tipe_komoditas' => 'required|string',
+            'barang.*.berat' => 'required|numeric',
+            'barang.*.lebar' => 'required|numeric',
+            'barang.*.panjang' => 'required|numeric',
+            'barang.*.tinggi' => 'required|numeric',
         ]);
-
+    
+        // Check and create Penerima if not exists
+        $penerima = Penerima::firstOrCreate(
+            [
+                'namaPenerima' => $request->input('penerima_nama'),
+                'nomorTelepon' => $request->input('penerima_nomorTelepon'),
+            ],
+            [
+                'alamat' => $request->input('penerima_alamat'),
+            ]
+        );
+    
+        // Check and create Pengirim if not exists
+        $pengirim = Pengirim::firstOrCreate(
+            [
+                'namaPengirim' => $request->input('pengirim_nama'),
+                'nomorTelepon' => $request->input('pengirim_nomorTelepon'),
+            ],
+            [
+                'alamat' => $request->input('pengirim_alamat'),
+            ]
+        );
+    
         $karyawan_id = Auth::user()->karyawan->id;
-        
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
         $jenisPengiriman = $request->input('jenisPengiriman');
         $barangData = $request->input('barang'); // Ensure 'barang' is structured correctly in your request
-
+    
         // Adjusted method call
         $harga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
+        
         // Create Resi
         $resi = Resi::create([
             'jenisPengiriman' => $request->input('jenisPengiriman'),
@@ -81,23 +186,25 @@ class ResiController extends Controller
             'created_at' => now(),
             'status' => 'Menunggu Pengiriman',
         ]);
-
+    
         // Create Barang
-        foreach ($request->input('barang') as $barangData) {
+        foreach ($barangData as $barang) {
             Barang::create([
                 'resi_id' => $resi->id,
-                'tipe_komoditas' => $barangData['tipe_komoditas'],
-                'berat' => $barangData['berat'],
-                'lebar' => $barangData['lebar'],
-                'panjang' => $barangData['panjang'],
-                'tinggi' => $barangData['tinggi'],
+                'tipe_komoditas' => $barang['tipe_komoditas'],
+                'berat' => $barang['berat'],
+                'lebar' => $barang['lebar'],
+                'panjang' => $barang['panjang'],
+                'tinggi' => $barang['tinggi'],
                 'created_at' => now(),
             ]);
         }
-
+    
         return redirect()->route('resi.create')->with('success', 'Resi created successfully');
     }
+    
 
+    // to show harga in resi.create
     public function calculateHargaAjax(Request $request)
     {
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
@@ -108,6 +215,7 @@ class ResiController extends Controller
         return response()->json(['harga' => $harga]);
     }
     
+    // to calculate harga in resi.create
     function calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData) {
         $udaraGeneralPerKg = 35000;
         $udaraGeneralPerHalfKg = 20000;
