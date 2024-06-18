@@ -32,18 +32,14 @@
                             <input class="form-input" type="password" name="password" id="password" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="add button">Submit</button>
+                        <button type="submit" class="add button mb-4 ">Submit</button>
                     </form>
-
+                    
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                            <div class="">
+                                <x-input-error :messages="$errors" />
+                            </div>
+                        @endif
                 </div>
             </div>
         </div>

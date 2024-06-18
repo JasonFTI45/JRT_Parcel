@@ -38,22 +38,26 @@ class KaryawanController extends Controller
         $request->validate([
             'nama' => 'required',
             'nomor_telepon' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required', 
         ]);
 
-        $karyawan = Karyawan::create($request->all());
+        try {
+            $karyawan = Karyawan::create($request->all());
 
-        // Create a new user for the karyawan
-        $user = new User;
-        $user->name = $request->nama;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = 'karyawan';
-        $user->karyawan_id = $karyawan->id; 
-        $user->save();
+            // Create a new user for the karyawan
+            $user = new User;
+            $user->name = $request->nama;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = 'karyawan';
+            $user->karyawan_id = $karyawan->id; 
+            $user->save();
 
-        return redirect()->route('karyawan.index')->with('success','Karyawan berhasil ditambahkan!');
+            return redirect()->route('karyawan.index')->with('success','Karyawan berhasil ditambahkan!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['email' => 'Email already exists.']);
+        }
     }
 
     public function update(Request $request, $email)
