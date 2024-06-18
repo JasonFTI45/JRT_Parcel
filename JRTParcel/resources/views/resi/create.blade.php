@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Resi') }}
+            {{ __('Create Resi') }}
         </h2>
     </x-slot>
 
@@ -15,7 +15,7 @@
                     @csrf
                     @method('POST')
                     <div>
-                        <h3 class="font-semibold text-lg mt-4 mb-2">Detail Pengiriman</h3>
+                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Pengiriman') }}/h3>
                         <div class="border p-4 rounded-md">
                             <div class="mb-6">
                                 <x-input-label for="jenisPengiriman" :value="__('Jenis Pengiriman')" />
@@ -39,7 +39,7 @@
                                         :required="true"
                                     />
 
-                                    <h3 class="font-semibold text-lg mt-4 mb-2">Pengirim</h3>
+                                    <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Pengirim') }}</h3>
                                     <x-input-label for="pengirim_nama" :value="__('Nama')" />
                                     <x-text-input type="text" id="pengirim_nama" name="pengirim_nama" required />
 
@@ -55,14 +55,14 @@
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items="['SINGKAWANG BARAT, SINGKAWANG', 'SINGKAWANG SELATAN, SINGKAWANG', 'SINGKAWANG TENGAH, SINGKAWANG', 'SINGKAWANG TIMUR, SINGKAWANG', 'SINGKAWANG UTARA, SINGKAWANG', 'SUNGAI PINYUH, MEMPAWAH']"
+                                        :items="['KUBU RAYA, PONTIANAK','SINGKAWANG BARAT, SINGKAWANG', 'SINGKAWANG SELATAN, SINGKAWANG', 'SINGKAWANG TENGAH, SINGKAWANG', 'SINGKAWANG TIMUR, SINGKAWANG', 'SINGKAWANG UTARA, SINGKAWANG', 'SUNGAI PINYUH, MEMPAWAH']"
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         initialQuery=""
                                         :disabled="false"
                                     />
 
-                                    <h3 class="font-semibold text-lg mt-4 mb-2">Penerima</h3>
+                                    <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Penerima') }}</h3>
                                     <x-input-label for="penerima_nama" :value="__('Nama')" />
                                     <x-text-input type="text" id="penerima_nama" name="penerima_nama" required />
 
@@ -77,24 +77,24 @@
                     </div>
                     
                     <div>
-                        <h3 class="font-semibold text-lg mt-4 mb-2">Detail Barang</h3>
+                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Barang') }}</h3>
                         <div id="barang-container" class="space-y-4">
                             
                             <div class="barang-item border p-4 rounded-md">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <h3 class="font-semibold text-lg mt-4 mb-2">Jenis Barang</h3>
+                                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Jenis Barang') }}</h3>
                                         <x-input-label for="tipe_komoditas" :value="__('Tipe Komoditas')" />
                                         <x-text-input type="text" name="barang[0][tipe_komoditas]" required />
                                     </div>
                                     <div>
-                                        <h3 class="font-semibold text-lg mt-4 mb-2">Berat Barang <span class="text-gray-500 text-sm">(Kg)*</span></h3>
+                                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Berat Barang') }} <span class="text-gray-500 text-sm">{{ __('(Kg)*') }}</span></h3>
                                         <x-input-label for="berat" :value="__('Berat')" />
                                         <x-number-input type="number" step="0.01" name="barang[0][berat]" required />
                                     </div>
                                 </div>
                                 <div>
-                                        <h3 class="font-semibold text-lg mt-4 mb-2">Dimensi Barang <span class="text-gray-500 text-sm">(PxLxT) cm*</span></h3>
+                                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Dimensi Barang') }} <span class="text-gray-500 text-sm">{{ __('(PxLxT) cm*') }}</span></h3>
                                         <div class="flex flex-row">
                                             <div style="margin-right:30px;">
                                                 <x-input-label for="panjang" :value="__('Panjang')" />
@@ -114,9 +114,24 @@
                                         </div>
                                         
                                 </div>
+                                <button type="button" onclick="addBarang()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                                {{ __('Add Barang') }}
+                                </button>
+                                
+                                </div>
+                                <button type="button" id="calculateHargaBtn" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                    {{ __('Hitung Harga') }}
+                                </button>
+                                <div id="hargaDisplay" class="float-right p-4 text-3xl font-bold">
+                                    {{ __('Rp. 0') }}
+                                </div>
+
+                                
                             </div>
-                            <button type="button" onclick="addBarang()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add Barang</button>
-                            <button type="submit" class="mt-6 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Submit</button>
+                            
+                            <button type="submit" class="mt-6 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                            {{ __('Create Resi') }}
+                            </button>
                         </div>
                         
                     </div>        
@@ -172,4 +187,46 @@
     function removeBarang(button) {
         button.parentNode.remove();
     }
+
+    document.getElementById('calculateHargaBtn').addEventListener('click', function() {
+    const kecamatanKotaTujuan = document.querySelector('[name="kecamatan_kota_tujuan"]').value;
+    const jenisPengiriman = document.querySelector('[name="jenisPengiriman"]').value;
+    
+    // Initialize an empty array to hold all barang data
+    const barangData = [];
+    
+    // Find all elements that have a name attribute starting with 'barang['
+    document.querySelectorAll('[name^="barang["]').forEach(element => {
+        // Extract the indexes and field name from the element's name attribute
+        const matches = element.name.match(/^barang\[(\d+)\]\[(\w+)\]$/);
+        if (matches) {
+            const index = matches[1];
+            const field = matches[2];
+            
+            // Initialize the object at this index if it doesn't already exist
+            if (!barangData[index]) {
+                barangData[index] = {};
+            }
+            
+            // Add the field's value to the corresponding object
+            barangData[index][field] = element.value;
+        }
+    });
+
+    function formatRupiah(amount) {
+    return 'Rp' + parseInt(amount, 10).toLocaleString('id-ID');
+    }
+    
+    axios.post('/calculate-harga', {
+        kecamatan_kota_tujuan: kecamatanKotaTujuan,
+        jenisPengiriman: jenisPengiriman,
+        barang: barangData,
+    })
+    .then(function (response) {
+        document.getElementById('hargaDisplay').innerText = formatRupiah(response.data.harga);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+});
 </script>
