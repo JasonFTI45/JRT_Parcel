@@ -60,11 +60,14 @@
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-2"
-        class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg z-10"
+
+        //class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg z-10"
+        class="absolute left-0 mt-2 w-1/2 bg-white border border-gray-300 rounded shadow-lg z-10 overflow-y-auto max-h-16"
+
     >
         <template x-for="item in filteredItems" :key="item">
             <li 
-                class="w-full text-gray-700 p-4 cursor-pointer hover:bg-gray-100"
+                class="w-full text-gray-700 p-4 cursor-pointer hover:bg-gray-100 "
                 x-text="item"
                 x-on:click="selectItem(item)"
             ></li>

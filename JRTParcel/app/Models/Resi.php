@@ -20,6 +20,8 @@ class Resi extends Model
         'kecamatan_kota_asal',
         'kecamatan_kota_tujuan',
         'created_at',
+        'karyawan_id',
+        'status'
     ];
 
     public function penerima()
@@ -34,6 +36,11 @@ class Resi extends Model
     public function barangs()
     {
         return $this->hasMany(Barang::class, 'resi_id');
+    }
+
+    public function karyawan()
+    {
+        return $this->belongsTo('App\Models\Karyawan', 'karyawan_id');
     }
 
     // Event listener for creating new Resi
