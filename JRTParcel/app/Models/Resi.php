@@ -19,6 +19,7 @@ class Resi extends Model
         'pengirim_id',
         'kecamatan_kota_asal',
         'kecamatan_kota_tujuan',
+        'harga',
         'created_at',
     ];
 
