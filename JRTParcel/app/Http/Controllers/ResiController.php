@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Resi;
 use App\Models\Penerima;
 use App\Models\Pengirim;
@@ -60,6 +61,8 @@ class ResiController extends Controller
             'alamat' => $request->input('pengirim_alamat'),
         ]);
 
+        $karyawan_id = Auth::user()->karyawan->id;
+
         // Create Resi
         $resi = Resi::create([
             'jenisPengiriman' => $request->input('jenisPengiriman'),
@@ -67,7 +70,9 @@ class ResiController extends Controller
             'kecamatan_kota_asal' => $request->input('kecamatan_kota_asal'),
             'penerima_id' => $penerima ? $penerima->id : null,
             'pengirim_id' => $pengirim ? $pengirim->id : null,
+            'karyawan_id' => $karyawan_id, 
             'created_at' => now(),
+            'status' => 'Menunggu Pengiriman',
         ]);
 
         // Create Barang
