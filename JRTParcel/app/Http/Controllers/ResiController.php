@@ -12,7 +12,7 @@ use App\Models\Barang;
 class ResiController extends Controller
 {
     public function index(){
-        $resis = Resi::with('penerima', 'pengirim')->get();
+        $resis = Resi::with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10);
         return view('resi.index', compact('resis'));
     }
 
@@ -21,7 +21,7 @@ class ResiController extends Controller
     }
 
     public function details(Resi $resi){
-        // dd($resi);
+        $resi->load('barangs');
         return view('resi.details', compact('resi'));
     }
 
@@ -225,6 +225,9 @@ class ResiController extends Controller
     
         $lautPerKg = 10000;
         $lautMinimal = 20000;
+
+        $volumetrikUdara = 6000;
+        $volumetrikLaut = 4000;
     
         if ($jenisPengiriman == 'Udara') {
             if ($kecamatanKotaTujuan && strpos($kecamatanKotaTujuan, 'PONTIANAK') !== false) {
@@ -239,6 +242,12 @@ class ResiController extends Controller
     
             foreach ($barangData as $barang) {
                 $berat1Paket = $barang['berat'];
+                $volume = $barang['panjang'] * $barang['lebar'] * $barang['tinggi'];
+                $beratVolume = $volume/$volumetrikUdara;
+
+                if($beratVolume > $berat1Paket){
+                    $berat1Paket = $beratVolume;
+                }
     
                 // Pembulatan berat
                 if ($berat1Paket < 0.5) {
@@ -269,6 +278,12 @@ class ResiController extends Controller
     
             foreach ($barangData as $barang) {
                 $berat1Paket = $barang['berat'];
+                $volume = $barang['panjang'] * $barang['lebar'] * $barang['tinggi'];
+                $beratVolume = $volume/$volumetrikLaut;
+
+                if($beratVolume > $berat1Paket){
+                    $berat1Paket = $beratVolume;
+                }
     
                 // Pembulatan berat
                 if ($berat1Paket <= 1) {

@@ -20,21 +20,23 @@
                             </tr>
 
                             @foreach ($karyawan as $kry)
-                                <tr>
-                                    <td>{{ $kry['nama'] }}</td>
-                                    <td>{{ $kry['nomor_telepon'] }}</td>
-                                    <td>{{ $kry['email'] }}</td>
-                                    <td>
-                                        <div class="flex items-center">
-                                            <a href="{{ route('karyawan.edit', $kry->email) }}" class="edit button">Edit</a>
-                                            <form action="{{ route('karyawan.destroy', $kry->email) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="delete button">Delete</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @if ($kry->bekerja)
+                                    <tr>
+                                        <td>{{ $kry['nama'] }}</td>
+                                        <td>{{ $kry['nomor_telepon'] }}</td>
+                                        <td>{{ $kry['email'] }}</td>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <a href="{{ route('karyawan.edit', $kry->email) }}" class="edit button">Edit</a>
+                                                <form action="{{ route('karyawan.destroy', $kry->email) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="delete button">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
 
                         </table>

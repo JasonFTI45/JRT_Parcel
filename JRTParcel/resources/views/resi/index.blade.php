@@ -21,22 +21,25 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                        @foreach($resis as $resi)
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left whitespace-nowrap">{{ $resi->kodeResi }}</td>
-                            <td class="py-3 px-6 text-left">{{ $resi->jenisPengiriman }}</td>
-                            <td class="py-3 px-6 text-left">{{ $resi->penerima->namaPenerima }}</td>
-                            <td class="py-3 px-6 text-left">{{ $resi->pengirim->namaPengirim }}</td>
-                            <td class="py-3 px-6 text-left">{{ $resi->kecamatan_kota_asal }}</td>
-                            <td class="py-3 px-6 text-left">{{ $resi->kecamatan_kota_tujuan }}</td>
-                            <td class="py-3 px-6 text-left">
-                                <a href="{{ route('resi.details', $resi->id) }}" class="text-blue-500 hover:text-blue-700">Details</a>
-                                <a href="{{ route('resi.edit', $resi->id) }}" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>
-                            </td>
-                        </tr>
-                        @endforeach
+                    @foreach($resis as $resi)
+                        @if($resi->karyawan->id == auth()->user()->karyawan->id)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">{{ $resi->kodeResi }}</td>
+                                <td class="py-3 px-6 text-left">{{ $resi->jenisPengiriman }}</td>
+                                <td class="py-3 px-6 text-left">{{ $resi->penerima->namaPenerima }}</td>
+                                <td class="py-3 px-6 text-left">{{ $resi->pengirim->namaPengirim }}</td>
+                                <td class="py-3 px-6 text-left">{{ $resi->kecamatan_kota_asal }}</td>
+                                <td class="py-3 px-6 text-left">{{ $resi->kecamatan_kota_tujuan }}</td>
+                                <td class="py-3 px-6 text-left">
+                                    <a href="{{ route('resi.details', $resi->id) }}" class="text-blue-500 hover:text-blue-700">Details</a>
+                                    <a href="{{ route('resi.edit', $resi->id) }}" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
                     </tbody>
                 </table>
+                {{ $resis->links() }}
                 <div class="flex justify-between items-start">
                     <div class="flex-grow">
                         <table class="min-w-full leading-normal">

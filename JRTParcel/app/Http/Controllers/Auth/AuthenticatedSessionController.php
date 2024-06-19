@@ -27,6 +27,13 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = Auth::user();
+
+        if (!$user->isEnabled) {
+            Auth::logout();
+            return redirect()->back()->withErrors(['email' => 'Your account is disabled.']);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
