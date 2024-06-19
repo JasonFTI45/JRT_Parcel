@@ -36,7 +36,6 @@ class LocationSeeder extends Seeder
         ['JAWAI SELATAN', 'MEMPAWAH'],
         ['SADANIANG', 'MEMPAWAH'],
         ['MARAU', 'MEMPAWAH'],
-        ['KUALA BEHE', 'MEMPAWAH'],
         ['BENGKAYANG', 'BENGKAYANG'],
         ['CAPKALA', 'BENGKAYANG'],
         ['JAGOI BABANG', 'BENGKAYANG'],
