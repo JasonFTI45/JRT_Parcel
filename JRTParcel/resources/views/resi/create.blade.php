@@ -4,9 +4,7 @@
             {{ __('Create Resi') }}
         </h2>
     </x-slot>
-    @php
-                                dump($lokasi->map(function($location) { return $location->kecamatan . ', ' . $location->kota; }));
-                            @endphp
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <form action="{{ route('resi.store') }}" method="POST" class="space-y-6">
@@ -52,13 +50,17 @@
                                     <x-input-label for="pengirim_alamat" :value="__('Alamat')" />
                                     <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows="4" required />
                                 </div>
-                                
+                                @php
+                                    $items = $lokasi->map(function($item) {
+                                        return $item->kecamatan . ', ' . $item->kota;
+                                    })->toArray();
+                                @endphp
                                 <div>
                                     <x-dropdown-search-input
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items="{{ json_encode($lokasi->pluck('kecamatan', 'kota')->all()) }}"
+                                        :items="$items"
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         initialQuery=""
@@ -77,7 +79,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
+                    
                     
                     <div>
                         <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Barang') }}</h3>
