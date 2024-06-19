@@ -21,7 +21,7 @@ class ResiController extends Controller
     }
 
     public function details(Resi $resi){
-        // dd($resi);
+        $resi->load('barangs');
         return view('resi.details', compact('resi'));
     }
 
