@@ -14,7 +14,7 @@ class AddHargaToResiTable extends Migration
     public function up()
 {
     Schema::table('resi', function (Blueprint $table) {
-        $table->integer('harga')->default(0)->after('kecamatan_kota_tujuan');
+        $table->decimal('harga',8,2)->default(0)->after('kecamatan_kota_tujuan');
     });
 }
 
