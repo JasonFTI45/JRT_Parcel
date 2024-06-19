@@ -8,6 +8,7 @@ use App\Models\Resi;
 use App\Models\Penerima;
 use App\Models\Pengirim;
 use App\Models\Barang;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ResiController extends Controller
 {
@@ -23,6 +24,18 @@ class ResiController extends Controller
     public function details(Resi $resi){
         $resi->load('barangs');
         return view('resi.details', compact('resi'));
+    }
+
+    public function generatePdf(Resi $resi){
+        $resi->load('barangs');
+        $data = [
+            'title' => 'JRT Parcel',
+            'date' => $resi->created_at,
+            'resi' => $resi,
+        ];
+
+        $pdf = Pdf::loadView('resi.print', $resi);
+        return $pdf->stream('invoice.pdf');
     }
 
     public function edit(Resi $resi){
