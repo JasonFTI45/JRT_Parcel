@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('resi_id');
             $table->string('tipe_komoditas');
-            $table->float('berat');
             $table->float('lebar');
             $table->float('panjang');
             $table->float('tinggi');
