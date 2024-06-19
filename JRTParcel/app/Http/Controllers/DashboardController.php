@@ -23,6 +23,6 @@ class DashboardController extends Controller
         $karyawanCount = Karyawan::where('bekerja',true)->count();
         $resiCount = Resi::count();
 
-        return view('dashboard', ['karyawan' => $karyawanCount,'resi' => $resi, 'all_resi' => $all_resi, 'resis' => $resiCount]);
+        return view('dashboard', ['karyawanCount' => $karyawanCount,'resi' => $resi, 'all_resi' => $all_resi, 'resis' => $resiCount]);
     }
 }
