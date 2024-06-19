@@ -65,8 +65,8 @@
                                 </tbody>
                             </table>
                             <div class="text-center text-blue-500 text-2xl font-bold pb-4">
-                                @if(Auth::user()->role == 'karyawan')
-                                    @if($r->karyawan->id == Auth::user()->karyawan->id)
+                                @if(Auth::user()->role == 'karyawan' && $resi->count() > 0)
+                                    @if($resi->karyawan->id == Auth::user()->karyawan->id)
                                         Total Harga: {{$resi->sum('harga')}}
                                     @endif
                                 @endif
