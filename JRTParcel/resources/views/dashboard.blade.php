@@ -12,7 +12,7 @@
                     <div class="w-full pr-5 mb-6 md:mb-0 ">
                         <div class="grid grid-cols-2 bg-custom-image center items-center justify-center w-full text-center text-xl font-bold border border-cyan-500 rounded-3xl bg-cyan-500 h-32 ">
                             <h1 class="text-white text-2xl pb-4 font-bold">Total Karyawan</h1>
-                            <p class="text-white text-2xl pb-4 font-bold">{{$karyawan}}</p>
+                            <p class="text-white text-2xl pb-4 font-bold">{{$karyawanCount}}</p>
                         </div>
                     </div>
                     <div class="w-full pl-5 mb-6 md:mb-0">
@@ -65,10 +65,8 @@
                                 </tbody>
                             </table>
                             <div class="text-center text-blue-500 text-2xl font-bold pb-4">
-                                @if(Auth::user()->role == 'karyawan')
-                                    @if($r->karyawan->id == Auth::user()->karyawan->id)
-                                        Total Harga: {{$resi->sum('harga')}}
-                                    @endif
+                                @if(Auth::user()->role == 'karyawan' && $resi->count() > 0)
+                                    Total Harga: {{$resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga')}}
                                 @endif
                                 @if(Auth::user()->role == 'admin')
                                     Total Harga: {{$resi->sum('harga')}}

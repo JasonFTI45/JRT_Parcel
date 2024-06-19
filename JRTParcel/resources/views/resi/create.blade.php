@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     @php
-                                dump($lokasi->map(function($location) { return $location->kecamatan . ', ' . $location->kota; }));
+                                dump({{ json_encode($lokasi->pluck('kecamatan', 'kota')->all()) }});
                             @endphp
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -58,7 +58,7 @@
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items="{{ json_encode($lokasi->pluck('kecamatan', 'kota')->all()) }}"
+                                        :items="['KUBU RAYA, PONTIANAK','SINGKAWANG BARAT, SINGKAWANG', 'SINGKAWANG SELATAN, SINGKAWANG', 'SINGKAWANG TENGAH, SINGKAWANG', 'SINGKAWANG TIMUR, SINGKAWANG', 'SINGKAWANG UTARA, SINGKAWANG', 'SUNGAI PINYUH, MEMPAWAH']"
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         initialQuery=""
