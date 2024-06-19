@@ -4,7 +4,9 @@
             {{ __('Create Resi') }}
         </h2>
     </x-slot>
-
+    @php
+                                dump($lokasi->map(function($location) { return $location->kecamatan . ', ' . $location->kota; }));
+                            @endphp
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <form action="{{ route('resi.store') }}" method="POST" class="space-y-6">
@@ -56,7 +58,7 @@
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items="['KUBU RAYA, PONTIANAK','SINGKAWANG BARAT, SINGKAWANG', 'SINGKAWANG SELATAN, SINGKAWANG', 'SINGKAWANG TENGAH, SINGKAWANG', 'SINGKAWANG TIMUR, SINGKAWANG', 'SINGKAWANG UTARA, SINGKAWANG', 'SUNGAI PINYUH, MEMPAWAH']"
+                                        :items="{{ json_encode($lokasi->pluck('kecamatan', 'kota')->all()) }}"
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         initialQuery=""
