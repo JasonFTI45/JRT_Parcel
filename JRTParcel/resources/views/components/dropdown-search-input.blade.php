@@ -61,7 +61,7 @@
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-2"
 
-        class="absolute left-0 mt-2 w-1/2 bg-white border border-gray-300 rounded shadow-lg z-10 overflow-y-auto max-h-24"
+        class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg z-10 overflow-y-auto max-h-32"
 
     >
         <template x-for="item in filteredItems" :key="item">
