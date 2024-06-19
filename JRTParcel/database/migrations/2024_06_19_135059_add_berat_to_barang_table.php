@@ -14,7 +14,7 @@ class AddBeratToBarangTable extends Migration
     public function up()
     {
         Schema::table('barang', function (Blueprint $table) {
-            $table->integer('berat')->default(0)->after('tipe_komoditas');
+            $table->decimal('berat',5,2)->default(0)->after('tipe_komoditas');
         });
     }
 
