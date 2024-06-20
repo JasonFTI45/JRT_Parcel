@@ -66,7 +66,7 @@
                             </table>
                             <div class="text-center text-blue-500 text-2xl font-bold pb-4">
                                 @if(Auth::user()->role == 'karyawan' && $resi->count() > 0)
-                                    Total Harga: {{$resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga')}}
+                                    Total Harga: {{ 'Rp ' . number_format($resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga'), 2, ',', '.') }}
                                 @endif
                                 @if(Auth::user()->role == 'admin')
                                     Total Harga: {{$resi->sum('harga')}}
