@@ -49,13 +49,17 @@
                                     <x-input-label for="pengirim_alamat" :value="__('Alamat')" />
                                     <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows="4" value="{{ $resi->pengirim->alamat }}" required />
                                 </div>
-                                
+                                @php
+                                    $items = $lokasi->map(function($item) {
+                                        return $item->kecamatan . ', ' . $item->kota;
+                                    })->toArray();
+                                @endphp
                                 <div>
                                     <x-dropdown-search-input
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items=""
+                                        :items="$items"
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         defaultText="{{ $resi->kecamatan_kota_tujuan }}"
