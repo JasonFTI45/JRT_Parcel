@@ -41,6 +41,7 @@
                                         <th>Kode Resi</th>
                                         <th>Berat Barang</th>
                                         <th>Harga</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +52,7 @@
                                                     <td>{{ $r->kodeResi }}</td>
                                                     <td>{{ $r->barangs->sum('berat') }}</td>
                                                     <td>{{ number_format($r->harga, 2, ',', '.') }}</td>
+                                                    <td>{{$r->status}}</td>
                                                 </tr>
                                             @endif
                                         @endif
@@ -59,6 +61,7 @@
                                                 <td>{{ $r->kodeResi }}</td>
                                                 <td>{{ $r->barangs->sum('berat') }}</td>
                                                 <td>{{ number_format($r->harga, 2, ',', '.') }}</td>
+                                                <td>{{$r->status}}</td>
                                             </tr>
                                         @endif
                                     @endforeach
