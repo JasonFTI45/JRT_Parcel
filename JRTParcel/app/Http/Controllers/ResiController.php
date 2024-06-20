@@ -52,6 +52,7 @@ class ResiController extends Controller
             'barang.*.lebar' => 'required|numeric',
             'barang.*.panjang' => 'required|numeric',
             'barang.*.tinggi' => 'required|numeric',
+            'status' => 'required|string',
         ]);
     
         // Check and update Penerima
@@ -91,7 +92,7 @@ class ResiController extends Controller
             'penerima_id' => $penerima->id,
             'pengirim_id' => $pengirim->id,
             'harga' => $harga,
-            'status' => 'Updated Status', // Update status as needed
+            'status' => $request->input('status'),
         ]);
     
         // Update Barang
