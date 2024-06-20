@@ -72,7 +72,7 @@
                                     Total Harga: {{ 'Rp ' . number_format($resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga'), 2, ',', '.') }}
                                 @endif
                                 @if(Auth::user()->role == 'admin')
-                                    Total Harga: {{ 'Rp ' . $resi->sum('harga'), 2, ',', '.'}}
+                                    Total Harga: {{ 'Rp ' . number_format($resi->sum('harga'), 2, ',', '.'}}
                                 @endif
                             </div>
                             {{ $resi->links() }}
