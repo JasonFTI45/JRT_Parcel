@@ -50,7 +50,7 @@
                                                 <tr>
                                                     <td>{{ $r->kodeResi }}</td>
                                                     <td>{{ $r->barangs->sum('berat') }}</td>
-                                                    <td>{{ $r->harga }}</td>
+                                                    <td>{{ number_format($r->harga, 2, ',', '.') }}</td>
                                                 </tr>
                                             @endif
                                         @endif
@@ -58,7 +58,7 @@
                                             <tr>
                                                 <td>{{ $r->kodeResi }}</td>
                                                 <td>{{ $r->barangs->sum('berat') }}</td>
-                                                <td>{{ $r->harga }}</td>
+                                                <td>{{ number_format($r->harga, 2, ',', '.') }}</td>
                                             </tr>
                                         @endif
                                     @endforeach
