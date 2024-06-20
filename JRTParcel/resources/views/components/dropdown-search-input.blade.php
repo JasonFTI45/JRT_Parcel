@@ -3,17 +3,20 @@
 <div 
     x-data="{
             search: '{{ $defaultText }}',
-            open: false,
-            items: {{ json_encode($items) }},
+            open: true,
+            items: ['mempawah', ...{{ json_encode($items) }}],
             selectedItem: null,
 
             get filteredItems() {
+                
                 if (!this.search.trim()) {
                     return [];
                 }
-                return this.items.filter(
+                const filtered = this.items.filter(
                     i => i.toLowerCase().includes(this.search.toLowerCase())
                 );
+                console.log(filtered); // Debug: Log filtered items
+                return filtered;
             },
 
             handleInput() {

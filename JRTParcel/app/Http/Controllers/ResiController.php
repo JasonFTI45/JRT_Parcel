@@ -8,16 +8,20 @@ use App\Models\Resi;
 use App\Models\Penerima;
 use App\Models\Pengirim;
 use App\Models\Barang;
+use App\Models\Lokasi;
 
 class ResiController extends Controller
 {
     public function index(){
         $resis = Resi::with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10);
+        
         return view('resi.index', compact('resis'));
     }
 
     public function create(){
-        return view('resi.create');
+
+        $lokasi = Lokasi::all();
+        return view('resi.create', compact('lokasi'));
     }
 
     public function details(Resi $resi){
@@ -27,7 +31,8 @@ class ResiController extends Controller
 
     public function edit(Resi $resi){
         $resi->load('barangs');
-        return view('resi.edit', compact('resi'));
+        $lokasi = Lokasi::all();
+        return view('resi.edit', compact('resi', 'lokasi'));
     }
 
     public function update(Resi $resi, Request $request){
