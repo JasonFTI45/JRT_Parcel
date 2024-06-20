@@ -4,7 +4,7 @@
     x-data="{
             search: '{{ $defaultText }}',
             open: true,
-            items: [{{ json_encode($items) }}],
+            items: {{ json_encode($items) }},
             selectedItem: null,
 
             get filteredItems() {
@@ -12,10 +12,11 @@
                 if (!this.search.trim()) {
                     return [];
                 }
+                const searchLower = this.search.toLowerCase();
                 const filtered = this.items.filter(
-                    i => i.toLowerCase().includes(this.search.toLowerCase())
+                    i => i.toLowerCase().includes(searchLower)
                 );
-                console.log(filtered); // Debug: Log filtered items
+                filtered.sort();
                 return filtered;
             },
 
