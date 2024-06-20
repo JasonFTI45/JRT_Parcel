@@ -5,13 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="container">
+    <div class="py-12 px-6">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card flex flex-row space-x-5 pl-3">
-                    <form id="combinedForm" method="GET" action="{{ route('history.index') }}">
-                        <div class="flex flex-row space-x-5">
-                            <div class="flex flex-row space-y-2">
+                <div class="flex">
+                    <form class="w-full"id="combinedForm" method="GET" action="{{ route('history.index') }}">
+                        <div class="flex justify-between">
+                            <div class="flex space-y-2">
                                 <div class="form-group w-52">
                                     <input type="text" name="search" class="form-control" placeholder="Search by Courier's Name" value="{{ request('search') }}">
                                 </div>
@@ -66,7 +66,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="card w-full max-w-full px-4 py-4">
+                <div class="card w-full max-w-full py-4">
                     <div class="card-body overflow-y-auto max-h-500">
                         <table class="table px-4">
                             <thead>
