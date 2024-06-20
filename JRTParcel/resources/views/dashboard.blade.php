@@ -27,11 +27,11 @@
     </div>
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="flex flex-wrap -mx-3">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="grid grid-cols-2 gap-3 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex justify-center items-center w-full bg-white overflow-hidden shadow-sm sm:rounded-lg center">
+                
+                    
+                        <div class="w-full py-4 px-7 mb-6 md:mb-0">
                             <div class="center justify-center w-full text-center">
                                 <h1 class="text-red-500 text-2xl pb-4 font-bold">Resi Terbaru</h1>
                             </div>
@@ -77,11 +77,10 @@
                             </div>
                             {{ $resi->links() }}
                         </div>
-                        <div class="w-2/5 pl-10">
-                            <canvas id="hargaChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+                    
+            </div>
+            <div class="flex justify-center items-center w-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <canvas class="p-5" id="hargaChart"></canvas>               
             </div>
         </div>
     </div>
