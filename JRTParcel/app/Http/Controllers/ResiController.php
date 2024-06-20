@@ -32,14 +32,7 @@ class ResiController extends Controller
 
     public function generatePdf(Resi $resi){
         $resi->load('barangs');
-        $data = [
-            'title' => 'JRT Parcel',
-            'date' => $resi->created_at,
-            'resi' => $resi,
-        ];
-
-        $pdf = Pdf::loadView('resi.print', $resi);
-        return $pdf->stream('invoice.pdf');
+        return view('resi.print', compact('resi'));
     }
 
     public function edit(Resi $resi){
