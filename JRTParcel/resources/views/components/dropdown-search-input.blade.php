@@ -4,7 +4,7 @@
     x-data="{
             search: '{{ $defaultText }}',
             open: true,
-            items: ['mempawah', ...{{ json_encode($items) }}],
+            items: [{{ json_encode($items) }}],
             selectedItem: null,
 
             get filteredItems() {
