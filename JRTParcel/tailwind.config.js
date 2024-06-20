@@ -17,7 +17,11 @@ export default {
             maxHeight: {
                 '500': '500px',
                 // add as many as you need
-              },
+            },
+            backgroundImage: theme => ({
+                'custom-image': "url('/public/assets/logo.png')",
+                'custom-image-2': "url('/public/assets/logo2.png')",
+              })
         },
     },
 

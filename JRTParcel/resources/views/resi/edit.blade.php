@@ -55,7 +55,7 @@
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items="['KUBU RAYA, PONTIANAK','SINGKAWANG BARAT, SINGKAWANG', 'SINGKAWANG SELATAN, SINGKAWANG', 'SINGKAWANG TENGAH, SINGKAWANG', 'SINGKAWANG TIMUR, SINGKAWANG', 'SINGKAWANG UTARA, SINGKAWANG', 'SUNGAI PINYUH, MEMPAWAH']"
+                                        :items=""
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         defaultText="{{ $resi->kecamatan_kota_tujuan }}"
