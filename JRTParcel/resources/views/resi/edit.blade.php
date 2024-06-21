@@ -17,16 +17,29 @@
                     <div>
                         <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Pengiriman') }}</h3>
                         <div class="border p-4 rounded-md">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="mb-6">
-                                <x-input-label for="jenisPengiriman" :value="__('Jenis Pengiriman')" />
-                                <x-select-input 
-                                    id="jenisPengiriman" 
-                                    name="jenisPengiriman" 
-                                    :options="['Udara' => 'Udara', 'Laut' => 'Laut']"
-                                    selected="{{$resi->jenisPengiriman}}"
-                                    required
-                                />
+                                    <x-input-label for="jenisPengiriman" :value="__('Jenis Pengiriman')" />
+                                    <x-select-input 
+                                        id="jenisPengiriman" 
+                                        name="jenisPengiriman" 
+                                        :options="['Udara' => 'Udara', 'Laut' => 'Laut']"
+                                        selected="{{$resi->jenisPengiriman}}"
+                                        required
+                                    />
+                                </div>
+                                <div class="mb-6">
+                                    <x-input-label for="status" :value="__('Status Pengiriman')" />
+                                    <x-select-input 
+                                        id="status" 
+                                        name="status" 
+                                        :options="['Menunggu Pengiriman' => 'Menunggu Pengiriman', 'Sedang Dikirim' => 'Sedang Dikirm', 'Sudah Sampai' => 'Sudah Sampai']"
+                                        selected="{{$resi->status}}"
+                                        required
+                                    />
+                                </div>
                             </div>
+                            
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -49,13 +62,17 @@
                                     <x-input-label for="pengirim_alamat" :value="__('Alamat')" />
                                     <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows="4" value="{{ $resi->pengirim->alamat }}" required />
                                 </div>
-                                
+                                @php
+                                    $items = $lokasi->map(function($item) {
+                                        return $item->kecamatan . ', ' . $item->kota;
+                                    })->toArray();
+                                @endphp
                                 <div>
                                     <x-dropdown-search-input
                                         id="kecamatan_kota_tujuan" 
                                         name="kecamatan_kota_tujuan" 
                                         label="Kecamatan, Kota Tujuan"
-                                        :items=""
+                                        :items="$items"
                                         placeholder="Search Kecamatan/Kota..."
                                         :required="true"
                                         defaultText="{{ $resi->kecamatan_kota_tujuan }}"

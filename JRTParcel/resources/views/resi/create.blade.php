@@ -44,7 +44,7 @@
                                     <x-text-input type="text" id="pengirim_nama" name="pengirim_nama" required />
 
                                     <x-input-label for="pengirim_nomorTelepon" :value="__('Nomor Telepon')" />
-                                    <x-text-input type="text" id="pengirim_nomorTelepon" name="pengirim_nomorTelepon" required />
+                                    <x-text-input type="number" id="pengirim_nomorTelepon" name="pengirim_nomorTelepon" required />
 
                                     <x-input-label for="pengirim_alamat" :value="__('Alamat')" />
                                     <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows="4" required />
@@ -71,7 +71,7 @@
                                     <x-text-input type="text" id="penerima_nama" name="penerima_nama" required />
 
                                     <x-input-label for="penerima_nomorTelepon" :value="__('Nomor Telepon')" />
-                                    <x-text-input type="text" id="penerima_nomorTelepon" name="penerima_nomorTelepon" required />
+                                    <x-text-input type="number" id="penerima_nomorTelepon" name="penerima_nomorTelepon" required />
 
                                     <x-input-label for="penerima_alamat" :value="__('Alamat')" />
                                     <x-text-area id="penerima_alamat" name="penerima_alamat" rows="4" required />

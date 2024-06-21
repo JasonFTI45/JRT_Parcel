@@ -27,11 +27,11 @@
     </div>
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="flex flex-wrap -mx-3">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="grid grid-cols-2 gap-3 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex justify-center items-center w-full bg-white overflow-hidden shadow-sm sm:rounded-lg center">
+                
+                    
+                        <div class="w-full py-4 px-7 mb-6 md:mb-0">
                             <div class="center justify-center w-full text-center">
                                 <h1 class="text-red-500 text-2xl pb-4 font-bold">Resi Terbaru</h1>
                             </div>
@@ -41,6 +41,7 @@
                                         <th>Kode Resi</th>
                                         <th>Berat Barang</th>
                                         <th>Harga</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +51,8 @@
                                                 <tr>
                                                     <td>{{ $r->kodeResi }}</td>
                                                     <td>{{ $r->barangs->sum('berat') }}</td>
-                                                    <td>{{ $r->harga }}</td>
+                                                    <td>{{ number_format($r->harga, 2, ',', '.') }}</td>
+                                                    <td>{{$r->status}}</td>
                                                 </tr>
                                             @endif
                                         @endif
@@ -58,7 +60,8 @@
                                             <tr>
                                                 <td>{{ $r->kodeResi }}</td>
                                                 <td>{{ $r->barangs->sum('berat') }}</td>
-                                                <td>{{ $r->harga }}</td>
+                                                <td>{{ number_format($r->harga, 2, ',', '.') }}</td>
+                                                <td>{{$r->status}}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -66,19 +69,18 @@
                             </table>
                             <div class="text-center text-blue-500 text-2xl font-bold pb-4">
                                 @if(Auth::user()->role == 'karyawan' && $resi->count() > 0)
-                                    Total Harga: {{$resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga')}}
+                                    Total Harga: {{ 'Rp ' . number_format($resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga'), 2, ',', '.') }}
                                 @endif
                                 @if(Auth::user()->role == 'admin')
-                                    Total Harga: {{$resi->sum('harga')}}
+                                    Total Harga: {{ 'Rp ' . number_format($resi->sum('harga'), 2, ',', '.') }}
                                 @endif
                             </div>
                             {{ $resi->links() }}
                         </div>
-                        <div class="w-2/5 pl-10">
-                            <canvas id="hargaChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+                    
+            </div>
+            <div class="flex justify-center items-center w-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <canvas class="p-5" id="hargaChart"></canvas>               
             </div>
         </div>
     </div>

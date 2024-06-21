@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                 <div class="p-6 text-gray-900">
-                    <h2 class="font-bold text-2xl mb-2">{{ __('Detail Pengiriman') }}</h2>
+                    <h2 class="font-bold text-2xl mb-2">{{ __('Detail Pengiriman') }} ({{ $resi->created_at->format('d-m-Y') }})</h2>
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div>
                             <p class="font-bold">{{ __('Kode Resi') }}</p>
@@ -22,10 +22,12 @@
                         <div>
                             <p class="font-bold">{{ __('Penerima') }}</p>
                             <p>{{ $resi->penerima->namaPenerima }}</p>
+                            <p>{{ $resi->penerima->nomorTelepon }}</p>
                         </div>
                         <div>
                             <p class="font-bold">{{ __('Pengirim') }}</p>
                             <p>{{ $resi->pengirim->namaPengirim }}</p>
+                            <p>{{ $resi->pengirim->nomorTelepon }}</p>
                         </div>
                         <div>
                             <p class="font-bold">{{ __('Kecamatan/Kota Asal') }}</p>
@@ -37,7 +39,7 @@
                         </div>
                         <div>
                             <p class="font-bold">{{ __('Alamat Tujuan') }}</p>
-                            <p>{{ $resi->pengirim->alamat }}</p>
+                            <p>{{ $resi->penerima->alamat }}</p>
                         </div>
                         <div>
                             <p class="font-bold">{{ __('Biaya Pengiriman') }}</p>

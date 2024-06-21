@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
 use App\Models\Resi;
+use App\Models\Lokasi;
 
 class HistoryController extends Controller
 {
@@ -42,8 +43,9 @@ class HistoryController extends Controller
         }
 
         $resi = $resi->get();
+        $lokasi = Lokasi::get();
 
-        return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'resi'));
+        return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'resi', 'lokasi'));
     }
 
     public function karyawan()

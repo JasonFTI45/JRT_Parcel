@@ -39,7 +39,7 @@
             </div>
             <br>
             <div class="tujuan-resi">
-                <h1>Jumlah Koli: {{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
+                <h1>{{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
             </div>
         </div>
         <div class="tabel-resi">
@@ -61,7 +61,7 @@
             </table>
         </div>
         <div class="total-resi">
-            <h1 style="font-weight: bolder;">{{ __('Biaya Pengiriman : ') . $resi->harga }}</h1>
+            <h1 style="font-weight: bolder;">{{ __('Biaya Pengiriman : ') . 'Rp ' . number_format($resi->harga, 2, ',', '.') }}</h1>
         </div>
     </div>
 

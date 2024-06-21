@@ -41,6 +41,46 @@ class ResiController extends Controller
         return view('resi.edit', compact('resi', 'lokasi'));
     }
 
+    // to find or create penerima in resi.create
+    private function findOrCreatePenerima($request)
+    {
+        $penerima = Penerima::where('namaPenerima', $request->input('penerima_nama'))
+                            ->where('nomorTelepon', $request->input('penerima_nomorTelepon'))
+                            ->first();
+
+        if (!$penerima) {
+            $penerima = Penerima::create([
+                'namaPenerima' => $request->input('penerima_nama'),
+                'nomorTelepon' => $request->input('penerima_nomorTelepon'),
+                'alamat' => $request->input('penerima_alamat'),
+            ]);
+        } else {
+            $penerima->update(['alamat' => $request->input('penerima_alamat')]);
+        }
+
+        return $penerima;
+    }
+
+    // to find or create pengirim in resi.create
+    private function findOrCreatePengirim($request)
+    {
+        $pengirim = Pengirim::where('namaPengirim', $request->input('pengirim_nama'))
+                            ->where('nomorTelepon', $request->input('pengirim_nomorTelepon'))
+                            ->first();
+
+        if (!$pengirim) {
+            $pengirim = Pengirim::create([
+                'namaPengirim' => $request->input('pengirim_nama'),
+                'nomorTelepon' => $request->input('pengirim_nomorTelepon'),
+                'alamat' => $request->input('pengirim_alamat'),
+            ]);
+        } else {
+            $pengirim->update(['alamat' => $request->input('pengirim_alamat')]);
+        }
+
+        return $pengirim;
+    }
+
     public function update(Resi $resi, Request $request){
         // Validate request
         $request->validate([
@@ -58,29 +98,12 @@ class ResiController extends Controller
             'barang.*.lebar' => 'required|numeric',
             'barang.*.panjang' => 'required|numeric',
             'barang.*.tinggi' => 'required|numeric',
+            'status' => 'required|string',
         ]);
     
-        // Check and update Penerima
-        $penerima = Penerima::firstOrCreate(
-            [
-                'namaPenerima' => $request->input('penerima_nama'),
-                'nomorTelepon' => $request->input('penerima_nomorTelepon'),
-            ],
-            [
-                'alamat' => $request->input('penerima_alamat'),
-            ]
-        );
-    
-        // Check and update Pengirim
-        $pengirim = Pengirim::firstOrCreate(
-            [
-                'namaPengirim' => $request->input('pengirim_nama'),
-                'nomorTelepon' => $request->input('pengirim_nomorTelepon'),
-            ],
-            [
-                'alamat' => $request->input('pengirim_alamat'),
-            ]
-        );
+        // Save Penerima and Pengirim
+        $penerima = $this->findOrCreatePenerima($request);
+        $pengirim = $this->findOrCreatePengirim($request);
     
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
         $jenisPengiriman = $request->input('jenisPengiriman');
@@ -97,7 +120,7 @@ class ResiController extends Controller
             'penerima_id' => $penerima->id,
             'pengirim_id' => $pengirim->id,
             'harga' => $harga,
-            'status' => 'Updated Status', // Update status as needed
+            'status' => $request->input('status'),
         ]);
     
         // Update Barang
@@ -155,27 +178,9 @@ class ResiController extends Controller
             'barang.*.tinggi' => 'required|numeric',
         ]);
     
-        // Check and create Penerima if not exists
-        $penerima = Penerima::firstOrCreate(
-            [
-                'namaPenerima' => $request->input('penerima_nama'),
-                'nomorTelepon' => $request->input('penerima_nomorTelepon'),
-            ],
-            [
-                'alamat' => $request->input('penerima_alamat'),
-            ]
-        );
-    
-        // Check and create Pengirim if not exists
-        $pengirim = Pengirim::firstOrCreate(
-            [
-                'namaPengirim' => $request->input('pengirim_nama'),
-                'nomorTelepon' => $request->input('pengirim_nomorTelepon'),
-            ],
-            [
-                'alamat' => $request->input('pengirim_alamat'),
-            ]
-        );
+        // Save Penerima and Pengirim
+        $penerima = $this->findOrCreatePenerima($request);
+        $pengirim = $this->findOrCreatePengirim($request);
     
         $karyawan_id = Auth::user()->karyawan->id;
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
