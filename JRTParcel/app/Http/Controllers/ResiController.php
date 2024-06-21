@@ -266,7 +266,9 @@ class ResiController extends Controller
                 }
     
                 // Pembulatan berat
-                if ($berat1Paket < 0.5) {
+                if ($berat1Paket == 0){
+                    $berat1Paket = 0;
+                } else if ($berat1Paket < 0.5) {
                     $berat1Paket = 0.5;
                 } else if ($berat1Paket <= 1) {
                     $berat1Paket = 1;
@@ -302,14 +304,16 @@ class ResiController extends Controller
                 }
     
                 // Pembulatan berat
-                if ($berat1Paket <= 1) {
+                if ($berat1Paket == 0){
+                    $berat1Paket = 0;
+                } else if ($berat1Paket <= 1) {
                     $berat1Paket = 1;
                 } else {
                     $berat1Paket = ceil($berat1Paket);
                 }
     
                 // Calculate price for each package
-                if ($berat1Paket <= 2) {
+                if ($berat1Paket > 0 && $berat1Paket <= 2) {
                     $totalHarga += $lautMinimal;
                 } else {
                     $totalHarga += $lautMinimal + ($berat1Paket - 2) * $lautPerKg;
