@@ -39,7 +39,7 @@
             </div>
             <br>
             <div class="tujuan-resi">
-                <h1>Jumlah Koli: {{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
+                <h1>{{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
             </div>
         </div>
         <div class="tabel-resi">
