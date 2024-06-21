@@ -16,12 +16,11 @@
             </div>
             <div class="informasi-resi">
                 <div class="penerima-resi">
-                    <h1>{{ __('Penerima: ') . $resi->penerima->nama }}Penerima: Tigo</h1>
+                    <h1>{{ __('Penerima: ') . $resi->penerima->namaPenerima }}</h1>
                     <h5>{{ $resi->penerima->alamat }}</h5>
-
                 </div>
                 <div class="pengirim-resi">
-                    <h1>{{ __('Pengirim: ') . $resi->pengirim->nama }}</h1>
+                    <h1>{{ __('Pengirim: ') . $resi->pengirim->namaPengirim }}</h1>
                     <h5>{{ $resi->pengirim->nomorTelepon }}</h5>
                     <h5>{{ $resi->kecamatan_kota_asal }}</h5>
                 </div>
