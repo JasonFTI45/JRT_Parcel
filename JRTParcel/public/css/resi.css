@@ -7,8 +7,13 @@ body {
     scroll-behavior: smooth;
 }
 
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .container-resi{
-    height: 95vh;
+    height: 100%;
     width: 100%;
     /* border: 2px solid red; */
 }
@@ -18,7 +23,7 @@ body {
     flex-direction: column;
     height: 40vh;
     width: 98vw;
-    margin: 5px;
+    margin: 1px 5px 0px 5px;
     border: 3px solid black;
 }
 
@@ -118,8 +123,84 @@ body {
 }
 
 .total-resi{
-    position:absolute;
-    margin: 0px 25px 25px 0px;
-    bottom:0;
-    right:0;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+    margin-bottom: 5vh;
+}
+
+.container-penerima{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    border-top: 2px dashed black;
+}
+
+.penerima{
+    display: flex;
+    flex-direction: row;
+    height: 22vh;
+    border: none;
+    margin-top: 10px;
+}
+
+.penerima-isi-1{
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    border: 2px solid black;
+}
+
+.penerima-isi-2{
+    display: flex;
+    flex-direction: column;
+    flex: 2.5;
+    border: 2px solid black;
+}
+
+
+.isi-1-top{
+    display: flex;
+    flex: 1;
+    border-bottom: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+
+.isi-1-bottom{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    flex: 3;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.isi-1-bottom table {
+    width: 100%; 
+    border-collapse: collapse; 
+}
+
+.isi-1-bottom table td {
+    padding: 0px 7.5px; 
+    margin: 0; 
+}
+
+.font-12{
+    font-size: 12px;
+}
+
+.border-no{
+    border: none;
+}
+
+.harga{
+    font-weight: bolder;
+    border-top: 1px solid black;
+    margin-top: -70px;
 }
