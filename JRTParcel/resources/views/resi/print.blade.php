@@ -11,27 +11,24 @@
                 <img src="{{ asset('assets/logo.png') }}" alt="" height="30" width="57.25">
             </div>
             <div class="judul-resi">
-                <h2>Jenis Pengiriman : Udara</h2>
-                <h2>No Resi : U0001</h2>
+                <h2> {{ __('Jenis Pengiriman : '. $resi->jenisPengiriman) }} </h2>
+                <h2>{{ __('No. Resi : ') . $resi->kodeResi }}</h2>
             </div>
             <div class="informasi-resi">
                 <div class="penerima-resi">
-                    <h1>Penerima: Tigo</h1>
-                    <h5>Jl. P. Diponegoro, Melayu, Kec. Singkawang Barat, Kota Singkawang, Kalimantan Barat 79111</h5>
+                    <h1>{{ __('Penerima: ') . $resi->penerima->nama }}Penerima: Tigo</h1>
+                    <h5>{{ $resi->penerima->alamat }}</h5>
 
                 </div>
                 <div class="pengirim-resi">
-                    <h1>Pengirim: Ivander</h1>
-                    <h5>085216441952</h5>
-                    <h5>TAMBORA, JAKARTA BARAT</h5>
+                    <h1>{{ __('Pengirim: ') . $resi->pengirim->nama }}</h1>
+                    <h5>{{ $resi->pengirim->nomorTelepon }}</h5>
+                    <h5>{{ $resi->kecamatan_kota_asal }}</h5>
                 </div>
             </div>
             <div class="tujuan-resi">
                 <div class="left-resi">
-                    <h1>SINGKAWANG</h1>
-                </div>
-                <div class="right-resi">
-                    <h1>SINGKAWANG BARAT</h1>
+                    <h1>{{ $resi->kecamatan_kota_tujuan }}</h1>
                 </div>
             </div>
             <div class="tujuan-resi">
@@ -42,7 +39,7 @@
             </div>
             <br>
             <div class="tujuan-resi">
-                <h1>Jumlah Koli: 2</h1>
+                <h1>Jumlah Koli: {{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
             </div>
         </div>
         <div class="tabel-resi">
@@ -52,26 +49,19 @@
                     <td>Tipe</td>
                     <td>Berat</td>
                     <td>Volume</td>
-                    <td>Harga</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Liquid</td>
-                    <td>2 Kg</td>
-                    <td>30 cm x 25 cm x 30 cm</td>
-                    <td>Rp. 250.000,00</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Liquid</td>
-                    <td>3 Kg</td>
-                    <td>30 cm x 25 cm x 30 cm</td>
-                    <td>Rp. 250.000,00</td>
-                </tr>
+                @foreach ( $resi->barangs as $barang )
+                    <tr>
+                        <td>{{ $loop->index + 1}}</td>
+                        <td>{{ $barang->tipe_komoditas }}</td>
+                        <td>{{ $barang->berat }} Kg</td>
+                        <td>{{ $barang->panjang }} cm x {{ $barang->lebar }} cm x {{ $barang->tinggi }} cm</td>
+                    </tr>
+                @endforeach
             </table>
         </div>
         <div class="total-resi">
-            <h1 style="font-weight: bolder;">Total Harga : Rp. 500.000,00</h1>
+            <h1 style="font-weight: bolder;">{{ __('Biaya Pengiriman : ') . $resi->harga }}</h1>
         </div>
     </div>
 
