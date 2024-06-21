@@ -8,6 +8,7 @@ use App\Models\Resi;
 use App\Models\Penerima;
 use App\Models\Pengirim;
 use App\Models\Barang;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Lokasi;
 
 class ResiController extends Controller
@@ -27,6 +28,11 @@ class ResiController extends Controller
     public function details(Resi $resi){
         $resi->load('barangs');
         return view('resi.details', compact('resi'));
+    }
+
+    public function generatePdf(Resi $resi){
+        $resi->load('barangs');
+        return view('resi.print', compact('resi'));
     }
 
     public function edit(Resi $resi){

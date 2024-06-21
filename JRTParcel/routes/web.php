@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/resi/{resi}/edit', [ResiController::class, 'edit'])->name('resi.edit');
     Route::put('/resi/{resi}/update', [ResiController::class, 'update'])->name('resi.update');
     Route::post('/calculate-harga', [ResiController::class, 'calculateHargaAjax'])->name('calculate.harga');
+    Route::get('/resi/{resi}/print', [ResiController::class, 'generatePdf'])->name('resi.print');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

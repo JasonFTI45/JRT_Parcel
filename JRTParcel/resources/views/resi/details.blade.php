@@ -71,11 +71,10 @@
                     </div>      
                     @endforeach                                 
                 </div>
-                </div>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    {{ __('Print') }}
-                </button>
             </div>
+            <a href="{{ route('resi.print', $resi->id) }}" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    {{ __('Print') }}
+            </a>
         </div>
     </div>
 </x-app-layout>
