@@ -39,7 +39,7 @@
                         </div>
                         <div>
                             <p class="font-bold">{{ __('Alamat Tujuan') }}</p>
-                            <p>{{ $resi->pengirim->alamat }}</p>
+                            <p>{{ $resi->penerima->alamat }}</p>
                         </div>
                         <div>
                             <p class="font-bold">{{ __('Biaya Pengiriman') }}</p>
