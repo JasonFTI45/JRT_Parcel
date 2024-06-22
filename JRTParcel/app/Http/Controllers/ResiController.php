@@ -98,6 +98,8 @@ class ResiController extends Controller
             'barang.*.lebar' => 'required|numeric',
             'barang.*.panjang' => 'required|numeric',
             'barang.*.tinggi' => 'required|numeric',
+            'metodePembayaran' => 'required|string',
+            'statusPembayaran' => 'required|string',
             'status' => 'required|string',
         ]);
     
@@ -120,6 +122,8 @@ class ResiController extends Controller
             'penerima_id' => $penerima->id,
             'pengirim_id' => $pengirim->id,
             'harga' => $harga,
+            'metodePembayaran' => $request->input('metodePembayaran'),
+            'statusPembayaran' => $request->input('statusPembayaran'),
             'status' => $request->input('status'),
         ]);
     

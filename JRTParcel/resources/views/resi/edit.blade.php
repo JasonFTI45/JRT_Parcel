@@ -139,18 +139,41 @@
                             </div>
                             
                             @endforeach
+                            <button type="button" onclick="addBarang()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            {{ __('Add Barang') }}
+                            </button>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Biaya Pengiriman') }}</h3>
+                        <div class="border p-4 rounded-md">
+                            
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">{{ __('Jenis Pembayaran') }}</h3>
+                                <x-radio-input name="metodePembayaran" value="Transfer" label="Transfer" required :checked="$resi->metodePembayaran === 'Transfer'"/>
+                                <x-radio-input name="metodePembayaran" value="Cash" label="Cash" required :checked="$resi->metodePembayaran === 'Cash'"/>
+                                <x-radio-input name="metodePembayaran" value="COD" label="COD" required :checked="$resi->metodePembayaran === 'COD'"/>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">{{ __('Status Pembayaran') }}</h3>
+                                <x-radio-input name="statusPembayaran" value="Lunas" label="Lunas" required :checked="$resi->statusPembayaran === 'Lunas'"/>
+                                <x-radio-input name="statusPembayaran" value="Belum Lunas" label="Belum Lunas" required :checked="$resi->statusPembayaran === 'Belum Lunas'"/>
+                            </div>
+                        </div>
+                            
+                            <button type="button" id="calculateHargaBtn" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                {{ __('Hitung Harga') }}
+                            </button>
+                            <div id="hargaDisplay" class="float-right p-4 text-3xl font-bold">
+                                {{ __('Rp. 0') }}
+                            </div>
+                        </div>
                     </div>
                                 
-                        <button type="button" onclick="addBarang()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                        {{ __('Add Barang') }}
-                        </button>
-                        <button type="button" id="calculateHargaBtn" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                            {{ __('Hitung Harga') }}
-                        </button>
-                        <div id="hargaDisplay" class="float-right p-4 text-3xl font-bold">
-                            {{ __('Rp. 0') }}
-                        </div>
-                        </div>
+                        
+                        
+                        
                         <button type="submit" class="mt-6 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                         {{ __('Update Resi') }}
                         </button>
