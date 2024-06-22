@@ -112,8 +112,7 @@ class ResiController extends Controller
         $barangData = $request->input('barang');
     
         // Recalculate harga
-        $harga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
-    
+        $totalHarga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
         // Update Resi
         $resi->update([
             'jenisPengiriman' => $request->input('jenisPengiriman'),
@@ -121,7 +120,7 @@ class ResiController extends Controller
             'kecamatan_kota_asal' => $request->input('kecamatan_kota_asal'),
             'penerima_id' => $penerima->id,
             'pengirim_id' => $pengirim->id,
-            'harga' => $harga,
+            'harga' => $totalHarga,
             'metodePembayaran' => $request->input('metodePembayaran'),
             'statusPembayaran' => $request->input('statusPembayaran'),
             'status' => $request->input('status'),
@@ -135,6 +134,7 @@ class ResiController extends Controller
                 $existingBarangs[$data['id']]->update([
                     'tipe_komoditas' => $data['tipe_komoditas'],
                     'berat' => $data['berat'],
+                    'beratVolume' => $this->calculateBeratVolumetrik($data['panjang'], $data['lebar'], $data['tinggi'], $jenisPengiriman),
                     'lebar' => $data['lebar'],
                     'panjang' => $data['panjang'],
                     'tinggi' => $data['tinggi'],
@@ -147,6 +147,7 @@ class ResiController extends Controller
                     'resi_id' => $resi->id,
                     'tipe_komoditas' => $data['tipe_komoditas'],
                     'berat' => $data['berat'],
+                    'beratVolume' => $this->calculateBeratVolumetrik($data['panjang'], $data['lebar'], $data['tinggi'], $jenisPengiriman),
                     'lebar' => $data['lebar'],
                     'panjang' => $data['panjang'],
                     'tinggi' => $data['tinggi'],
@@ -194,8 +195,7 @@ class ResiController extends Controller
         $barangData = $request->input('barang'); // Ensure 'barang' is structured correctly in your request
     
         // Adjusted method call
-        $harga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
-        
+        $totalHarga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
         // Create Resi
         $resi = Resi::create([
             'jenisPengiriman' => $request->input('jenisPengiriman'),
@@ -203,7 +203,7 @@ class ResiController extends Controller
             'kecamatan_kota_asal' => $request->input('kecamatan_kota_asal'),
             'penerima_id' => $penerima ? $penerima->id : null,
             'pengirim_id' => $pengirim ? $pengirim->id : null,
-            'harga' => $harga,
+            'harga' => $totalHarga,
             'metodePembayaran'=> $request->input('metodePembayaran'),
             'statusPembayaran'=> $request->input('statusPembayaran'),
             'karyawan_id' => $karyawan_id, 
@@ -217,6 +217,7 @@ class ResiController extends Controller
                 'resi_id' => $resi->id,
                 'tipe_komoditas' => $barang['tipe_komoditas'],
                 'berat' => $barang['berat'],
+                'beratVolume' => $this->calculateBeratVolumetrik($barang['panjang'], $barang['lebar'], $barang['tinggi'], $jenisPengiriman),
                 'lebar' => $barang['lebar'],
                 'panjang' => $barang['panjang'],
                 'tinggi' => $barang['tinggi'],
@@ -234,9 +235,43 @@ class ResiController extends Controller
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
         $jenisPengiriman = $request->input('jenisPengiriman');
         $barangData = $request->input('barang');
-        $harga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
+        $totalHarga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
     
-        return response()->json(['harga' => $harga]);
+        return response()->json(['harga' => $totalHarga]);
+    }
+    
+    private function calculateBeratVolumetrik($panjang, $lebar, $tinggi, $jenisPengiriman){
+        $volumetrikUdara = 6000;
+        $volumetrikLaut = 4000;
+
+        $volume = $panjang * $lebar * $tinggi;
+
+        if($jenisPengiriman == 'Udara'){
+            $beratVolume = $volume/$volumetrikUdara;
+            if ($beratVolume == 0){
+                $beratVolume = 0;
+            } else if ($beratVolume < 1) {
+                $beratVolume = 1;
+            } else if ($beratVolume <= 1.5) {
+                $beratVolume = 1.5;
+            } else {
+                $beratVolume = ceil($beratVolume);
+            }
+
+            return $beratVolume;
+
+        } else if($jenisPengiriman == 'Laut'){
+            $beratVolume = $volume/$volumetrikLaut;
+            if ($beratVolume == 0){
+                $beratVolume = 0;
+            } else if ($beratVolume <= 2) {
+                $beratVolume = 2;
+            } else {
+                $beratVolume = ceil($beratVolume);
+            }
+
+            return $beratVolume;
+        }
     }
     
     // to calculate harga in resi.create
@@ -298,7 +333,7 @@ class ResiController extends Controller
                 }
             }
     
-            return $totalHarga; 
+            return $totalHarga;
         } else {
             $totalHarga = 0;
     

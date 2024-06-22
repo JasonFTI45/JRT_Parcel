@@ -166,7 +166,7 @@
                                 {{ __('Hitung Harga') }}
                             </button>
                             <div id="hargaDisplay" class="float-right p-4 text-3xl font-bold">
-                                {{ __('Rp. 0') }}
+                                {{ 'Rp ' . number_format($resi->harga, 2, ',', '.') }}
                             </div>
                         </div>
                     </div>
