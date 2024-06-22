@@ -114,8 +114,8 @@
                         <tbody class="font-12">
                             @foreach([
                             'No. Resi' => $resi->kodeResi,
-                            'Total Berat' => $barang->sum('berat') . ' Kg',
-                            'Total Berat Volume' => $barang->sum('beratVolume') . ' Kg',
+                            'Total Berat Barang' => $resi->barangs->sum('berat') . ' Kg',
+                            'Total Berat Volume' => $resi->barangs->sum('beratVolume') . ' Kg',
                             'Jumlah Koli' => $resi->barangs->count()
                             ] as $label => $value)
                             <tr>
