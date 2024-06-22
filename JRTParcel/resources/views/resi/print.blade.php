@@ -36,7 +36,6 @@
                 </div>
                 <div class="right-resi-2"><i>Penerima tidak perlu membayar ongkir ke Kurir</i></div>
             </div>
-            <br>
             <div class="tujuan-resi">
                 <h1>{{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
             </div>
@@ -63,6 +62,7 @@
             <h1 style="font-weight: bolder;">{{ __('Biaya Pengiriman : ') . 'Rp ' . number_format($resi->harga, 2, ',', '.') }}</h1>
         </div>
     </div>
+    <b style="margin-left: 10px;"><i>&#9988; Lembar Pengirim</i></b>
     <div class="container-penerima">
         <div class="content-resi penerima">
             <div class="penerima-isi-1">
@@ -87,7 +87,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
             <div class="penerima-isi-2">
                 <div class="isi-1-top column">
