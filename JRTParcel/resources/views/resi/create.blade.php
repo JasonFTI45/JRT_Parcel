@@ -131,14 +131,14 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                                 <div>
                                     <h3 class="font-semibold text-lg mb-2">{{ __('Jenis Pembayaran') }}</h3>
-                                    <x-radio-input name="Pembayaran" value="Transfer" label="Transfer"/>
-                                    <x-radio-input name="Pembayaran" value="Cash" label="Cash"/>
-                                    <x-radio-input name="Pembayaran" value="COD" label="COD"/>
+                                    <x-radio-input name="metodePembayaran" value="Transfer" label="Transfer" required/>
+                                    <x-radio-input name="metodePembayaran" value="Cash" label="Cash" required/>
+                                    <x-radio-input name="metodePembayaran" value="COD" label="COD" required/>
                                 </div>
                                 <div>
                                     <h3 class="font-semibold text-lg mb-2">{{ __('Status Pembayaran') }}</h3>
-                                    <x-radio-input name="StatusPembayaran" value="Lunas" label="Lunas"/>
-                                    <x-radio-input name="StatusPembayaran" value="Belum Lunas" label="Belum Lunas"/>
+                                    <x-radio-input name="statusPembayaran" value="Lunas" label="Lunas" required/>
+                                    <x-radio-input name="statusPembayaran" value="Belum Lunas" label="Belum Lunas" required/>
                                     
                                 </div>
                             </div>
@@ -252,21 +252,21 @@
     //to disable lunas radio button when COD is selected
     document.addEventListener('DOMContentLoaded', function () {
     // Select the COD and Lunas radio inputs
-    const codRadioInput = document.querySelector('input[name="Pembayaran"][value="COD"]');
-    const lunasRadioInput = document.querySelector('input[name="StatusPembayaran"][value="Lunas"]');
+    const codRadioInput = document.querySelector('input[name="metodePembayaran"][value="COD"]');
+    const lunasRadioInput = document.querySelector('input[name="statusPembayaran"][value="Lunas"]');
     const lunasLabel = document.querySelector('label[for="' + lunasRadioInput.id + '"]'); // Assuming the label's "for" attribute matches the Lunas radio input's id
 
     // Function to update Lunas radio input and label styles
     function updateLunasStyles(isDisabled) {
         if (isDisabled) {
             lunasRadioInput.disabled = true;
-            lunasRadioInput.checked = false;
-            lunasLabel.style.opacity = '0.5';
-            lunasLabel.style.cursor = 'not-allowed';
+            lunasRadioInput.checked = false; // Unselect Lunas
+            lunasLabel.style.opacity = '0.5'; // Dim the label to indicate it's disabled
+            lunasLabel.style.cursor = 'not-allowed'; // Change cursor to indicate it's not clickable
         } else {
             lunasRadioInput.disabled = false;
-            lunasLabel.style.opacity = '1';
-            lunasLabel.style.cursor = 'pointer';
+            lunasLabel.style.opacity = '1'; // Reset label opacity
+            lunasLabel.style.cursor = 'pointer'; // Reset cursor
         }
     }
 
@@ -276,7 +276,7 @@
     });
 
     // Optionally, add event listeners to other payment method radio inputs to ensure that the Lunas radio button and label are styled correctly when COD is not selected
-    const otherPaymentMethods = document.querySelectorAll('input[name="Pembayaran"]:not([value="COD"])');
+    const otherPaymentMethods = document.querySelectorAll('input[name="metodePembayaran"]:not([value="COD"])');
     otherPaymentMethods.forEach(function(input) {
         input.addEventListener('change', function() {
             updateLunasStyles(false);

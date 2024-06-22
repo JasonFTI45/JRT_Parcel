@@ -20,6 +20,8 @@ class Resi extends Model
         'kecamatan_kota_asal',
         'kecamatan_kota_tujuan',
         'harga',
+        'metodePembayaran',
+        'statusPembayaran',
         'created_at',
         'karyawan_id',
         'status'

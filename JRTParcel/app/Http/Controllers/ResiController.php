@@ -176,6 +176,8 @@ class ResiController extends Controller
             'barang.*.lebar' => 'required|numeric',
             'barang.*.panjang' => 'required|numeric',
             'barang.*.tinggi' => 'required|numeric',
+            'metodePembayaran' => 'required|string',
+            'statusPembayaran' => 'required|string',
         ]);
     
         // Save Penerima and Pengirim
@@ -198,6 +200,8 @@ class ResiController extends Controller
             'penerima_id' => $penerima ? $penerima->id : null,
             'pengirim_id' => $pengirim ? $pengirim->id : null,
             'harga' => $harga,
+            'metodePembayaran'=> $request->input('metodePembayaran'),
+            'statusPembayaran'=> $request->input('statusPembayaran'),
             'karyawan_id' => $karyawan_id, 
             'created_at' => now(),
             'status' => 'Menunggu Pengiriman',
