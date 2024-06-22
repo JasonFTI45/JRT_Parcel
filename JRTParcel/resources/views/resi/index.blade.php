@@ -88,8 +88,11 @@
                                 <td class="py-3 px-6 text-left">{{ $resi->kecamatan_kota_asal }}</td>
                                 <td class="py-3 px-6 text-left">{{ $resi->kecamatan_kota_tujuan }}</td>
                                 <td class="py-3 px-6 text-left">
-                                    <a href="{{ route('resi.details', $resi->id) }}" class="text-blue-500 hover:text-blue-700">Details</a>
-                                    <a href="{{ route('resi.edit', $resi->id) }}" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>
+                                    <div class="flex">
+                                        <a href="{{ route('resi.details', $resi->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Details</a>
+                                        <a href="{{ route('resi.edit', $resi->id) }}" class="ml-2 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                                        <a href="{{ route('resi.print', $resi->id) }}" target="_blank" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Print</a>
+                                    </div>
                                 </td>
                             </tr>
                         @endif

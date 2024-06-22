@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('resi', function (Blueprint $table) {
-            $table->string('status')->default('Menunggu Pengiriman');
+            $table->string('metodePembayaran');
+            $table->string('statusPembayaran');
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('resi', function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->dropColumn(['metodePembayaran', 'statusPembayaran']);
         });
     }
 };

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('resi', function (Blueprint $table) {
-            $table->string('status')->default('Menunggu Pengiriman');
+        Schema::table('barang', function (Blueprint $table) {
+            $table->float('beratVolume')->default(0)->after('berat'); // Adjust the precision and scale as needed
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('resi', function (Blueprint $table) {
-            $table->dropColumn('status');
+        Schema::table('barang', function (Blueprint $table) {
+            $table->dropColumn('beratVolume');
         });
     }
 };

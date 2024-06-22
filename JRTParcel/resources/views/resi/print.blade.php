@@ -16,12 +16,11 @@
             </div>
             <div class="informasi-resi">
                 <div class="penerima-resi">
-                    <h1>{{ __('Penerima: ') . $resi->penerima->nama }}Penerima: Tigo</h1>
+                    <h1>{{ __('Penerima: ') . $resi->penerima->namaPenerima }}</h1>
                     <h5>{{ $resi->penerima->alamat }}</h5>
-
                 </div>
                 <div class="pengirim-resi">
-                    <h1>{{ __('Pengirim: ') . $resi->pengirim->nama }}</h1>
+                    <h1>{{ __('Pengirim: ') . $resi->pengirim->namaPengirim }}</h1>
                     <h5>{{ $resi->pengirim->nomorTelepon }}</h5>
                     <h5>{{ $resi->kecamatan_kota_asal }}</h5>
                 </div>
@@ -37,7 +36,6 @@
                 </div>
                 <div class="right-resi-2"><i>Penerima tidak perlu membayar ongkir ke Kurir</i></div>
             </div>
-            <br>
             <div class="tujuan-resi">
                 <h1>{{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
             </div>
@@ -51,12 +49,12 @@
                     <td>Volume</td>
                 </tr>
                 @foreach ( $resi->barangs as $barang )
-                    <tr>
-                        <td>{{ $loop->index + 1}}</td>
-                        <td>{{ $barang->tipe_komoditas }}</td>
-                        <td>{{ $barang->berat }} Kg</td>
-                        <td>{{ $barang->panjang }} cm x {{ $barang->lebar }} cm x {{ $barang->tinggi }} cm</td>
-                    </tr>
+                <tr>
+                    <td>{{ $loop->index + 1}}</td>
+                    <td>{{ $barang->tipe_komoditas }}</td>
+                    <td>{{ $barang->berat }} Kg</td>
+                    <td>{{ $barang->panjang }} cm x {{ $barang->lebar }} cm x {{ $barang->tinggi }} cm</td>
+                </tr>
                 @endforeach
             </table>
         </div>
@@ -64,7 +62,62 @@
             <h1 style="font-weight: bolder;">{{ __('Biaya Pengiriman : ') . 'Rp ' . number_format($resi->harga, 2, ',', '.') }}</h1>
         </div>
     </div>
+    
+    <div class="container-penerima">
+    <b style="margin-left: 10px;"><i>&#9988; Lembar Pengirim</i></b>
+        <div class="content-resi penerima">
+            <div class="penerima-isi-1">
+                <div class="isi-1-top">
+                    <img src="{{ asset('assets/logo.png') }}" alt="" height="30" width="57.25">
+                </div>
+                <div class="isi-1-bottom">
+                    <table>
+                        <tbody>
+                            @foreach([
+                            'Pengirim' => $resi->pengirim->namaPengirim,
+                            'Penerima' => $resi->penerima->namaPenerima,
+                            'Kota Tujuan' => $resi->kecamatan_kota_tujuan,
+                            'Estimasi' => $resi->created_at->format('d-m-Y')
+                            ] as $label => $value)
+                            <tr>
+                                <td>{{ $label }}</td>
+                                <td>:</td>
+                                <td>{{ $value }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="penerima-isi-2">
+                <div class="isi-1-top column">
+                    <h2 style="font-size: 18px; ">{{ __('Pengiriman ') . $resi->jenisPengiriman }}</h2>
+                    <h5>({{ $resi->created_at->format('d-m-Y') }})</h5>
+                </div>
+                <div class="isi-1-bottom">
+                    <table>
+                        <tbody class="font-12">
+                            @foreach([
+                            'No. Resi' => $resi->kodeResi,
+                            'Total Berat' => $barang->berat . ' Kg',
+                            'Jumlah Koli' => $resi->barangs->count()
+                            ] as $label => $value)
+                            <tr>
+                                <td>{{ $label }}</td>
+                                <td>:</td>
+                                <td>{{ $value }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
+                </div>
+                <div class="isi-1-top harga">
+                    <h1>{{'Rp. ' . number_format($resi->harga, 2, ',', '.')}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </x-print-layout>
 <script>

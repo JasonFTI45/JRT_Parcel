@@ -5,8 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use database\seeders\AdminUserSeeder;
-use database\seeders\LocationSeeder;
+use Database\Seeders\AdminUserSeeder;
+use Database\Seeders\LocationSeeder;
 
 class DatabaseSeeder extends Seeder
 {

@@ -47,15 +47,26 @@
                         </div>
                     </div>
                     <h2 class="font-bold text-2xl mb-2">{{ __('Detail Barang') }}</h2>
-                    <div class="mb-4">
-                        <p class="font-bold">{{ __('Jumlah Koli') }}</p>
-                        <p>{{ $resi->barangs->count() }}</p>
+                    <div class="grid grid-cols-2 gap-4 mb-2">
+                        <div class="mb-4">
+                            <p class="font-bold">{{ __('Jumlah Koli') }}</p>
+                            <p>{{ $resi->barangs->count() }}</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-bold">{{ __('Total Berat Barang') }}</p>
+                            <p>{{ $resi->barangs->sum('berat') }} kg</p>
+                        </div>
+                        <div class="mb-4"></div>
+                        <div class="mb4">
+                            <p class="font-bold">{{ __('Total Berat Volume') }}</p>
+                            <p>{{ $resi->barangs->sum('beratVolume') }} kg</p>
+                        </div>
                     </div>
                     @foreach ( $resi->barangs as $barang )
                     <div>
                         <h2 class="font-bold text-xl mb-1">{{ __('Barang ') . $loop->index+1 }}  </h2>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="grid grid-cols-2 gap-4 mb-6">   
                         <div>
                             <p class="font-bold">{{ __('Tipe') }}</p>              
                             <p>{{ $barang->tipe_komoditas }}</p>
@@ -67,6 +78,10 @@
                         <div>
                             <p class="font-bold">{{ __('Volume') }}</p>
                             <p>{{ $barang->panjang }} cm x {{ $barang->lebar }} cm x {{ $barang->tinggi }} cm</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">{{ __('Berat Volume') }}</p>
+                            <p>{{ $barang->beratVolume }} kg</p>
                         </div>
                     </div>      
                     @endforeach                                 

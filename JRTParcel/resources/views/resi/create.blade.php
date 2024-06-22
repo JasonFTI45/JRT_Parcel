@@ -88,12 +88,12 @@
                             <div class="barang-item border p-4 rounded-md">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Jenis Barang') }}</h3>
+                                        <h3 class="font-semibold text-lg mb-2">{{ __('Jenis Barang') }}</h3>
                                         <x-input-label for="tipe_komoditas" :value="__('Tipe Komoditas')" />
                                         <x-text-input type="text" name="barang[0][tipe_komoditas]" required />
                                     </div>
                                     <div>
-                                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Berat Barang') }} <span class="text-gray-500 text-sm">{{ __('(Kg)*') }}</span></h3>
+                                        <h3 class="font-semibold text-lg mb-2">{{ __('Berat Barang') }} <span class="text-gray-500 text-sm">{{ __('(Kg)*') }}</span></h3>
                                         <x-input-label for="berat" :value="__('Berat')" />
                                         <x-number-input type="number" step="0.01" name="barang[0][berat]" required />
                                     </div>
@@ -121,13 +121,36 @@
                         <button type="button" onclick="addBarang()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                                 {{ __('Add Barang') }}
                         </button>
-                        <button type="button" id="calculateHargaBtn" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                            {{ __('Hitung Harga') }}
-                        </button>
-                        <div id="hargaDisplay" class="float-right p-4 text-3xl font-bold">
-                            {{ __('Rp. 0') }}
+                        
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Detail Biaya Pengiriman') }}</h3>
+                        <div class="border p-4 rounded-md">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-2">{{ __('Jenis Pembayaran') }}</h3>
+                                    <x-radio-input name="metodePembayaran" value="Transfer" label="Transfer" required/>
+                                    <x-radio-input name="metodePembayaran" value="Cash" label="Cash" required/>
+                                    <x-radio-input name="metodePembayaran" value="COD" label="COD" required/>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-2">{{ __('Status Pembayaran') }}</h3>
+                                    <x-radio-input name="statusPembayaran" value="Lunas" label="Lunas" required/>
+                                    <x-radio-input name="statusPembayaran" value="Belum Lunas" label="Belum Lunas" required/>
+                                    
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="calculateHargaBtn" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                {{ __('Hitung Harga') }}
+                            </button>
+                            <div id="hargaDisplay" class="float-right p-4 text-3xl font-bold">
+                                {{ __('Rp. 0') }}
+                            </div>
                         </div>
-                    </div>                            
+                    </div>
             </div>
             <button type="submit" class="mt-6 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                 {{ __('Create Resi') }}
@@ -147,12 +170,12 @@
         newBarang.innerHTML = `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <h3 class="font-semibold text-lg mt-4 mb-2">Jenis Barang</h3>
+                    <h3 class="font-semibold text-lg mb-2">Jenis Barang</h3>
                     <x-input-label for="tipe_komoditas" :value="__('Tipe Komoditas')" />
                     <x-text-input type="text" name="barang[${barangIndex}][tipe_komoditas]" required />
                 </div>
                 <div>
-                    <h3 class="font-semibold text-lg mt-4 mb-2">Berat Barang <span class="text-gray-500 text-sm">(Kg)*</span></h3>
+                    <h3 class="font-semibold text-lg mb-2">Berat Barang <span class="text-gray-500 text-sm">(Kg)*</span></h3>
                     <x-input-label for="berat" :value="__('Berat')" />
                     <x-number-input type="number" step="0.01" name="barang[${barangIndex}][berat]" required />
                 </div>
@@ -225,4 +248,39 @@
             console.log(error);
         });
     });
+
+    //to disable lunas radio button when COD is selected
+    document.addEventListener('DOMContentLoaded', function () {
+    // Select the COD and Lunas radio inputs
+    const codRadioInput = document.querySelector('input[name="metodePembayaran"][value="COD"]');
+    const lunasRadioInput = document.querySelector('input[name="statusPembayaran"][value="Lunas"]');
+    const lunasLabel = document.querySelector('label[for="' + lunasRadioInput.id + '"]'); // Assuming the label's "for" attribute matches the Lunas radio input's id
+
+    // Function to update Lunas radio input and label styles
+    function updateLunasStyles(isDisabled) {
+        if (isDisabled) {
+            lunasRadioInput.disabled = true;
+            lunasRadioInput.checked = false; // Unselect Lunas
+            lunasLabel.style.opacity = '0.5'; // Dim the label to indicate it's disabled
+            lunasLabel.style.cursor = 'not-allowed'; // Change cursor to indicate it's not clickable
+        } else {
+            lunasRadioInput.disabled = false;
+            lunasLabel.style.opacity = '1'; // Reset label opacity
+            lunasLabel.style.cursor = 'pointer'; // Reset cursor
+        }
+    }
+
+    // Add an event listener to the COD radio input
+    codRadioInput.addEventListener('change', function() {
+        updateLunasStyles(this.checked);
+    });
+
+    // Optionally, add event listeners to other payment method radio inputs to ensure that the Lunas radio button and label are styled correctly when COD is not selected
+    const otherPaymentMethods = document.querySelectorAll('input[name="metodePembayaran"]:not([value="COD"])');
+    otherPaymentMethods.forEach(function(input) {
+        input.addEventListener('change', function() {
+            updateLunasStyles(false);
+        });
+    });
+});
 </script>
