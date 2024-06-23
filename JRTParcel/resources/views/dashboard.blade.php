@@ -92,7 +92,7 @@
                                 'Sudah Sampai' => 0
                             ];
                             
-                            foreach ($resi as $rs) {
+                            foreach ($all_resi as $rs) {
                                 if (isset($statusCounts[$rs->status])) {
                                     $statusCounts[$rs->status]++;
                                 }
