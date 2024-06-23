@@ -1,23 +1,19 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Resi') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="pt-5">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-solid ">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <h1 class="text-center font-bold text-2xl mb-5">DAFTAR PAKET</h1>
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <tr>
-                            <th class="py-3 px-6 text-left">Kode Resi</th>
+                            <th class="py-3 px-6 text-left">No. Resi</th>
                             <th class="py-3 px-6 text-left">Jenis Pengiriman</th>
                             <th class="py-3 px-6 text-left">Penerima</th>
                             <th class="py-3 px-6 text-left">Pengirim</th>
                             <th class="py-3 px-6 text-left">Kecamatan/Kota Asal</th>
                             <th class="py-3 px-6 text-left">Kecamatan/Kota Tujuan</th>
-                            <th class="py-3 px-6 text-left">Actions</th>
+                            <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
@@ -50,7 +46,7 @@
                         </table>
                     </div>
                     <a href="{{ route('resi.create') }}" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-                        {{ __('Add Resi') }}
+                        {{ __('Tambah Paket') }}
                     </a>
                 </div>
             </div>

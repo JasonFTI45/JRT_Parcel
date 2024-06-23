@@ -25,7 +25,7 @@
                     @endif
                     @if (Auth::user()->role == 'karyawan')
                         <x-nav-link class="font-bold" :href="route('resi.index')" :active="request()->routeIs('resi.index')">
-                            <h1 class="font-bold text-lg">{{ __('Add Parcel') }}</h1>
+                            <h1 class="font-bold text-lg">{{ __('Paket') }}</h1>
                         </x-nav-link>
                     @endif
                 </div>

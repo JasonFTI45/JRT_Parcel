@@ -69,7 +69,9 @@
                         Total Harga: {{ 'Rp ' . number_format($resi->sum('harga'), 2, ',', '.') }}
                         @endif
                     </div> -->
-                    {{ $resi->links() }}
+                    <div class="flex justify-center ">
+                        {{ $resi->links() }}
+                    </div>
                     <div class="pb-5"></div>
                 </div>
             </div>
@@ -81,7 +83,7 @@
                             <tr>
                                 <th>St. No</th>
                                 <th>Status</th>
-                                <th>Count</th>
+                                <th>Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,17 +103,17 @@
                         <tr>
                             <td>1</td>
                             <td>Menunggu Pengiriman</td>
-                            <td>{{ $statusCounts['Menunggu Pengiriman'] }}</td>
+                            <td class="text-center">{{ $statusCounts['Menunggu Pengiriman'] }}</td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Sedang Dikirim</td>
-                            <td>{{ $statusCounts['Sedang Dikirim'] }}</td>
+                            <td class="text-center">{{ $statusCounts['Sedang Dikirim'] }}</td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>Sudah Sampai</td>
-                            <td>{{ $statusCounts['Sudah Sampai'] }}</td>
+                            <td class="text-center">{{ $statusCounts['Sudah Sampai'] }}</td>
                         </tr>
                     </tbody>
                     </table>
@@ -133,7 +135,7 @@
             </div>
             <div class="flex-column sm:rounded-lg ml-5">
                 <div class="flex-row w-full h-80 mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-10">
-                    <h1 class="pt-5 text-500 text-xl pl-10 font-bold ">Daily Activities</h1>
+                    <h1 class="pt-5 text-500 text-xl pl-10 font-bold ">Aktivitas Harian</h1>
                     <canvas class="w-full pt-3 ml-32" id="hargaChart"></canvas>
                 </div>
             </div>  
