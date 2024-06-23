@@ -32,7 +32,7 @@ Route::patch('/karyawan/update/{karyawan}', [KaryawanController::class, 'update'
 Route::delete('/karyawan/delete/{karyawan}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 
 Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
-Route::get('/history/{id}', [HistoryController::class, 'view'])->name('history.view');
+Route::get('/history/{resi}/print', [HistoryController::class, 'print'])->name('history.print');
 
 
 Route::middleware('auth')->group(function () {
