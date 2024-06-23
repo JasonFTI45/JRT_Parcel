@@ -62,8 +62,9 @@
             <h1 style="font-weight: bolder;">{{ __('Biaya Pengiriman : ') . 'Rp ' . number_format($resi->harga, 2, ',', '.') }}</h1>
         </div>
     </div>
-    <b style="margin-left: 10px;"><i>&#9988; Lembar Pengirim</i></b>
+    
     <div class="container-penerima">
+    <b style="margin-left: 10px;"><i>&#9988; Lembar Pengirim</i></b>
         <div class="content-resi penerima">
             <div class="penerima-isi-1">
                 <div class="isi-1-top">
