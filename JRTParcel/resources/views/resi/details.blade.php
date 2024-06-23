@@ -7,9 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
-                <div class="p-6 text-gray-900">
-                    <h2 class="font-bold text-2xl mb-2">{{ __('Detail Pengiriman') }} ({{ $resi->created_at->format('d-m-Y') }})</h2>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4 p-6">
+            <a href="{{ route('resi.index') }}" class="text-blue-500 hover:text-blue-700">&larr; {{ __('Kembali') }}</a>
+                    <h2 class="font-bold text-2xl mb-2 mt-4">{{ __('Detail Pengiriman') }} ({{ $resi->created_at->format('d-m-Y') }})</h2>
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div>
                             <p class="font-bold">{{ __('Kode Resi') }}</p>
@@ -84,8 +84,7 @@
                             <p>{{ $barang->beratVolume }} kg</p>
                         </div>
                     </div>      
-                    @endforeach                                 
-                </div>
+                    @endforeach                
             </div>
             <a href="{{ route('resi.print', $resi->id) }}" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     {{ __('Print') }}

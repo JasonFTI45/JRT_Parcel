@@ -13,11 +13,45 @@ use App\Models\Lokasi;
 
 class ResiController extends Controller
 {
-    public function index(){
-        $resis = Resi::with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10);
-        
-        return view('resi.index', compact('resis'));
-    }
+    public function index(Request $request) { // Inject Request $request here
+        $search = $request->get('search');
+        $shippingMethod = $request->get('shippingMethod');
+        $shippingLocation = $request->get('shippingLocation');
+        $shippingStatus = $request->get('shippingStatus');
+        $sortField = $request->get('sortField', 'id');
+        $sortOrder = $request->get('sortOrder', 'asc');
+        $resi = Resi::query();
+
+        if ($search) {
+            $resi->whereHas('penerima', function ($query) use ($search) {
+                $query->whereRaw('LOWER("namaPenerima") LIKE ?', [strtolower("%{$search}%")]);
+            });
+        }
+
+        if ($shippingMethod) {
+            $resi->where('jenisPengiriman', $shippingMethod);
+        }
+        if ($shippingLocation) {
+            $resi->where('kecamatan_kota_tujuan', $shippingLocation);
+        }
+        if ($shippingStatus) {
+            $resi->where('status', $shippingStatus);
+        }
+
+        if ($sortField === 'nama') {
+            $resi->join('karyawan', 'resi.karyawan_id', '=', 'karyawan.id')
+                ->orderBy('karyawan.nama', $sortOrder)
+                ->select('resi.*');
+        } else {
+            $resi->orderBy($sortField, $sortOrder);
+        }
+
+        // Apply the filters and sorting to the final query
+        $resis = $resi->with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10);
+        $lokasi = Lokasi::get();
+
+        return view('resi.index', compact('resis','shippingMethod', 'shippingLocation', 'shippingStatus', 'lokasi', 'sortField', 'sortOrder'));
+}
 
     public function create(){
 

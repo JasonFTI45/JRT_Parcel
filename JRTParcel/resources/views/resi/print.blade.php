@@ -13,6 +13,7 @@
             <div class="judul-resi">
                 <h2> {{ __('Jenis Pengiriman : '. $resi->jenisPengiriman) }} </h2>
                 <h2>{{ __('No. Resi : ') . $resi->kodeResi }}</h2>
+                <h2>{{ __('Tanggal : ') . $resi->created_at->format('d-m-Y') }}</h2>
             </div>
             <div class="informasi-resi">
                 <div class="penerima-resi">
@@ -32,12 +33,23 @@
             </div>
             <div class="tujuan-resi">
                 <div class="left-resi-2">
-                    <h1>CASHLESS</h1>
+                    @if ($resi->metodePembayaran == 'Transfer' || $resi->metodePembayaran == 'Cash')
+                        <h1>CASHLESS</h1>
+                    @elseif ($resi->metodePembayaran == 'COD')
+                        <h1>COD</h1>
+                    @endif
                 </div>
-                <div class="right-resi-2"><i>Penerima tidak perlu membayar ongkir ke Kurir</i></div>
+                @if ($resi->metodePembayaran == 'Transfer' || $resi->metodePembayaran == 'Cash')
+                        <div class="right-resi-2"><i>Penerima tidak perlu membayar ongkir ke Kurir</i></div>
+                    @elseif ($resi->metodePembayaran == 'COD')
+                        <div class="right-resi-2"><i>Penerima harus membayar ongkir ke Kurir</i></div>
+                @endif
+                
             </div>
             <div class="tujuan-resi">
                 <h1>{{ __('Jumlah Koli: ') . $resi->barangs->count() }}</h1>
+                <h1 class="mr" style="font-weight: bolder;">{{ __('Total Berat Volume : ') . $resi->barangs->sum('beratVolume') . ' Kg'}}</h1>
+                <h1 class="mr" style="font-weight: bolder;">{{ __('Total Berat Barang : ') . $resi->barangs->sum('berat') . ' Kg'}}</h1>
             </div>
         </div>
         <div class="tabel-resi">
@@ -45,15 +57,17 @@
                 <tr style="font-weight: bolder;">
                     <td>#</td>
                     <td>Tipe</td>
-                    <td>Berat</td>
                     <td>Volume</td>
+                    <td>Berat Volume</td>
+                    <td>Berat Barang</td>
                 </tr>
                 @foreach ( $resi->barangs as $barang )
                 <tr>
                     <td>{{ $loop->index + 1}}</td>
                     <td>{{ $barang->tipe_komoditas }}</td>
-                    <td>{{ $barang->berat }} Kg</td>
                     <td>{{ $barang->panjang }} cm x {{ $barang->lebar }} cm x {{ $barang->tinggi }} cm</td>
+                    <td>{{ $barang->beratVolume }} Kg</td>
+                    <td>{{ $barang->berat }} Kg</td>
                 </tr>
                 @endforeach
             </table>
@@ -77,7 +91,8 @@
                             'Pengirim' => $resi->pengirim->namaPengirim,
                             'Penerima' => $resi->penerima->namaPenerima,
                             'Kota Tujuan' => $resi->kecamatan_kota_tujuan,
-                            'Estimasi' => $resi->created_at->format('d-m-Y')
+                            'Tanggal Kirim' => $resi->created_at->format('d-m-Y'),
+                            'Estimasi' => ($resi->jenisPengiriman == 'Udara') ? '2-3 Hari' : (($resi->jenisPengiriman == 'Laut') ? '7-10 Hari' : '')
                             ] as $label => $value)
                             <tr>
                                 <td>{{ $label }}</td>
@@ -99,7 +114,8 @@
                         <tbody class="font-12">
                             @foreach([
                             'No. Resi' => $resi->kodeResi,
-                            'Total Berat' => $barang->berat . ' Kg',
+                            'Total Berat Barang' => $resi->barangs->sum('berat') . ' Kg',
+                            'Total Berat Volume' => $resi->barangs->sum('beratVolume') . ' Kg',
                             'Jumlah Koli' => $resi->barangs->count()
                             ] as $label => $value)
                             <tr>
