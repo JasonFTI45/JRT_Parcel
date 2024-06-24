@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Karyawan;
 use App\Models\Resi;
 use App\Models\Lokasi;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HistoryController extends Controller
 {
@@ -46,6 +47,11 @@ class HistoryController extends Controller
         $lokasi = Lokasi::get();
 
         return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'resi', 'lokasi'));
+    }
+
+    public function print(Resi $resi){
+        $resi->load('barangs');
+        return view('history.print', compact('resi'));
     }
 
     public function karyawan()

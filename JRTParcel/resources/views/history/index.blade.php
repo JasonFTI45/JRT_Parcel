@@ -91,7 +91,7 @@
                                         <td >{{ $r->kecamatan_kota_tujuan }}</td>
                                         <td class="text-red-500 hover:text-red-700">{{ $r->penerima->namaPenerima }}<br>{{ $r->penerima->nomorTelepon }}</td>
                                         <td class="text-red-500 hover:text-red-700">{{ $r->status }}</td>
-                                        <td><button class="text-red-500 hover:text-red-700">Print Resi</button></td> 
+                                        <td><a href="{{ route('history.print', $r->id) }}" target="_blank" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Print</a></td> 
                                     </tr>
                                 @endforeach
                             </tbody>
