@@ -23,7 +23,7 @@
     </div>
 
     <div class="pt-6 px-7">
-        <div class="flex max-w-8xl mx-auto sm:px-6 lg:px-8">
+        <div class="grid grid-cols-3 sm:px-6 lg:px-8">
             <div class="flex justify-center bg-white overflow-hidden shadow-sm sm:rounded-lg center0 px-5">
                 <div class="border-double text-xs">
                     <div class="center justify-center text-center ">
@@ -75,7 +75,7 @@
                     <div class="pb-5"></div>
                 </div>
             </div>
-            <div class="flex-column w-1/3 sm:rounded-lg ml-5" >
+            <div class="flex-column sm:rounded-lg ml-5" >
                 <div class="flex-row justify-center px-5 w-full h-80 mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-3">
                     <h1 class="text-500 text-xl font-bold pt-5 pb-5 text-center">Status Paket</h1>
                     <table>
