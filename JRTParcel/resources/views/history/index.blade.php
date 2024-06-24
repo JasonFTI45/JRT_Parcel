@@ -84,6 +84,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $resi->links() }}
                     </div>
                 </div>
             </div>
