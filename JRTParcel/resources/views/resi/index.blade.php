@@ -41,7 +41,6 @@
                             <div class="flex flex-row space-x-2">
                                 <div class="flex flex-row space-x-2">
                                     <select class="rounded w-28 text-sm" id="sortField" name="sortField" onchange="submitForm()">
-                                        <option value="">Sort by</option>
                                         <option value="id" {{ ($sortField == 'id') ? 'selected' : '' }}>No. Resi</option>
                                         <option value="kecamatan_kota_asal" {{ ($sortField == 'kecamatan_kota_asal') ? 'selected' : '' }}>Kota Asal</option>
                                         <option value="kecamatan_kota_tujuan" {{ ($sortField == 'kecamatan_kota_tujuan') ? 'selected' : '' }}>Kota Tujuan</option>
