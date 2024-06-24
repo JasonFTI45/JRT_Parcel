@@ -2,30 +2,31 @@
     <div class="px-16 pt-5 ">
         <div class="grid grid-cols-3 gap-6 ">
             <div class="w-full mb-6 md:mb-0 ">
-                <div class="grid grid-cols-2 color-1 center items-center justify-center w-full text-center text-xl font-bold rounded-3xl bg-pink-500 h-24 ">
-                    <h1 class="text-white text-2xl font-bold">Total Karyawan</h1>
-                    <p class="text-white text-2xl font-bold">{{$karyawanCount}}</p>
+                <div class="grid grid-cols-2 color-1 center items-center justify-center w-full text-center text-xl font-bold rounded-3xl bg-sky-500 h-24 ">                   
+                
+                <h1 class="text-white text-2xl font-bold">Hello, {{ Auth::user()->name }}</h1>
+                <p></p>
                 </div>
             </div>
             <div class="w-full mb-6 md:mb-0">
-                <div class="grid grid-cols-2 center color-2 items-center justify-center w-full text-center text-xl font-bold borderborder-red-500 rounded-3xl bg-green-500 h-24">
+                <div class="grid grid-cols-2 center color-2 items-center justify-center w-full text-center text-xl font-bold borderborder-red-500 rounded-3xl bg-pink-500 h-24">
                     <h1 class="text-white text-2xl font-bold">Total Paket</h1>
                     <p class="text-white text-2xl font-bold">{{$resis}}</p>
                 </div>
             </div>
             <div class="w-full mb-6 md:mb-0">
-                <div class="grid grid-cols-2 color-3 center items-center justify-center w-full text-center text-xl font-bold borderborder-red-500 rounded-3xl bg-sky-500 h-24">
-                    <h1 class="text-white text-2xl font-bold">Total Branch</h1>
-                    <p class="text-white text-2xl font-bold">{{$resis}}</p>
+                <div class="grid grid-cols-2 color-3 center items-center justify-center w-full text-center text-xl font-bold borderborder-red-500 rounded-3xl bg-green-500 h-24">
+                    <h1 class="text-white text-2xl font-bold">Total Karyawan</h1>
+                    <p class="text-white text-2xl font-bold">{{$karyawanCount}}</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="pt-6 px-7">
-        <div class="grid grid-cols-3 sm:px-6 lg:px-8">
-            <div class="flex justify-center bg-white overflow-hidden shadow-sm sm:rounded-lg center0 px-5">
-                <div class="border-double text-xs">
+    <div class="py-6 px-7">
+        <div class="grid grid-cols-3 sm:px-6 lg:px-8" style="min-height: 60vh; max-height: 70vh"> <!-- coba bikin responsive -->
+            <div class="flex justify-center bg-white overflow-hidden shadow-sm sm:rounded-lg center px-5">
+                <div class="border-double">
                     <div class="center justify-center text-center ">
                         <h1 class="text-500 text-xl font-bold pt-5 pb-5 ">Histori Paket</h1>
                     </div>
@@ -75,8 +76,8 @@
                     <div class="pb-5"></div>
                 </div>
             </div>
-            <div class="flex-column sm:rounded-lg ml-5" >
-                <div class="flex-row justify-center px-5 w-full h-80 mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-3">
+            <div class="grid grid-rows-2 sm:rounded-lg ml-5 min-h-full" >
+                <div class="flex-row justify-center px-5 w-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-3">
                     <h1 class="text-500 text-xl font-bold pt-5 pb-5 text-center">Status Paket</h1>
                     <table>
                         <thead>
@@ -134,7 +135,7 @@
                 </div>
             </div>
             <div class="flex-column sm:rounded-lg ml-5">
-                <div class="flex-row w-full h-80 mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-10">
+                <div class="flex-row w-full min-h-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-10">
                     <h1 class="pt-5 text-500 text-xl pl-10 font-bold ">Aktivitas Harian</h1>
                     <canvas class="w-full pt-3 ml-32" id="hargaChart"></canvas>
                 </div>
