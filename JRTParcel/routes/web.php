@@ -24,7 +24,7 @@ Route::get('/', function () {
 // butuh login untuk akses route dibawah
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');    
-
+});
 // admin only routes
 Route::middleware('isAdmin')->group(function () {
     Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
