@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>JRT Parcel</title>
 
     <!-- Fonts -->
     <link href="{{ asset('css/styles_2.css') }}" rel="stylesheet">
