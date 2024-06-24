@@ -9,11 +9,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="flex">
-                    <form class="w-full"id="combinedForm" method="GET" action="{{ route('history.index') }}">
+                    <form class="w-full" id="combinedForm" method="GET" action="{{ route('history.index') }}">
                         <div class="flex justify-between">
                             <div class="flex space-y-2">
                                 <div class="form-group w-52">
-                                    <input type="text" name="search" class="form-control" placeholder="Search by Courier's Name" value="{{ request('search') }}">
+                                    <input type="text" name="search" class="form-control" placeholder="Search by Name" value="{{ request('search') }}">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" name="action" value="search" class="bg-red-500 hover:bg-red-600 active:bg-red-700 w-20 rounded">Search</button>
@@ -27,10 +27,10 @@
                                         <option value="Laut" {{ ($shippingMethod == 'Laut') ? 'selected' : '' }}>Laut</option>
                                         <option value="Udara" {{ ($shippingMethod == 'Udara') ? 'selected' : '' }}>Udara</option>
                                     </select>
-                                    <select class="border-red-400 max-w-64 " id="shippingLocation" name="shippingLocation" >
+                                    <select class="border-red-400 max-w-64 " id="shippingLocation" name="shippingLocation">
                                         <option value="">Select Shipping Location</option>
                                         @foreach ($lokasi as $lokasi)
-                                            <option   value="{{ $lokasi->kecamatan }}, {{ $lokasi->kota }}" {{ ($shippingLocation == ($lokasi->kecamatan . ', ' . $lokasi->kota)) ? 'selected' : '' }}>{{ $lokasi->kecamatan }}, {{ $lokasi->kota }}</option>
+                                        <option value="{{ $lokasi->kecamatan }}, {{ $lokasi->kota }}" {{ ($shippingLocation == ($lokasi->kecamatan . ', ' . $lokasi->kota)) ? 'selected' : '' }}>{{ $lokasi->kecamatan }}, {{ $lokasi->kota }}</option>
                                         @endforeach
                                     </select>
                                     <select class="border-red-400" id="shippingStatus" name="shippingStatus">
@@ -48,10 +48,8 @@
                             <div class="flex flex-row space-x-2">
                                 <div class="flex flex-row space-x-2">
                                     <select class="border-red-400" id="sortField" name="sortField">
-                                        <option value="">Sort by</option>
-                                        <option value="id" {{ ($sortField == 'id') ? 'selected' : '' }}>Resi ID</option>
+                                        <option value="id" {{ ($sortField == 'id') ? 'selected' : '' }}>No. Resi</option>
                                         <option value="nama" {{ ($sortField == 'nama') ? 'selected' : '' }}>Kurir</option>
-                                        <option value="kecamatan_kota_asal" {{ ($sortField == 'kecamatan_kota_asal') ? 'selected' : '' }}>Kota Asal</option>
                                         <option value="kecamatan_kota_tujuan" {{ ($sortField == 'kecamatan_kota_tujuan') ? 'selected' : '' }}>Kota Tujuan</option>
                                     </select>
                                     <select class="border-red-400" id="sortOrder" name="sortOrder">
@@ -83,16 +81,16 @@
                             </thead>
                             <tbody>
                                 @foreach ($resi as $r)
-                                    <tr>
-                                        <td>{{ $r->kodeResi }}</td>
-                                        <td>{{ $r->karyawan->nama}}<br>{{ $r->karyawan->nomor_telepon}}</td>
-                                        <td class="text-red-500 hover:text-red-700">{{ $r->pengirim->namaPengirim }}<br>{{ $r->pengirim->nomorTelepon }}</td>
-                                        <td >{{ $r->kecamatan_kota_asal }}</td> 
-                                        <td >{{ $r->kecamatan_kota_tujuan }}</td>
-                                        <td class="text-red-500 hover:text-red-700">{{ $r->penerima->namaPenerima }}<br>{{ $r->penerima->nomorTelepon }}</td>
-                                        <td class="text-red-500 hover:text-red-700">{{ $r->status }}</td>
-                                        <td><a href="{{ route('history.print', $r->id) }}" target="_blank" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Print</a></td> 
-                                    </tr>
+                                <tr>
+                                    <td>{{ $r->kodeResi }}</td>
+                                    <td>{{ $r->karyawan->nama}}<br>{{ $r->karyawan->nomor_telepon}}</td>
+                                    <td class="text-red-500 hover:text-red-700">{{ $r->pengirim->namaPengirim }}<br>{{ $r->pengirim->nomorTelepon }}</td>
+                                    <td>{{ $r->kecamatan_kota_asal }}</td>
+                                    <td>{{ $r->kecamatan_kota_tujuan }}</td>
+                                    <td class="text-red-500 hover:text-red-700">{{ $r->penerima->namaPenerima }}<br>{{ $r->penerima->nomorTelepon }}</td>
+                                    <td class="text-red-500 hover:text-red-700">{{ $r->status }}</td>
+                                    <td><a href="{{ route('history.print', $r->id) }}" target="_blank" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Print</a></td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -102,4 +100,3 @@
         </div>
     </div>
 </x-app-layout>
-
