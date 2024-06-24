@@ -21,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// admin only routes
 Route::middleware('isAdmin')->group(function () {
     Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
     Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
@@ -34,9 +35,8 @@ Route::middleware('isAdmin')->group(function () {
     Route::get('/history/{resi}/print', [HistoryController::class, 'print'])->name('history.print');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');    
-
+// karyawan only routes
+Route::middleware('isKaryawan')->group(function () {
     Route::get('/resi', [ResiController::class, 'index'])->name('resi.index');
     Route::get('/resi/create', [ResiController::class, 'create'])->name('resi.create');
     Route::post('/resi', [ResiController::class, 'store'])->name('resi.store');
@@ -45,6 +45,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/resi/{resi}/update', [ResiController::class, 'update'])->name('resi.update');
     Route::post('/calculate-harga', [ResiController::class, 'calculateHargaAjax'])->name('calculate.harga');
     Route::get('/resi/{resi}/print', [ResiController::class, 'generatePdf'])->name('resi.print');
+});
+
+// common routes
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');    
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
