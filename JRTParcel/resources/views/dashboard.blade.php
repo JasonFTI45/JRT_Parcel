@@ -137,7 +137,7 @@
             <div class="flex-column sm:rounded-lg ml-5">
                 <div class="flex-row w-full min-h-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-10">
                     <h1 class="pt-5 text-500 text-xl pl-10 font-bold ">Aktivitas Harian</h1>
-                    <canvas class="w-full pt-3 ml-32" id="hargaChart"></canvas>
+                    <canvas class="w-full p-5" id="hargaChart"></canvas>
                 </div>
             </div>  
         </div>
@@ -152,7 +152,7 @@
 <!-- Add the script to create the chart -->
 <script>
     window.onload = function() {
-        console.log(Chart);
+        // console.log(Chart);
 
         var resiGroupedByStatus = @json($all_resi -> groupBy('status'));
         var labels = Object.keys(resiGroupedByStatus);
@@ -160,8 +160,8 @@
             return resiGroupedByStatus[key].length;
         });
 
-        console.log(labels.length);
-        console.log(data);
+        // console.log(labels.length);
+        // console.log(data);
 
         var ctx = document.getElementById('hargaChart').getContext('2d');
         var hargaChart = new Chart(ctx, {
