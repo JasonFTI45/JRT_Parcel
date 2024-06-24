@@ -17,13 +17,13 @@
     <div class="container-lp">
         @if (Route::has('login'))
         <div class="container-navbar">
-
-            @auth
-            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-            @else
-            <a href="{{ route('login') }}" class="btn-1 bolder">Login</a>
-            @endauth
-
+            <div>
+                @auth
+                <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                @else
+                <a href="{{ route('login') }}" class="btn-1 bolder">Login</a>
+                @endauth
+            </div>
             <h2 class="head-lp">JRT Courier Management System</h2>
             <img src="{{ asset('assets/logo.png') }}" alt="" height="60" width="114.5">
         </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="desc-lp">
                     <h1>Welcome to Courier Management System</h1>
-                    <p>Our platform streamlines your delivery operations, making it easy to manage, track, and optimize your courier services. From real-time tracking to automated dispatching, our system ensures timely and accurate deliveries, enhancing your operational efficiency and customer satisfaction.</p>
+                    <p class="py-4">Our platform streamlines your delivery operations, making it easy to manage, track, and optimize your courier services. From real-time tracking to automated dispatching, our system ensures timely and accurate deliveries, enhancing your operational efficiency and customer satisfaction.</p>
                     <div class="marquee">
                         <div class="marquee-content">
                             <?php
