@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// butuh login untuk akses route dibawah
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');    
+
 // admin only routes
 Route::middleware('isAdmin')->group(function () {
     Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
@@ -50,6 +54,20 @@ Route::middleware('isKaryawan')->group(function () {
 // common routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');    
+
+    // route admin only
+    Route::middleware('isAdmin')->group(function () {
+        Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+        Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
+        Route::get('/karyawan/edit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+    
+        Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
+        Route::patch('/karyawan/update/{karyawan}', [KaryawanController::class, 'update'])->name('karyawan.update');
+        Route::delete('/karyawan/delete/{karyawan}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
+    
+        Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+        Route::get('/history/{resi}/print', [HistoryController::class, 'print'])->name('history.print');
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
