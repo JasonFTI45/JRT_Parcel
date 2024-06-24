@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="pt-5">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <h1 class="text-center font-bold text-2xl mb-5">DAFTAR PAKET</h1>
                 <div class="flex max-w-7xl mx-auto border-solid mb-8">
