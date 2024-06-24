@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\LocationSeeder;
 use Database\Seeders\KaryawanUserSeeder;
+use Database\Seeders\ResiSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(LocationSeeder::class);
         $this->call(KaryawanUserSeeder::class);
+        $this->call(ResiSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
