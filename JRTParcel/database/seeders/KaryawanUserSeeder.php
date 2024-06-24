@@ -27,42 +27,11 @@ class KaryawanUserSeeder extends Seeder
                     'email' => 'jasonri@gmail.com',
                 ],
             ],
-
-            [
-                'user' => [
-                    'name' => 'Diana Putri',
-                    'email' => 'dianaputri@gmail.com',
-                    'password' => Hash::make('Diana456'), // Use a secure password in production
-                    'role' => 'karyawan',
-                    'karyawan_id' => 2,
-                ],
-                'karyawan' => [
-                    'nama' => 'Diana Putri',
-                    'nomor_telepon' => '081234567891',
-                    'email' => 'dianaputri@gmail.com',
-                ],
-            ],
-
-            [
-                'user' => [
-                    'name' => 'Rahmat Hidayat',
-                    'email' => 'rahmathidayat@gmail.com',
-                    'password' => Hash::make('Rahmat789'), // Use a secure password in production
-                    'role' => 'karyawan',
-                    'karyawan_id' => 3,
-                ],
-                'karyawan' => [
-                    'nama' => 'Rahmat Hidayat',
-                    'nomor_telepon' => '081234567892',
-                    'email' => 'rahmathidayat@gmail.com',
-                ],
-            ],
         ];
     
         foreach ($users as $data) {
             $karyawan = Karyawan::create($data['karyawan']);
             
-            // If karyawan_id is auto-incremented and should be dynamically set
             $data['user']['karyawan_id'] = $karyawan->id;
     
             User::create($data['user']);
