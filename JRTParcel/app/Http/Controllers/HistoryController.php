@@ -43,7 +43,14 @@ class HistoryController extends Controller
             $resi->orderBy($sortField, $sortOrder);
         }
 
-        $resi = $resi->paginate(10);
+        $resi = $resi->paginate(10)->appends([
+                    'search' => $request->get('search'),
+                    'shippingMethod' => $request->get('shippingMethod'),
+                    'shippingLocation' => $request->get('shippingLocation'),
+                    'shippingStatus' => $request->get('shippingStatus'),
+                    'sortField' => $request->get('sortField', 'id'),
+                    'sortOrder' => $request->get('sortOrder', 'asc'),
+                ]);
         $lokasi = Lokasi::get();
 
         return view('history.index', compact('shippingMethod', 'shippingLocation', 'shippingStatus', 'sortField', 'sortOrder', 'resi', 'lokasi'));

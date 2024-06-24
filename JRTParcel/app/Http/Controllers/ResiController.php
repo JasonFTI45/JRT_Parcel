@@ -47,7 +47,14 @@ class ResiController extends Controller
         }
 
         // Apply the filters and sorting to the final query
-        $resis = $resi->with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10);
+        $resis = $resi->with('penerima', 'pengirim')->where('karyawan_id', auth()->user()->karyawan->id)->paginate(10)->appends([
+                    'search' => $request->get('search'),
+                    'shippingMethod' => $request->get('shippingMethod'),
+                    'shippingLocation' => $request->get('shippingLocation'),
+                    'shippingStatus' => $request->get('shippingStatus'),
+                    'sortField' => $request->get('sortField', 'id'),
+                    'sortOrder' => $request->get('sortOrder', 'asc'),
+                ]);
         $lokasi = Lokasi::get();
 
         return view('resi.index', compact('resis','shippingMethod', 'shippingLocation', 'shippingStatus', 'lokasi', 'sortField', 'sortOrder'));

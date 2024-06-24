@@ -23,6 +23,6 @@ class IsAdminMiddleware
         }
 
         // redirect non-admin users or return a response
-        return redirect()->route('dashboard')->with('error', 'You do not have access to this section.');
+        return redirect()->route('dashboard')->with('error', 'Please login as karyawan to access this section.');
     }
 }
