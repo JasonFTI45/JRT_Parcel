@@ -48,7 +48,7 @@
                                     <x-text-input type="number" id="pengirim_nomorTelepon" name="pengirim_nomorTelepon" required />
 
                                     <x-input-label for="pengirim_alamat" :value="__('Alamat')" />
-                                    <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows="4" required />
+                                    <x-text-area id="pengirim_alamat" name="pengirim_alamat" rows="4" required="true" />
                                 </div>
                                 @php
                                     $items = $lokasi->map(function($item) {
@@ -56,16 +56,21 @@
                                     })->toArray();
                                 @endphp
                                 <div>
-                                    <x-dropdown-search-input
-                                        id="kecamatan_kota_tujuan" 
-                                        name="kecamatan_kota_tujuan" 
-                                        label="Kecamatan, Kota Tujuan"
-                                        :items="$items"
-                                        placeholder="Search Kecamatan/Kota..."
-                                        :required="true"
-                                        initialQuery=""
-                                        :disabled="false"
-                                    />
+                                    <div>
+                                        <x-dropdown-search-input
+                                            id="kecamatan_kota_tujuan" 
+                                            name="kecamatan_kota_tujuan" 
+                                            label="Kecamatan, Kota Tujuan"
+                                            :items="$items"
+                                            placeholder="Search Kecamatan/Kota..."
+                                            :required="true"
+                                            initialQuery=""
+                                            :disabled="false"
+                                        />
+                                        @if(session('kecamatan_kota_tujuan_error'))
+                                            <div class="text-red-500">{{ session('kecamatan_kota_tujuan_error') }}</div>
+                                        @endif
+                                    </div>
 
                                     <h3 class="font-semibold text-lg mt-4 mb-2">{{ __('Penerima') }}</h3>
                                     <x-input-label for="penerima_nama" :value="__('Nama')" />
@@ -75,7 +80,7 @@
                                     <x-text-input type="number" id="penerima_nomorTelepon" name="penerima_nomorTelepon" required />
 
                                     <x-input-label for="penerima_alamat" :value="__('Alamat')" />
-                                    <x-text-area id="penerima_alamat" name="penerima_alamat" rows="4" required />
+                                    <x-text-area id="penerima_alamat" name="penerima_alamat" rows="4" required="true" />
                                 </div>
                             </div>
                         </div>

@@ -4,12 +4,11 @@
     x-data="{
             search: '{{ $defaultText }}',
             open: true,
+            disabled: {{ $disabled ? 'true' : 'false' }},
             items: {{ json_encode($items) }},
             selectedItem: null,
-
             get filteredItems() {
-                
-                if (!this.search.trim()) {
+                if (!this.search.trim() || this.disabled) {
                     return [];
                 }
                 const searchLower = this.search.toLowerCase();
@@ -19,18 +18,17 @@
                 filtered.sort();
                 return filtered;
             },
-
             handleInput() {
-                if (!{{ $disabled ? 'true' : 'false' }}) {
+                if (!this.disabled) {
                     this.open = this.search.length > 0;
                 }
             },
-
             selectItem(item) {
-                this.search = item;
-                this.selectedItem = item;
-                this.open = false;
-                
+                if (!this.disabled) {
+                    this.search = item;
+                    this.selectedItem = item;
+                    this.open = false;
+                }
             }
         }"
     class="relative"
@@ -47,9 +45,9 @@
         id="{{ $id }}" 
         name="{{ $name }}" 
         autocomplete="off"
-        :class="{'bg-gray-100 text-gray-500 cursor-not-allowed': {{ $disabled ? 'true' : 'false' }}, 'bg-white': !{{ $disabled ? 'true' : 'false' }}}"
+        :class="{'bg-gray-100 text-gray-500 cursor-not-allowed': disabled, 'bg-white': !disabled}"
         class="py-3 px-4 w-full border-gray-300 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100 mt-1"
-        :disabled="{{ $disabled ? 'true' : 'false' }}"
+        :disabled="disabled"
         :required="{{ $required ? 'true' : 'false' }}"
         :value="{{ $value }}"
     >
@@ -57,16 +55,14 @@
         <input type="hidden" name="{{ $name }}" x-bind:value="search">
     @endif
     <ul 
-        x-show="open && filteredItems.length > 0" 
+        x-show="open && filteredItems.length > 0 && !disabled" 
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-2"
         x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-2"
-
         class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg z-10 overflow-y-auto max-h-32"
-
     >
         <template x-for="item in filteredItems" :key="item">
             <li 
@@ -76,4 +72,7 @@
             ></li>
         </template>
     </ul>
-</div> 
+    <div x-show="open && filteredItems.length === 0 && search.trim().length > 0 && !disabled" class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg p-4 text-gray-700">
+        No items found.
+    </div>
+</div>

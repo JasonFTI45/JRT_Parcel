@@ -122,6 +122,26 @@ class ResiController extends Controller
         return $pengirim;
     }
 
+    private function checkKecamatanKota($kecamatanKotaTujuan)
+    {
+        if (!$kecamatanKotaTujuan) {
+            return null;
+        }
+        if(strpos($kecamatanKotaTujuan, ', ') === false){
+            return null;
+        }
+        
+        list($kecamatan, $kota) = explode(', ', $kecamatanKotaTujuan);
+        $exists = Lokasi::where('kecamatan', $kecamatan)
+            ->where('kota', $kota)
+            ->exists();
+        if (!$exists) {
+            return null;
+        }
+        
+        return null;
+    }
+
     public function update(Resi $resi, Request $request){
         // Validate request
         $request->validate([
@@ -142,7 +162,7 @@ class ResiController extends Controller
             'metodePembayaran' => 'required|string',
             'statusPembayaran' => 'required|string',
             'status' => 'required|string',
-        ]);
+        ]);       
     
         // Save Penerima and Pengirim
         $penerima = $this->findOrCreatePenerima($request);
@@ -151,7 +171,12 @@ class ResiController extends Controller
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
         $jenisPengiriman = $request->input('jenisPengiriman');
         $barangData = $request->input('barang');
-    
+
+        //check for kecamatan kota
+        if($this->checkKecamatanKota($kecamatanKotaTujuan) == null){
+            return redirect()->route('resi.create')->with('kecamatan_kota_tujuan_error', 'Please select one of the option');
+        }
+
         // Recalculate harga
         $totalHarga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
         // Update Resi
@@ -234,7 +259,12 @@ class ResiController extends Controller
         $kecamatanKotaTujuan = $request->input('kecamatan_kota_tujuan');
         $jenisPengiriman = $request->input('jenisPengiriman');
         $barangData = $request->input('barang'); // Ensure 'barang' is structured correctly in your request
-    
+
+        //check for kecamatan kota in database
+        if($this->checkKecamatanKota($kecamatanKotaTujuan) == null){
+            return redirect()->route('resi.create')->with('kecamatan_kota_tujuan_error', 'Please select one of the option');
+        }
+
         // Adjusted method call
         $totalHarga = $this->calculateHarga($kecamatanKotaTujuan, $jenisPengiriman, $barangData);
         // Create Resi
