@@ -9,7 +9,7 @@
                         <div class="flex justify-between">
                             <div class="flex border-solid">
                                 <div class="form-group w-40">
-                                    <input type="text" name="search" class="form-control rounded w-36 text-sm" placeholder="Search by Name" value="{{ request('search') }}">
+                                    <input type="text" name="search" class="form-control rounded w-36 text-sm" placeholder="Search by Karyawan" value="{{ request('search') }}">
                                 </div>
                                 <div class="form-group self-center">
                                     <button type="submit" name="action" value="search" class="btn-1 font-extrabold">Search</button>
