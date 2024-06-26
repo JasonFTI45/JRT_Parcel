@@ -14,15 +14,17 @@ class DashboardController extends Controller
         if (Auth::user()->role == 'admin') {
             $resi = Resi::latest()->paginate(5);
             $all_resi = Resi::get();
-
+            $totalResiCount = Resi::count();
         } else if (Auth::user()->role == 'karyawan') {
             $resi = Resi::where('karyawan_id', Auth::user()->karyawan->id)->latest()->paginate(5);
             $all_resi = Resi::where('karyawan_id', Auth::user()->karyawan->id)->get();
+            $totalResiCount = Resi::where('karyawan_id', Auth::user()->karyawan->id)->count();
         }
 
         $karyawanCount = Karyawan::where('bekerja',true)->count();
-        $resiCount = Resi::count();
+        
+        
 
-        return view('dashboard', ['karyawanCount' => $karyawanCount,'resi' => $resi, 'all_resi' => $all_resi, 'resis' => $resiCount]);
+        return view('dashboard', ['karyawanCount' => $karyawanCount,'resi' => $resi, 'all_resi' => $all_resi, 'totalResi' => $totalResiCount]);
     }
 }

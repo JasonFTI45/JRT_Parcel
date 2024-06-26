@@ -11,7 +11,7 @@
             <div class="w-full mb-6 md:mb-0">
                 <div class="grid grid-cols-2 center color-2 items-center justify-center w-full text-center text-xl font-bold borderborder-red-500 rounded-3xl bg-pink-500 h-24">
                     <h1 class="text-white text-2xl font-bold">Total Paket</h1>
-                    <p class="text-white text-2xl font-bold">{{$resis}}</p>
+                    <p class="text-white text-2xl font-bold">{{$totalResi}}</p>
                 </div>
             </div>
             <div class="w-full mb-6 md:mb-0">
