@@ -28,7 +28,7 @@
                                             <form action="{{ route('karyawan.destroy', $kry->email) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="delete button">Delete</button>
+                                                <button type="submit" class="delete button" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
                                             </form>
                                         </div>
                                     </td>
