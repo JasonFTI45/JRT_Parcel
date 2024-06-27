@@ -18,16 +18,50 @@ JRT Parcel is a Courier Management System application designed to help delivery 
 
 ### Executing program
 
-* Clone this repository : ``` https://github.com/JasonFTI45/JRT_Parcel.git ```
-* Navigate to the project directory : ``` cd JRTParcel ```
-* Run composer : ``` composer install ``` or ``` composer i ``` (In short)
-* Install npm : ``` npm install ```
-* Setup .env 
-* Generate APP_KEY in .env : ``` php artisan key:generate ``` or ``` php artisan key:gen ``` (In short) 
+* Clone this repository : 
+``` 
+https://github.com/JasonFTI45/JRT_Parcel.git
+```
+* Navigate to the project directory : 
+``` 
+cd JRTParcel
+```
+* Run composer : 
+``` 
+composer install 
+``` 
+or (In short)
+``` 
+composer i 
+``` 
+* Install npm : 
+``` 
+npm install 
+```
+* Setup ``` .env ``` file 
+* Generate APP_KEY in .env : 
+``` 
+php artisan key:generate
+``` 
+or (In short) 
+``` 
+php artisan key:gen 
+``` 
+
 * Migrate database : 
-``` php artisan migrate:fresh ```
-* Initialize data : ``` php artisan db:seed ```
-* Start the server : ``` php artisan serve ``` and ``` npm run dev ```
+``` 
+php artisan migrate:fresh
+```
+* Initialize data : 
+``` 
+php artisan db:seed 
+```
+* Start the server : 
+``` 
+php artisan serve 
+npm run dev 
+``` 
+and 
 * Open your web browser and navigate to ``` http://127.0.0.1:8000/ ``` to access JRT Parcel.
 
 
