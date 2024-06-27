@@ -15,7 +15,6 @@ body {
 .container-resi{
     height: 72.5vh;
     width: 100%;
-    /* border: 2px solid red; */
 }
 
 .content-resi{
@@ -170,7 +169,6 @@ body {
 .isi-1-bottom{
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
     flex: 3;
 }
 

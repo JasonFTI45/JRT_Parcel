@@ -141,14 +141,3 @@
         window.print();
     }
 </script>
-
-<!-- <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded no-print">
-                    {{ __('Print') }}
-            </button> -->
-
-<!-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4"> -->
-<!-- Updated Test div with a class for printing -->
-<!-- <div class="text-gray-900">
-                    <p>test</p>
-                </div>
-            </div> -->
