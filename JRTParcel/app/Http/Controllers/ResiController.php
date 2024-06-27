@@ -124,22 +124,19 @@ class ResiController extends Controller
 
     private function checkKecamatanKota($kecamatanKotaTujuan)
     {
-        if (!$kecamatanKotaTujuan) {
+        list($kecamatan, $kota) = explode(',', $kecamatanKotaTujuan);
+        $kecamatan = trim($kecamatan);
+        $kota = trim($kota);
+
+        // Assuming you have a method to query your database
+        $kecamatanExists = Lokasi::where('kecamatan', $kecamatan)->exists();
+        $kotaExists = Lokasi::where('kota', $kota)->exists();
+
+        if ($kecamatanExists && $kotaExists) {
+            return true;
+        } else {
             return null;
         }
-        if(strpos($kecamatanKotaTujuan, ', ') === false){
-            return null;
-        }
-        
-        list($kecamatan, $kota) = explode(', ', $kecamatanKotaTujuan);
-        $exists = Lokasi::where('kecamatan', $kecamatan)
-            ->where('kota', $kota)
-            ->exists();
-        if (!$exists) {
-            return null;
-        }
-        
-        return null;
     }
 
     public function update(Resi $resi, Request $request){
