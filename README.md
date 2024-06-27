@@ -8,34 +8,24 @@ JRT Parcel is a Courier Management System application designed to help delivery 
 
 ## Getting Started
 
-### Dependencies
-
-* **[PHP](https://www.php.net/)** (v8.1)
-* **[PostgreeSQL](https://www.postgresql.org/)**
-* IDE
-* Tailwind CSS (CDN)
-* Font Awesome (CDN)
-* Google Font (CDN)
-* Leaflet JS (CDN)
-
 ### Installing
 
 * <a href="https://www.php.net/downloads.php" target="_blank">PHP</a>
-* <a href="https://www.postgresql.org/" target="_blank">MongoDB</a>
+* <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a>
 * <a href="https://www.apachefriends.org/download.html" target="_blank">XAMPP</a>
+* <a href="https://getcomposer.org/" target="_blank">Composer</a>
 * <a href="https://code.visualstudio.com/download" target="_blank">Visual studio code </a> or any other IDE
 
 ### Executing program
 
-* Clone this repository : ``` [https://github.com/TigoF13/Catcylopedia.git](https://github.com/JasonFTI45/JRT_Parcel.git) ```
+* Clone this repository : ``` (https://github.com/JasonFTI45/JRT_Parcel.git) ```
 * Navigate to the project directory : ``` cd JRTParcel ```
-* Setup .env : ``` .env.example to .env ```
+* Setup .env : Delete the .example on .env.example ``` .env ```
 * Install dependencies : 
-``` composer install  ```
-``` npm install  ``` 
+``` composer install  ``` and ``` npm install  ``` 
 * Migrate database : 
 ``` artisan migrate fresh ```
-* Open your web browser and navigate to ```http://127.0.0.1`` to access JRT Parcel.
+* Open your web browser and navigate to ``` http://127.0.0.1:8000/ ``` to access JRT Parcel.
 * **Notes** : The .env folder should not be publicly displayed, but since this is an assignment project that must be submitted, it is displayed and can be modified according to the user.
 
 ## Watch
@@ -43,4 +33,4 @@ JRT Parcel is a Courier Management System application designed to help delivery 
 
 # Repobeats
 
-![Alt](https://repobeats.axiom.co/api/embed/11db0952879786ab2d05300770cd5952d38fcda9.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/4e250261eecbc5d0eae659b1e71959803051b9be.svg "Repobeats analytics image")
