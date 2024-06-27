@@ -18,51 +18,62 @@ JRT Parcel is a Courier Management System application designed to help delivery 
 
 ### Executing program
 
-* Clone this repository : 
-``` 
-https://github.com/JasonFTI45/JRT_Parcel.git
-```
-* Navigate to the project directory : 
-``` 
-cd JRTParcel
-```
-* Run composer : 
-``` 
-composer install 
-``` 
-or (In short)
-``` 
-composer i 
-``` 
-* Install npm : 
-``` 
-npm install 
-```
-* Setup ``` .env ``` file 
-* Generate APP_KEY in .env : 
-``` 
-php artisan key:generate
-``` 
-or (In short) 
-``` 
-php artisan key:gen 
-``` 
+1.  **Clone this repository** :
+    ``` 
+    git clone https://github.com/JasonFTI45/JRT_Parcel.git
+    ```
 
-* Migrate database : 
-``` 
-php artisan migrate:fresh
-```
-* Initialize data : 
-``` 
-php artisan db:seed 
-```
-* Start the server : 
-``` 
-php artisan serve 
-npm run dev 
-``` 
-and 
-* Open your web browser and navigate to ``` http://127.0.0.1:8000/ ``` to access JRT Parcel.
+2. **Navigate to the project directory** :
+    ``` 
+    cd JRTParcel
+    ```
+
+3. **Install dependency composer** : 
+    ``` 
+    composer install 
+    ``` 
+    or (In short)
+    ``` 
+    composer i 
+    ``` 
+
+4. **Install Front End Assets** : 
+    ``` 
+    npm install 
+    ```
+    or (In short)
+    ```
+    npm i
+    ```
+
+5. **Setup ```.env ``` file**
+
+6. **Generate APP_KEY in ```.env```** :
+    ``` 
+    php artisan key:generate
+    ``` 
+    or (In short) 
+    ``` 
+    php artisan key:gen 
+    ``` 
+
+7.  **Migrate database** : 
+    ``` 
+    php artisan migrate:fresh
+    ```
+
+8. **Seed data** : The Seeder contains dummy accounts
+    ``` 
+    php artisan db:seed 
+    ```
+
+9. **Start the server** : 
+    ``` 
+    php artisan serve 
+    npm run dev 
+    ``` 
+
+10. **Open your web browser and navigate to default web http://127.0.0.1:8000/ to access JRT Parcel.**
 
 
 ## Watch
