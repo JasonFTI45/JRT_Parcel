@@ -18,7 +18,7 @@ JRT Parcel is a Courier Management System application designed to help delivery 
 
 ### Executing program
 
-* Clone this repository : ``` (https://github.com/JasonFTI45/JRT_Parcel.git) ```
+* Clone this repository : ``` https://github.com/JasonFTI45/JRT_Parcel.git ```
 * Navigate to the project directory : ``` cd JRTParcel ```
 * Run composer : ``` composer install ``` or ``` composer i ``` (In short)
 * Install npm : ``` npm install ```
