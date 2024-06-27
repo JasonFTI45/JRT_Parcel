@@ -58,3 +58,31 @@ th, td {
 .add:hover,.update:hover{
     background-color: rgb(0, 155, 0);
 }
+
+.color-1{
+    background-color: 'rgba(255, 99, 132, 1)';
+}
+
+.color-2{
+    background-color: 'rgba(255, 206, 86, 1)';
+}
+
+.color-3{
+    background-color: 'rgba(0, 206, 86, 1)';
+}
+
+.btn-1{
+    font-size: 14px;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 2.5px 5px;
+    margin: 0px 5px;
+}
+
+.btn-1:hover{
+    background-color: #333;
+    color: white;
+    transition: .15s ease-in-out;
+}

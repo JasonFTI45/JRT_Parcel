@@ -1,26 +1,31 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 border-solid">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+    <div class="max-w-full mx-auto sm:px-6 lg:px-8 border-solid">
+        <div class="flex justify-between h-16 px-10 border-solid">
+            <div class="flex ">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center ">
                     <a href="{{ route('dashboard') }}">
                     <img src="{{ asset('assets/logo.png') }}" class="block h-9 w-auto" alt="Your Logo">
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex border-solid ">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        <h1 class="font-bold text-lg">{{ __('Dashboard') }}</h1>
                     </x-nav-link>
                     @if (Auth::user()->role == 'admin')
                         <x-nav-link :href="route('karyawan.index')" :active="request()->routeIs('karyawan.*')">
-                            {{ __('Karyawan') }}
+                            <h1 class="font-bold text-lg">{{ __('Karyawan') }}</h1>
                         </x-nav-link>
                         <x-nav-link :href="route('history.index')" :active="request()->routeIs('history.index')">
-                            {{ __('History') }}
+                            <h1 class="font-bold text-lg">{{ __('History') }}</h1>
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()->role == 'karyawan')
+                        <x-nav-link class="font-bold" :href="route('resi.index')" :active="request()->routeIs('resi.index')">
+                            <h1 class="font-bold text-lg">{{ __('Paket') }}</h1>
                         </x-nav-link>
                     @endif
                 </div>
@@ -31,7 +36,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <h1 class="font-bold text-lg">{{ Auth::user()->name }}</h1>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -43,7 +48,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <h1 class="font-bold text-lg">{{ __('Profile') }}</h1>
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -53,7 +58,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                            <h1 class="font-bold text-lg">{{ __('Log Out') }}</h1>
                             </x-dropdown-link>
                         </form>
                     </x-slot>

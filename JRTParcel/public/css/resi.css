@@ -1,0 +1,212 @@
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-resi{
+    height: 72.5vh;
+    width: 100%;
+}
+
+.content-resi{
+    display: flex;
+    flex-direction: column;
+    height: 32vh;
+    width: 98vw;
+    margin: 1px 5px 0px 5px;
+    border: 3px solid black;
+}
+
+.logo-resi{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    border-bottom: 2px dashed black;
+}
+
+.judul-resi{
+    display: flex;
+    flex-direction: row;
+}
+
+.content-resi h2{
+    font-weight: bolder;
+    text-align: center;
+    width: 100%;
+    margin: 4px 0px;
+}
+
+.informasi-resi{
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+    border-top: 2px dashed black;
+    /* border: 2px dashed black; */
+}
+
+.informasi-resi h1{
+    font-weight: bolder;
+}
+
+.penerima-resi{
+    display: flex;
+    flex-direction: column;
+    flex: 1.75;
+    /* margin-left: 5px; */
+    margin: 0px 5px;
+    /* border: 2px solid green; */
+}
+
+.pengirim-resi{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* border: 2px solid green; */
+}
+
+.tujuan-resi{
+    display: flex;
+    flex-direction: row;
+}
+
+.tujuan-resi h1{
+    font-weight: bolder;
+    text-align: center;
+    width: 100%;
+}
+
+.left-resi{
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+    margin: 0px 1px;
+}
+
+.right-resi{
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+    margin: 0px 1px;
+}
+
+.left-resi-2{
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+    margin: 0px 1px;
+}
+
+.right-resi-2{
+    display: flex;
+    flex: 2;
+    border: 2px solid black;
+    margin: 0px 1px;
+    padding-left: 5px;
+}
+
+.tabel-resi{
+    margin: 0px 10px;
+    /* border: 2px solid black;; */
+}
+
+.total-resi{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+    margin-bottom: 2vh;
+}
+
+.container-penerima{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    border-top: 2px dashed black;
+}
+
+.penerima{
+    display: flex;
+    flex-direction: row;
+    height: 22vh;
+    border: none;
+    margin-top: 10px;
+}
+
+.penerima-isi-1{
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    border: 2px solid black;
+}
+
+.penerima-isi-2{
+    display: flex;
+    flex-direction: column;
+    flex: 2.5;
+    border: 2px solid black;
+}
+
+.isi-1-top{
+    display: flex;
+    flex: 1;
+    border-bottom: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+
+.isi-1-bottom{
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.tabel-resi table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabel-resi table td{
+    padding: 5px 0px 0px 24px;
+}
+
+.isi-1-bottom table {
+    width: 100%; 
+    border-collapse: collapse; 
+}
+
+.isi-1-bottom table td {
+    padding: 0px 7.5px; 
+    margin: 0; 
+}
+
+.font-12{
+    font-size: 12px;
+}
+
+.border-no{
+    border: none;
+}
+
+.harga{
+    font-weight: bolder;
+    border-top: 1px solid black;
+    margin-top: -30px;
+}

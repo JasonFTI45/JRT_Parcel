@@ -1,0 +1,130 @@
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Poppins';
+}
+
+.bolder{
+    font-weight: bolder;
+}
+
+.container-navbar{
+    /* border: 2px solid black; */
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+
+}
+
+.container-content{
+    /* border: 2px solid royalblue; */
+    height: 85vh;
+    width: 100%;
+}
+
+.container-lp{
+    background-color: #ECEBE9;
+    background-repeat: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.head-lp{
+    /* margin-right: 29%; */
+    color: #333;
+    /* margin-left: 26.5%; */
+    font-size: 25.8px;
+}
+
+.content-lp{
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.img-lp{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* border: 2px solid black; */
+    align-items: center;
+    justify-content: center;
+}
+
+.desc-lp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    /* border: 2px solid black; */
+}
+
+.desc-lp h1{
+    margin: 100px 0px 50px 0px;
+    font-size: 64px;
+    text-align: center;
+    /* border: 2px solid black; */
+}
+
+.desc-lp p{
+    /* border: 2px solid black; */
+    text-align: justify;
+    margin: 0px 40px;
+}
+
+.btn-1{
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0px 10px;
+}
+
+.btn-1:hover{
+    background-color: #333;
+    color: white;
+    /* opacity: 0.6; */
+    transition: .15s ease-in-out;
+}
+
+.marquee {
+    width: 90%;
+    overflow: hidden;
+    margin: 0px 40px;
+    align-self: center;
+}
+
+.marquee-content {
+    display: flex;
+    animation: scrolling 10s linear infinite;
+}
+
+.marquee-item {
+    flex: 0 0 10vw;
+    padding: 0 2vw;
+}
+
+.marquee-item img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: block;
+    width: 100%;
+}
+
+@keyframes scrolling {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
