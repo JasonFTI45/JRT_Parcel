@@ -25,7 +25,7 @@ JRT Parcel is a Courier Management System application designed to help delivery 
 * Setup .env 
 * Generate APP_KEY in .env : ``` php artisan key:generate ``` or ``` php artisan key:gen ``` (In short) 
 * Migrate database : 
-``` php artisan migrate fresh ```
+``` php artisan migrate:fresh ```
 * Start the server : ``` php artisan serve ``` and ``` npm run dev ```
 * Open your web browser and navigate to ``` http://127.0.0.1:8000/ ``` to access JRT Parcel.
 
