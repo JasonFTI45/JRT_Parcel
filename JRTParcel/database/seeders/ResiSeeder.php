@@ -35,7 +35,7 @@ class ResiSeeder extends Seeder
                 'jenisPengiriman' => 'Laut',
                 'penerima_id' => $penerima->id, 
                 'pengirim_id' => $pengirim->id, 
-                'kecamatan_kota_asal' => 'KUBU RAYA, PONTIANAK',
+                'kecamatan_kota_asal' => 'TAMBORA, JAKARTA BARAT',
                 'kecamatan_kota_tujuan' => 'SINGKAWANG BARAT, SINGKAWANG',
                 'harga' => 50000 * $i,
                 'metodePembayaran' => 'Cash',
