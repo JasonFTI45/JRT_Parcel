@@ -1,3 +1,6 @@
+<!-- HALAMAN UNTUK MEMPERBARUI DETAIL PAKET DAN MENGUBAH STATUS PENGIRIMAN -->
+<!-- STATUS PENGIRIMAN BERISI (MENUNGGU PENGIRIMAN, SEDANG DIKIRIM, SUDAH SAMPAI) -->
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

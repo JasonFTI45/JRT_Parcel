@@ -15,6 +15,11 @@
 
 <body>
     <div class="container-lp">
+
+        <!-- Kondisi Button ketika sudah melakukan Login dan Tidak Login -->
+
+        <!-- NAVBAR START -->
+
         @if (Route::has('login'))
         <div class="container-navbar">
             <div>
@@ -29,6 +34,11 @@
         </div>
         @endif
 
+        <!-- NAVBAR END -->
+
+
+        <!-- CONTENT START -->
+
         <div class="container-content">
             <div class="content-lp">
                 <div class="img-lp">
@@ -38,6 +48,9 @@
                     <h1>Welcome to Courier Management System</h1>
                     <p class="py-4">Our platform streamlines your delivery operations, making it easy to manage, track, and optimize your courier services. From real-time tracking to automated dispatching, our system ensures timely and accurate deliveries, enhancing your operational efficiency and customer satisfaction.</p>
                     <div class="marquee">
+
+                        <!-- MARQUEE START -->
+
                         <div class="marquee-content">
                             <?php
                             $logos = array(
@@ -56,12 +69,16 @@
                             }
                             ?>
                         </div>
-                    </div>
 
+                        <!-- MARQUEE END -->
+
+                    </div>
                 </div>
             </div>
-
         </div>
+
+        <!-- CONTENT END -->
+
     </div>
 </body>
 

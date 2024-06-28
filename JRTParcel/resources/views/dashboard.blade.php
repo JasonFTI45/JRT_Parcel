@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    <!-- HEAD INFORMATION START -->
+
     <div class="px-16 pt-5 ">
         <div class="grid grid-cols-3 gap-6 ">
             <div class="w-full mb-6 md:mb-0 ">
@@ -23,8 +26,15 @@
         </div>
     </div>
 
+    <!-- HEAD INFORMATION END -->
+
+    <!-- DASHBOARD CONTENT START -->
+
     <div class="py-6 px-7">
-        <div class="grid grid-cols-3 sm:px-6 lg:px-8" style="min-height: 60vh; max-height: 70vh"> <!-- coba bikin responsive -->
+        <div class="grid grid-cols-3 sm:px-6 lg:px-8" style="min-height: 60vh; max-height: 70vh"> 
+
+            <!-- RECENTLY HISTORY TABLE START -->
+
             <div class="flex justify-center bg-white overflow-hidden shadow-sm sm:rounded-lg center px-5">
                 <div class="border-double">
                     <div class="center justify-center text-center ">
@@ -62,20 +72,17 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <!-- <div class="relative text-center text-500 text-xl font-bold pb-4">
-                        @if(Auth::user()->role == 'karyawan' && $resi->count() > 0)
-                        Total Harga: {{ 'Rp ' . number_format($resi->where('karyawan_id', Auth::user()->karyawan->id)->sum('harga'), 2, ',', '.') }}
-                        @endif
-                        @if(Auth::user()->role == 'admin')
-                        Total Harga: {{ 'Rp ' . number_format($resi->sum('harga'), 2, ',', '.') }}
-                        @endif
-                    </div> -->
                     <div class="flex justify-center ">
                         {{ $resi->links() }}
                     </div>
                     <div class="pb-5"></div>
                 </div>
             </div>
+
+            <!-- RECENTLY HISTORY TABLE END -->
+
+            <!-- STATUS PAKET COUNT TABLE START -->
+
             <div class="grid grid-rows-2 sm:rounded-lg ml-5 min-h-full" >
                 <div class="flex-row justify-center px-5 w-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-3">
                     <h1 class="text-500 text-xl font-bold pt-5 pb-5 text-center">Status Paket</h1>
@@ -119,6 +126,9 @@
                     </tbody>
                     </table>
                 </div>
+
+                <!-- CATATAN KARYAWNA TEMPORARY START -->
+
                 <div class="flex w-full mt-5 h-40 mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-3 ">
                     <div class="flex-row justify-center px-5 w-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg ">    
                         <h1 class="text-500 text-xl font-bold pt-2 pb-2 text-center">Catatan Karyawan</h1>
@@ -133,35 +143,46 @@
                         </form>
                     </div>
                 </div>
+
+                <!-- CATATAN KARYAWAN TEMPORARY END -->
+
             </div>
+
+            <!-- STATUS PAKET COUNT TABLE END -->
+
+            <!-- PIE CHART START -->
+
             <div class="flex-column sm:rounded-lg ml-5">
                 <div class="flex-row w-full min-h-full mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg mr-10">
                     <h1 class="pt-5 text-500 text-xl pl-10 font-bold ">Aktivitas Harian</h1>
                     <canvas class="w-full p-5" id="hargaChart"></canvas>
                 </div>
-            </div>  
+            </div>
+            
+            <!-- PIE CHART END -->
+
         </div>
     </div>
+
+    <!-- DASHBOARD CONTENT END -->
+
 </x-app-layout>
 
 <!-- Include the Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <!-- Include the Chart.js Data Labels plugin -->
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 <!-- Add the script to create the chart -->
 <script>
     window.onload = function() {
-        // console.log(Chart);
 
         var resiGroupedByStatus = @json($all_resi -> groupBy('status'));
         var labels = Object.keys(resiGroupedByStatus);
         var data = labels.map(function(key) {
             return resiGroupedByStatus[key].length;
         });
-
-        // console.log(labels.length);
-        // console.log(data);
 
         var ctx = document.getElementById('hargaChart').getContext('2d');
         var hargaChart = new Chart(ctx, {

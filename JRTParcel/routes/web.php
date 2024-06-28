@@ -1,5 +1,7 @@
 <?php
 
+// IMPORT CONTROLLER CODE
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResiController;
 use App\Http\Controllers\KaryawanController;

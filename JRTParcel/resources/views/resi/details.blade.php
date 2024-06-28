@@ -1,3 +1,6 @@
+<!-- HALAMAN UNTUK MELIHAT DETAIL PAKET YANG TELATH DI INPUT OLEH KARYAWAN -->
+<!-- DETAIL PAKET INI DAPAT DI PRINT OLEH KARYAWAN -->
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

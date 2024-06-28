@@ -1,3 +1,7 @@
+<!-- HALAMAN PRINT RESI -->
+<!-- BERFUNGSI UNTUK MELAKUKAN PRINT DATA PAKET YANG TELAH DITAMBAH -->
+<!-- DATA AKAN DISIMPAN DALAM FORMAT PDF DENGAN NAMA JRTParcel.pdf -->
+
 <x-print-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight no-print">

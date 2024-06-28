@@ -1,3 +1,6 @@
+<!-- HALAMAN UNTUK MENAMBAH KARYAWAN KETIKA LOGIN SEBAGAI ADMIN -->
+<!-- KARYAWAN DIBUAT PADA HALAMAN INI MULAI DARI NAMA, NO TELP, EMAIL DAN PASSWORD -->
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

@@ -1,5 +1,8 @@
-<x-app-layout>
+<!-- HALAMAN UNTUK PAKET DI KARYAWAN -->
+<!-- TERDAPAT FUNCTION TAMBAH PAKET, EDIT PAKET, DETAILS PAKET, PRINT RESI -->
+<!-- TERDAPAT FUNGSI SEARCH, FILTER, SORT (ASC/DESC) -->
 
+<x-app-layout>
     <div class="pt-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">

@@ -1,3 +1,7 @@
+<!-- HALAMAN UNTUK MENAMBAHKAN PAKET -->
+<!-- DIBUTUHKAN DATA DARI USER UNTUK PENERIMA, PENGIRIM, DETAIL PAKET DAN JENIS PEMBAYARAN -->
+<!-- SETELAH PAKET SELESAI DIBUAT DAPAT LANGSUNG MELAKUKAN PRINT RESI -->
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

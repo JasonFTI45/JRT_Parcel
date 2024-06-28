@@ -1,3 +1,6 @@
+<!-- HALAMAN UNTUK MELAKUKAN PRINT RESI KETIKA LOGIN SEBAGAI ADMIN -->
+<!-- RESI DIPRINT DALAM BENTUK PDF DAN TERSIMPAN DENFAN NAMA JRTParcel.pdf -->
+
 <x-print-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight no-print">

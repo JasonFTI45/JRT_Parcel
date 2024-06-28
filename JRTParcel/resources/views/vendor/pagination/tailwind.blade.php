@@ -1,3 +1,6 @@
+<!-- PAGINATION UNTUK MEMBERIKAN DATA SECARA TERATUR -->
+<!-- DIGUNAKAN UNTUK TABLE YANG MENAMPILKAN DATA SECARA BERKALA -->
+
 <div class="flex items-center justify-center">
     <!-- Previous Page Link -->
     @if ($paginator->onFirstPage())
